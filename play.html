@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>Watching | 038-MOVIE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: #0b0c10; color: #fff; font-family: sans-serif; margin: 0; }
+        .nav { padding: 15px 5%; background: #000; }
+        .player-container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        .artplayer-app { width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; }
+        
+        /* Episode List */
+        .ep-list { margin-top: 20px; background: #1a1c22; border-radius: 8px; overflow: hidden; }
+        .ep-item { padding: 15px; border-bottom: 1px solid #333; cursor: pointer; display: none; } /* ซ่อนไว้ก่อนถ้าเป็นหนัง */
+        .ep-item.active { color: #ff0000; background: #222; border-left: 4px solid #ff0000; }
+        .ep-item:hover { background: #252525; }
+    </style>
+</head>
+<body>
+
+    <div class="nav"><a href="index.html" style="color:red; text-decoration:none;">← กลับหน้าแรก</a></div>
+
+    <div class="player-container">
+        <div class="artplayer-app"></div>
+        <h1 id="title" style="margin-top:20px;"></h1>
+        
+        <div class="ep-list" id="epBox">
+            <div style="padding:15px; background:red; font-weight:bold;">เลือกตอนรับชม</div>
+            <div id="epItems"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+    <script src="data.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const movie = movieDatabase.find(m => m.id === urlParams.get('id'));
+        let currentEp = 0;
+
+        if (movie) {
+            document.getElementById('title').innerText = movie.title;
+            
+            // ตั้งค่าเริ่มต้นของวิดีโอ
+            const videoUrl = movie.type === 'series' ? movie.episodes[0].url : movie.url;
+
+            const art = new Artplayer({
+                container: '.artplayer-app',
+                url: videoUrl,
+                type: 'm3u8',
+                pip: true,
+                setting: true,
+                fullscreen: true,
+                lock: true, // ล็อคหน้าจอสำหรับมือถือ
+                controls: movie.type === 'series' ? [
+                    {
+                        position: 'right',
+                        html: '<i class="fas fa-step-forward"></i>',
+                        tooltip: 'ตอนถัดไป',
+                        click: () => changeEp(currentEp + 1)
+                    }
+                ] : [],
+                customType: {
+                    m3u8: (video, url) => {
+                        const hls = new Hls();
+                        hls.loadSource(url);
+                        hls.attachMedia(video);
+                    }
+                }
+            });
+
+            // ถ้าเป็นซีรีส์ ให้สร้างรายการตอน
+            if (movie.type === 'series') {
+                const box = document.getElementById('epItems');
+                movie.episodes.forEach((ep, i) => {
+                    const div = document.createElement('div');
+                    div.className = `ep-item ${i === 0 ? 'active' : ''}`;
+                    div.style.display = 'block';
+                    div.innerText = `${movie.title} - ${ep.title}`;
+                    div.onclick = () => changeEp(i);
+                    box.appendChild(div);
+                });
+            } else {
+                document.getElementById('epBox').style.display = 'none';
+            }
+
+            function changeEp(index) {
+                if (index >= 0 && index < movie.episodes.length) {
+                    currentEp = index;
+                    art.switchUrl(movie.episodes[index].url);
+                    document.querySelectorAll('.ep-item').forEach((el, i) => {
+                        el.classList.toggle('active', i === index);
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
