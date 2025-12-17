@@ -135,4 +135,13 @@ const movieDatabase = [
         poster: "https://m.media-amazon.com/images/I/71Lvqoov42L.jpg",
         url: "https://master.streamhls.com/hls/066b49de468e78b54f7ba04d5776f733/master.m3u8"
     },
+    {
+        id: "m14",
+        type: "movie",
+        title: "Wake Up Dead Man A Knives Out Mystery (2025) ฆาตกรรมหรรษา ใครฆ่าคนบาป",
+        quality: "HD",
+        category: "acttion",
+        poster: "https://m.media-amazon.com/images/M/MV5BNzcxNjQxYWEtZTRlMy00ZDFmLTk1MGMtZGYwZjUxNjMzM2M2XkEyXkFqcGc@._V1_.jpg",
+        url: "https://master.streamhls.com/hls/47d8e4d33652e1af7cd94935e769665c/master.m3u8"
+    },
 ];
