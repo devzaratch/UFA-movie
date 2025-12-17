@@ -4,7 +4,7 @@ const movieDatabase = [
         type: "movie",
         title: "Merv (2025) เมิร์ฟ สี่ขาสื่อหัวใจ",
         quality: "HD",
-        category: "comudy",
+        category: "drama",
         poster: "https://m.media-amazon.com/images/M/MV5BNmExNjYzNzMtOTJiYS00MmY2LThlN2UtODk5MjhkMmQwN2NjXkEyXkFqcGc@._V1_.jpg",
         url: "https://master.streamhls.com/hls/f67f50e408c9f566c7d08fc4ac518a1c/master.m3u8"
     },
@@ -140,7 +140,7 @@ const movieDatabase = [
         type: "movie",
         title: "Wake Up Dead Man A Knives Out Mystery (2025) ฆาตกรรมหรรษา ใครฆ่าคนบาป",
         quality: "HD",
-        category: "comidy",
+        category: "drama",
         poster: "https://m.media-amazon.com/images/M/MV5BNzcxNjQxYWEtZTRlMy00ZDFmLTk1MGMtZGYwZjUxNjMzM2M2XkEyXkFqcGc@._V1_.jpg",
         url: "https://master.streamhls.com/hls/47d8e4d33652e1af7cd94935e769665c/master.m3u8"
     },
@@ -251,5 +251,149 @@ const movieDatabase = [
         category: "action",
         poster: "https://cdn.majorcineplex.com/uploads/movie/4649/thumb_4649.jpg",
         url: "https://master.streamhls.com/hls/fe5ab8d6e1500eac986c49023b4b9811/master.m3u8"
+    },
+    {
+        id: "m25",
+        type: "movie",
+        title: "ธี่หยด 3 (2025) Death Whisperer 3",
+        quality: "ZOOM",
+        category: "horror",
+        poster: "https://static.thairath.co.th/media/Dtbezn3nNUxytg04avgw8jteSq1H0aDkdqtjOCgVdH9Q67.jpg",
+        url: "https://master.streamhls.com/hls/272d52fc1b400c3918e7ac93aa1a76b9/master.m3u8"
+    },
+    {
+        id: "m26",
+        type: "movie",
+        title: "Home Sweet Home Rebirth (2025) โฮมสวีทโฮม กำเนิดใหม่",
+        quality: "HD",
+        category: "horror",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/4575/thumb_4575.jpg",
+        url: "https://master.streamhls.com/hls/ad4c79696fd3a9a9ee5294dfc3ff903b/master.m3u8"
+    },
+    {
+        id: "m27",
+        type: "movie",
+        title: "The Bad Guys 2 (2025) วายร้ายพันธุ์ดี 2",
+        quality: "HD",
+        category: "anime",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/4303/thumb_4303.jpg",
+        url: "https://master.streamhls.com/hls/62ac5d5057f6caf59a569d0cb963745f/master.m3u8"
+    },
+    {
+        id: "m28",
+        type: "movie",
+        title: "Elio (2025) เอลิโอ",
+        quality: "HD",
+        category: "anime",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/3677/thumb_3677.jpg",
+        url: "https://master.streamhls.com/hls/7d6f65e9b183d9c315d1731189306f08/master.m3u8"
+    },
+    {
+        id: "m29",
+        type: "movie",
+        title: "Noise (2025) เสียงซ่อนผี",
+        quality: "HD",
+        category: "horror",
+        poster: "https://d2dogsd00e27qz.cloudfront.net/eyJidWNrZXQiOiJzdXBlcmFwcC1wcm9kLWltYWdlIiwia2V5IjoiaW1hZ2VzLzIwMjUvNy84L2ltZ18xNzUxOTUxMDY0NTI2XzJuMnZqNWlydy5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Imluc2lkZSJ9fX0=",
+        url: "https://master.streamhls.com/hls/5024d2ccbb0dde41b37c44c4b163077b/master.m3u8"
+    },
+    {
+        id: "m30",
+        type: "movie",
+        title: "Demon Slayer Infinity Castle Movie (2025) ดาบพิฆาตอสูร ภาคปราสาทไร้ขอบเขต",
+        quality: "ZOOM",
+        category: "anime",
+        poster: "https://image.tmdb.org/t/p/original/w2KyCngXW106bSyrfauoe1G4GuC.jpg",
+        url: "https://master.streamhls.com/hls/590e8e5c50f20796d1d5d25ec25322b0/master.m3u8"
+    },
+    {
+        id: "m31",
+        type: "movie",
+        title: "How to Train Your Dragon (2025) อภินิหารไวกิ้งพิชิตมังกร",
+        quality: "HD",
+        category: "anime",
+        poster: "https://files.thaiware.site/movie/2024-12/images-poster/241216120411490.jpg",
+        url: "https://master.streamhls.com/hls/6736289a8fc6e724450f60053142cc51/master.m3u8"
+    },
+    {
+        id: "m32",
+        type: "movie",
+        title: "Superman (2025) ซูเปอร์แมน",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/4246/thumb_4246.jpg?1234",
+        url: "https://master.streamhls.com/hls/03126e933e84a91686d60c80f6d5b706/master.m3u8"
+    },
+    {
+        id: "m33",
+        type: "movie",
+        title: "Barbie (2023) บาร์บี้",
+        quality: "HD",
+        category: "drama",
+        poster: "https://f.ptcdn.info/198/081/000/ry7jqjiq5q6kw7wzxQe5-o.jpg",
+        url: "https://master.streamhls.com/hls/5e6fd0dd6283f89f90000ccafdc63d15/master.m3u8"
+    },
+    {
+        id: "m34",
+        type: "movie",
+        title: "Godzilla x Kong: The New Empire (2024) ก๊อตซิล่าปะทะคอง 2 อาณาจักรใหม่",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/3680/thumb_3680.jpg?140220250435",
+        url: "https://master.streamhls.com/hls/5e0fef31dca4b2eb90ee083f3c21bfb1/master.m3u8"
+    },
+    {
+        id: "m35",
+        type: "movie",
+        title: "The Shadow’s Edge (2025) แผนระห่ำ ใหญ่ฟัดเดือด",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/4685/thumb_4685.jpg?1234",
+        url: "https://master.streamhls.com/hls/e9618ce32d30104a741021ebca224814/master.m3u8"
+    },
+    {
+        id: "m36",
+        type: "movie",
+        title: "Joker Folie a Deux (2024) โจ๊กเกอร์ โฟลีย์ อา เดอ",
+        quality: "HD",
+        category: "drama",
+        poster: "https://cdn.posteritati.com/posters/000/000/072/700/joker-folie-a-deux-md-web.jpg",
+        url: "https://master.streamhls.com/hls/b7da95c83f0b8e1f35ed50c83010c673/master.m3u8"
+    },
+    {
+        id: "m37",
+        type: "movie",
+        title: "F1 The Movie (2025) F1 เดอะ มูฟวี่",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/content/images/20250627120143_MV5BNGI0MDI4NjEtOWU3ZS00ODQyLWFhYTgtNGYxM2ZkM2Q2YjE3XkEyXkFqcGc@._V1_.jpg",
+        url: "https://master.streamhls.com/hls/f34ee734d838c63d51315e30110ee6b1/master.m3u8"
+    },
+    {
+        id: "m38",
+        type: "movie",
+        title: "Elevation (2024) อสุรกายขย้ำ 8000 ฟุต",
+        quality: "HD",
+        category: "action",
+        poster: "https://lh3.googleusercontent.com/VeccC2fNWFRz6BKbXiPvFpKiTp6izOSdbErfEp10srYmBEtiKYDFfqDfCcOyaCHeh_VOm1eHECnBAdDXRigzztk2rErVWZmBQg=w280",
+        url: "https://master.streamhls.com/hls/bc460f0a2e10f3b1da087026ed2cced2/master.m3u8"
+    },
+    {
+        id: "m39",
+        type: "movie",
+        title: "Until Dawn (2025) ต้องรอดก่อนย่ำรุ่ง",
+        quality: "HD",
+        category: "horror",
+        poster: "https://files.thaiware.site/movie/2025-03/images-poster/2503121204119q1.jpg",
+        url: "https://master.streamhls.com/hls/3fc29b45bcf864c0e5e68c1d1de3785f/master.m3u8"
+    },
+    {
+        id: "m40",
+        type: "movie",
+        title: "Mission: Impossible The Final Reckoning (2025) มิชชั่น:อิมพอสซิเบิ้ล ปิดปฏิบัติการล่าพิกัดมรณะ",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/content/images/20241112141529_466362626_1003564018467341_7282186515952770490_n.jpg",
+        url: "https://master.streamhls.com/hls/26381db55e5b77dfc15bd8f55ddfd507/master.m3u8"
     },
 ];
