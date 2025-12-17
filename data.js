@@ -140,8 +140,26 @@ const movieDatabase = [
         type: "movie",
         title: "Wake Up Dead Man A Knives Out Mystery (2025) ฆาตกรรมหรรษา ใครฆ่าคนบาป",
         quality: "HD",
-        category: "acttion",
+        category: "comidy",
         poster: "https://m.media-amazon.com/images/M/MV5BNzcxNjQxYWEtZTRlMy00ZDFmLTk1MGMtZGYwZjUxNjMzM2M2XkEyXkFqcGc@._V1_.jpg",
         url: "https://master.streamhls.com/hls/47d8e4d33652e1af7cd94935e769665c/master.m3u8"
+    },
+    {
+        id: "s2",
+        type: "series",
+        title: "สาธุ 2 (2025) The Believers 2",
+        quality: "HD",
+        category: "drama",
+        poster: "https://img.pptvhd36.com/thumbor/2025/12/01/news-62ce79a.jpg",
+        episodes: [
+            { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/54f62936a757bb60874ba80adfe08ea9/master.m3u8" },
+            { title: "ตอนที่ 2", url: "https://master.steamhls88.com/hlsr2/de1c5385c8620e6cdb71f24fccbf5ddc/master.m3u8" },
+            { title: "ตอนที่ 3", url: "https://master.steamhls88.com/hlsr2/9fd99c1f4b1aaf107fd44d375ae947ec/master.m3u8" },
+            { title: "ตอนที่ 4", url: "https://master.steamhls88.com/hlsr2/6060d19f9206dd4fa5d2c6b0a5dee3b3/master.m3u8" },
+            { title: "ตอนที่ 5", url: "https://master.steamhls88.com/hlsr2/a36993174342bfc6d004fa676f2e75c4/master.m3u8" },
+            { title: "ตอนที่ 6", url: "https://master.steamhls88.com/hlsr2/84712eeaa5d9e33412191ada205ac6a5/master.m3u8" },
+            { title: "ตอนที่ 7", url: "https://master.steamhls88.com/hlsr2/7b3643cbab4fa99cef892c72d2006d2b/master.m3u8" },
+            { title: "ตอนที่ 8", url: "https://master.steamhls88.com/hlsr2/c4f4faaf8f6033c6736dce212bc58ba1/master.m3u8" }
+        ]
     },
 ];
