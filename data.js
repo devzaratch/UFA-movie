@@ -117,4 +117,22 @@ const movieDatabase = [
         poster: "https://image.tmdb.org/t/p/original/c32TsWLES7kL1uy6fF03V67AIYX.jpg",
         url: "https://master.streamhls.com/hls/4d4a9e124673b56fcb1ab48ae75ec794/master.m3u8"
     },
+    {
+        id: "m12",
+        type: "movie",
+        title: "Avatar (2009) อวตาร 4K",
+        quality: "HD",
+        category: "acttion",
+        poster: "https://i.ebayimg.com/00/s/MTYwMFgxMDY2/z/9cAAAOSwy8xir7bm/$_57.JPG?set_id=880000500F",
+        url: "https://master.streamhls.com/hls/8412420e8eb07e9dbe8479045d03243a/master.m3u8"
+    },
+    {
+        id: "m13",
+        type: "movie",
+        title: "Avatar 2: The Way of Water (2022) อวตาร: วิถีแห่งสายน้ำ",
+        quality: "HD",
+        category: "acttion",
+        poster: "https://m.media-amazon.com/images/I/71Lvqoov42L.jpg",
+        url: "https://master.streamhls.com/hls/066b49de468e78b54f7ba04d5776f733/master.m3u8"
+    },
 ];
