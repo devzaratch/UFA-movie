@@ -41,7 +41,7 @@ const movieDatabase = [
         type: "movie",
         title: "ฝีนาค (2024) Fee Nak",
         quality: "HD",
-        category: "hornor",
+        category: "horror",
         poster: "https://true4u.com/static/images/04325fd1-b582-44e9-9c62-4979f6b2974b.jpg",
         url: "https://master.streamhls.com/hls/7def8884be5a83291df80511b8b4a7a8/master.m3u8"
     },
@@ -50,7 +50,7 @@ const movieDatabase = [
         type: "movie",
         title: "ท่าแร่ (2025) Tha Rae The Exorcist",
         quality: "HD",
-        category: "hornor",
+        category: "horror",
         poster: "https://upload.wikimedia.org/wikipedia/th/e/ec/%E0%B8%97%E0%B9%88%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B9%88.jpg",
         url: "https://master.streamhls.com/hls/c4bf0a56712ffbbc542401eb6482abd1/master.m3u8"
     },
@@ -86,7 +86,7 @@ const movieDatabase = [
         type: "movie",
         title: "The Conjuring (2013) คนเรียกผี",
         quality: "HD",
-        category: "hornor",
+        category: "horror",
         poster: "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_FMjpg_UX1000_.jpg",
         url: "https://master.streamhls.com/hls/22864771f7baa38186380274c683c4d7/master.m3u8"
     },
@@ -167,7 +167,7 @@ const movieDatabase = [
         type: "movie",
         title: "Bring Her Back (2025) เรียกมันกลับมาหลอน",
         quality: "HD",
-        category: "hornor",
+        category: "horror",
         poster: "https://m.media-amazon.com/images/M/MV5BZTlhYTk1ZTEtOWY3NC00NWQ5LTlkOTctNjQ3ZDYyZGE5ZWNlXkEyXkFqcGc@._V1_.jpg",
         url: "https://master.streamhls.com/hls/07bc9a6ea1dc783f51181b167d376e1f/master.m3u8"
     },
@@ -185,7 +185,7 @@ const movieDatabase = [
         type: "movie",
         title: "Secret (2009) ซ่อน สืบ ฆ่า",
         quality: "HD",
-        category: "drama",
+        category: "horror",
         poster: "https://m.media-amazon.com/images/M/MV5BMTcxMTI5ODg4N15BMl5BanBnXkFtZTgwNTU0MTE0MjE@._V1_.jpg",
         url: "https://master.streamhls.com/hls/553cfe2f58d1293c7440d6b64414e9e2/master.m3u8"
     },
