@@ -189,4 +189,13 @@ const movieDatabase = [
         poster: "https://m.media-amazon.com/images/M/MV5BMTcxMTI5ODg4N15BMl5BanBnXkFtZTgwNTU0MTE0MjE@._V1_.jpg",
         url: "https://master.streamhls.com/hls/553cfe2f58d1293c7440d6b64414e9e2/master.m3u8"
     },
+    {
+        id: "m18",
+        type: "movie",
+        title: "The Conjuring Last Rites (2025) คนเรียกผี พิธีกรรมครั้งสุดท้าย",
+        quality: "HD",
+        category: "horror",
+        poster: "https://image.tmdb.org/t/p/original/byWgphT74ClOVa8EOGzYDkl8DVL.jpg",
+        url: "https://master.streamhls.com/hls/d1a5f5c7987e17e96ae77d2e3ccc4b94/master.m3u8"
+    },
 ];
