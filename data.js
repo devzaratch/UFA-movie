@@ -13,7 +13,7 @@ const movieDatabase = [
         type: "series",
         title: "สาธุ (2024) The Believers",
         quality: "HD",
-        category: "drama",
+        category: "serie",
         poster: "https://s359.kapook.com/pagebuilder/6d1330eb-9399-44df-a445-be3bbb517da5.jpg",
         episodes: [
             { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/9d47d931808f3185498af98ec547189a/master.m3u8" },
@@ -149,7 +149,7 @@ const movieDatabase = [
         type: "series",
         title: "สาธุ 2 (2025) The Believers 2",
         quality: "HD",
-        category: "drama",
+        category: "serie",
         poster: "https://img.pptvhd36.com/thumbor/2025/12/01/news-62ce79a.jpg",
         episodes: [
             { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/54f62936a757bb60874ba80adfe08ea9/master.m3u8" },
