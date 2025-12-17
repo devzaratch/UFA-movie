@@ -180,4 +180,13 @@ const movieDatabase = [
         poster: "https://image.tmdb.org/t/p/original/hfuxIKRCNsecLmoDdO0HJ1YUvv1.jpg",
         url: "https://master.streamhls.com/hls/14ac7e60c627d60415358165ec973d76/master.m3u8"
     },
+    {
+        id: "m17",
+        type: "movie",
+        title: "Secret (2009) ซ่อน สืบ ฆ่า",
+        quality: "HD",
+        category: "drama",
+        poster: "https://m.media-amazon.com/images/M/MV5BMTcxMTI5ODg4N15BMl5BanBnXkFtZTgwNTU0MTE0MjE@._V1_.jpg",
+        url: "https://master.streamhls.com/hls/553cfe2f58d1293c7440d6b64414e9e2/master.m3u8"
+    },
 ];
