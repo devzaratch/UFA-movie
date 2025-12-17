@@ -162,4 +162,22 @@ const movieDatabase = [
             { title: "ตอนที่ 8", url: "https://master.steamhls88.com/hlsr2/c4f4faaf8f6033c6736dce212bc58ba1/master.m3u8" }
         ]
     },
+    {
+        id: "m15",
+        type: "movie",
+        title: "Bring Her Back (2025) เรียกมันกลับมาหลอน",
+        quality: "HD",
+        category: "hornor",
+        poster: "https://m.media-amazon.com/images/M/MV5BZTlhYTk1ZTEtOWY3NC00NWQ5LTlkOTctNjQ3ZDYyZGE5ZWNlXkEyXkFqcGc@._V1_.jpg",
+        url: "https://master.streamhls.com/hls/07bc9a6ea1dc783f51181b167d376e1f/master.m3u8"
+    },
+    {
+        id: "m16",
+        type: "movie",
+        title: "Left Handed Girl (2025) เด็กมือซ้าย",
+        quality: "HD",
+        category: "romantic",
+        poster: "https://image.tmdb.org/t/p/original/hfuxIKRCNsecLmoDdO0HJ1YUvv1.jpg",
+        url: "https://master.streamhls.com/hls/14ac7e60c627d60415358165ec973d76/master.m3u8"
+    },
 ];
