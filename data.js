@@ -396,4 +396,22 @@ const movieDatabase = [
         poster: "https://cdn.majorcineplex.com/uploads/content/images/20241112141529_466362626_1003564018467341_7282186515952770490_n.jpg",
         url: "https://master.streamhls.com/hls/26381db55e5b77dfc15bd8f55ddfd507/master.m3u8"
     },
+    {
+        id: "s3",
+        type: "series",
+        title: "The Witcher Season 4 (2025) เดอะ วิทเชอร์ นักล่าจอมอสูร ซีซั่น 4",
+        quality: "HD",
+        category: "serie",
+        poster: "https://kahirihome.com/wp-content/uploads/2025/11/The-Witcher-Season-4-2025-%E0%B9%80%E0%B8%94%E0%B8%AD%E0%B8%B0-%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B9%80%E0%B8%8A%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%A5%E0%B9%88%E0%B8%B2%E0%B8%88%E0%B8%AD%E0%B8%A1%E0%B8%AD%E0%B8%AA%E0%B8%B9%E0%B8%A3-%E0%B8%8B%E0%B8%B5%E0%B8%8B%E0%B8%B1%E0%B9%88%E0%B8%99-4-187x269-300x450-1.webp",
+        episodes: [
+            { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/fdc98818864161d438c48dec0418a6f1/master.m3u8" },
+            { title: "ตอนที่ 2", url: "https://master.steamhls88.com/hlsr2/135f8dacf1abad39b0746a7a7fa1e599/master.m3u8" },
+            { title: "ตอนที่ 3", url: "https://master.steamhls88.com/hlsr2/bb09b9535d38492144e7fc962c360bd8/master.m3u8" },
+            { title: "ตอนที่ 4", url: "https://master.steamhls88.com/hlsr2/db28e116c3aa82869031d64509415620/master.m3u8" },
+            { title: "ตอนที่ 5", url: "https://master.steamhls88.com/hlsr2/8680a5d3c0bdbfba80672aa9d3740a3d/master.m3u8" },
+            { title: "ตอนที่ 6", url: "https://master.steamhls88.com/hlsr2/9d8aae204c771bb61f645550ede8f576/master.m3u8" },
+            { title: "ตอนที่ 7", url: "https://master.steamhls88.com/hlsr2/a67967e67ca421c35dd71e134b1c3380/master.m3u8" },
+            { title: "ตอนที่ 8", url: "https://master.steamhls88.com/hlsr2/d6919a1a46671e1ab24c13dd7daf6a22/master.m3u8" }
+        ]
+    },
 ];
