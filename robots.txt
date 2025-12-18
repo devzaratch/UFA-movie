@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ufa-movie.pages.dev/sitemap.xml
+Sitemap:https://ufa-movie.pages.dev/sitemap.xml
