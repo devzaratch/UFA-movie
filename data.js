@@ -547,4 +547,67 @@ const movieDatabase = [
             { title: "ตอนที่ 4", url: "https://master.steamhls88.com/hlsr2/a0d3d354016072cb9567261e27d320d7/master.m3u8" }
         ]
     },
+    {
+        id: "s9",
+        type: "series",
+        title: "Reacher (2022) รีชเชอร์ ยอดคนสืบระห่ำ",
+        quality: "HD",
+        category: "serie",
+        poster: "https://image.tmdb.org/t/p/original/oIAMQ42lzSd6ksvGe4WFMKqT0ja.jpg",
+        episodes: [
+            { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/a83efab08a5cbfac0db55f81b9b4d6b8/master.m3u8" },
+            { title: "ตอนที่ 2", url: "https://master.steamhls88.com/hlsr2/ff910d38568fc28b55a1ec14ea825df7/master.m3u8" },
+            { title: "ตอนที่ 3", url: "https://master.steamhls88.com/hlsr2/ab10b3a5bf37178a8d5f5e463ac59b6b/master.m3u8" },
+            { title: "ตอนที่ 4", url: "https://master.steamhls88.com/hlsr2/d77c6b875cde70ad2c06b0c9e1fa3443/master.m3u8" },
+            { title: "ตอนที่ 5", url: "https://master.steamhls88.com/hlsr2/af6931281e4b4bbb4a58e1acadfe7024/master.m3u8" },
+            { title: "ตอนที่ 6", url: "https://master.steamhls88.com/hlsr2/593a05af85a351a157d488289db41341/master.m3u8" },
+            { title: "ตอนที่ 7", url: "https://master.steamhls88.com/hlsr2/f7fa88654a326632c76884a73f484496/master.m3u8" },
+            { title: "ตอนที่ 8", url: "https://master.steamhls88.com/hlsr2/7949fd7015b6ce6d47817b8aebef1c3d/master.m3u8" }
+        ]
+    },
+    {
+        id: "s9",
+        type: "series",
+        title: "Reacher (2023) แจ็ค รีชเชอร์ ยอดคนสืบระห่ำ Season 2",
+        quality: "HD",
+        category: "serie",
+        poster: "https://media.themoviedb.org/t/p/w500/jFuH0md41x5mB4qj5344mSmtHrO.jpg",
+        episodes: [
+            { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/444a5d5e4b51e8899a157ec9387701fd/master.m3u8" },
+            { title: "ตอนที่ 2", url: "https://master.steamhls88.com/hlsr2/9958e608a21263435ae32db77f3e463c/master.m3u8" },
+            { title: "ตอนที่ 3", url: "https://master.steamhls88.com/hlsr2/01269f962849fd86f82bcd4df403498c/master.m3u8" },
+            { title: "ตอนที่ 4", url: "https://master.steamhls88.com/hlsr2/c59e7cd49b5021a84de9198b0066b7ac/master.m3u8" },
+            { title: "ตอนที่ 5", url: "https://master.steamhls88.com/hlsr2/abf56e93fbb9282fb373311c914a5af8/master.m3u8" },
+            { title: "ตอนที่ 6", url: "https://master.steamhls88.com/hlsr2/a512349b850773dc31c00e441a367cf6/master.m3u8" },
+            { title: "ตอนที่ 7", url: "https://master.steamhls88.com/hlsr2/1171353b52ffbc906d80313aade502e5/master.m3u8" },
+            { title: "ตอนที่ 8", url: "https://master.steamhls88.com/hlsr2/8a768d450c4bc95c870533eb8c82399e/master.m3u8" }
+        ]
+    },
+    {
+        id: "s10",
+        type: "series",
+        title: "Reacher (2025) แจ็ค รีชเชอร์ ยอดคนสืบระห่ำ Season 3",
+        quality: "HD",
+        category: "serie",
+        poster: "https://cms.dmpcdn.com/ugcarticle/2025/03/01/936db8e0-f69b-11ef-981c-6985119be05f_webp_original.webp",
+        episodes: [
+            { title: "ตอนที่ 1", url: "https://master.steamhls88.com/hlsr2/c08ed208eaa11aafd2e89c7e732bb52e/master.m3u8" },
+            { title: "ตอนที่ 2", url: "https://master.steamhls88.com/hlsr2/f68a25d6ac2bb00da8e5bbe93d4fa7b6/master.m3u8" },
+            { title: "ตอนที่ 3", url: "https://master.steamhls88.com/hlsr2/cf5fdb73ee305665d9d0ce19a54071d0/master.m3u8" },
+            { title: "ตอนที่ 4", url: "https://master.steamhls88.com/hlsr2/9cceb6d8c7eab8b0b70638bde5297d9e/master.m3u8" },
+            { title: "ตอนที่ 5", url: "https://master.steamhls88.com/hlsr2/c70e9a21ebb36ba255f32dbc04e8f358/master.m3u8" },
+            { title: "ตอนที่ 6", url: "https://master.steamhls88.com/hlsr2/a845f8b03ceb74ddc0b118aca3c635e5/master.m3u8" },
+            { title: "ตอนที่ 7", url: "https://master.steamhls88.com/hlsr2/113f2f198dccb0ba9275fa1df9136ea9/master.m3u8" },
+            { title: "ตอนที่ 8", url: "https://master.steamhls88.com/hlsr2/a686f980e34634788ce44240b8bb9926/master.m3u8" }
+        ]
+    },
+    {
+        id: "m46",
+        type: "movie",
+        title: "Kraven the Hunter (2024) เครเว่น เดอะ ฮันเตอร์",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/3518/thumb_3518.jpg",
+        url: "https://master.steamhls88.com/hlsr2/93707159920ef181f1269bd05f23469a/master.m3u8"
+    },
 ];
