@@ -6,24 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
     
-    <title id="page-title">Watching | UFA-MOVIE</title>
-    <meta name="description" id="meta-description" content="UFA-MOVIE ເວັບເບິ່ງໜັງອອນໄລນ໌ຟຣີ ລວມໜັງໃໝ່ 2025 ຄົມຊັດລະດັບ HD ເຕັມເລື່ອງ ມີທັງໜັງແອັກຊັນ ໜັງຜີ ໜັງຮັກ ແລະ ກາຕູນ ອັບເດດໃໝ່ທຸກມື້ ເບິ່ງໄດ້ທຸກບ່ອນທຸກເວລາ">
-    <meta name="keywords" content="ເບິ່ງໜັງອອນໄລນ໌, ໜັງໃໝ່ 2025, ເບິ່ງໜັງຟຣີ, UFA-MOVIE, ดูหนังออนไลน์, หนังใหม่ 2025">
+    <title id="page-title">Watching | UFA-MOVIE เບິ່ງໜັງອອນໄລນ໌</title>
+    <meta name="description" id="meta-description" content="ເບິ່ງໜັງອອນໄລນ໌ຟຣີ 2025 ຄົມຊັດລະດັບ HD ພາກໄທ ທີ່ UFA-MOVIE">
     
-    <meta property="og:type" content="video.movie">
-    <meta property="og:title" id="og-title" content="UFA-MOVIE">
-    <meta property="og:description" id="og-desc" content="ເບິ່ງໜັງອອນໄລນຟຣີ ພາກໄທ 4K">
-    <meta property="og:image" id="og-image" content="favicon.png">
-
     <script id="structured-data" type="application/ld+json"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        body { background: #000; color: #fff; font-family: 'Prompt', sans-serif; margin: 0; }
-        .nav-back { padding: 15px; background: #111; position: sticky; top: 0; z-index: 1000; }
-        .player-container { max-width: 1000px; margin: 20px auto; padding: 0 15px; position: relative; }
+        :root { --main-red: #e50914; --bg-dark: #0b0c10; --card-bg: #1a1c22; }
+        body { background: var(--bg-dark); color: #fff; font-family: 'Prompt', sans-serif; margin: 0; padding-bottom: 50px; }
         
-        /* AD OVERLAY SYSTEM */
+        /* Header & Nav */
+        .nav-back { padding: 15px 5%; background: #111; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #222; }
+        .nav-back a { color:#fff; text-decoration:none; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        
+        /* Player Box */
+        .player-container { max-width: 1100px; margin: 20px auto; padding: 0 15px; position: relative; }
+        
+        /* AD SYSTEM LAYER */
         .ad-layer { 
             position: absolute; top: 0; left: 15px; right: 15px; bottom: 0; 
             background: #000; z-index: 100; display: flex; align-items: center; 
@@ -32,124 +34,117 @@
         #adVideo { width: 100%; height: 100%; object-fit: contain; background: #000; }
 
         .btn-skip { 
-            position: absolute; bottom: 50px; right: 30px; background: rgba(0,0,0,0.8); 
+            position: absolute; bottom: 40px; right: 30px; background: rgba(0,0,0,0.8); 
             color: #fff; border: 1px solid #777; padding: 12px 25px; border-radius: 5px; 
-            cursor: not-allowed; font-size: 16px; z-index: 101; transition: 0.3s;
+            cursor: not-allowed; z-index: 101; font-weight: bold;
         }
-        .btn-skip.ready { background: #e50914; cursor: pointer; border-color: #fff; box-shadow: 0 0 10px rgba(229, 9, 20, 0.5); }
+        .btn-skip.ready { background: var(--main-red); cursor: pointer; border-color: #fff; box-shadow: 0 0 15px rgba(229,9,20,0.5); }
         
         .btn-reg { 
-            position: absolute; top: 30px; right: 30px; background: #f5c518; 
+            position: absolute; top: 20px; right: 30px; background: #f5c518; 
             color: #000; padding: 10px 25px; text-decoration: none; font-weight: bold; 
-            border-radius: 5px; z-index: 101; box-shadow: 0 0 15px rgba(245, 197, 24, 0.5);
+            border-radius: 5px; z-index: 101; font-size: 15px; box-shadow: 0 0 15px rgba(245,197,24,0.5);
         }
+        .ad-count { position: absolute; top: 20px; left: 30px; background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 20px; font-size: 13px; border: 1px solid #444; z-index: 101; }
 
-        .ad-count-tag {
-            position: absolute; top: 30px; left: 30px; background: rgba(0,0,0,0.6);
-            padding: 5px 15px; border-radius: 20px; font-size: 13px; border: 1px solid #444;
-        }
-
-        /* MAIN PLAYER */
-        .artplayer-app { width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #111; }
+        /* Main Player Area */
+        .artplayer-app { width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid #333; }
         
-        /* INFO SECTION */
-        .movie-info-box { margin-top: 20px; padding: 10px; }
-        h1 { font-size: 24px; color: #fff; margin-bottom: 10px; }
-        .m-meta { color: #aaa; font-size: 14px; margin-bottom: 20px; }
-        .m-meta span { margin-right: 15px; background: #222; padding: 3px 8px; border-radius: 4px; }
+        /* Movie Detail */
+        .info-box { margin-top: 25px; background: #111; padding: 25px; border-radius: 8px; border: 1px solid #222; }
+        h1 { font-size: 24px; margin: 0 0 15px 0; color: #fff; }
+        .meta-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .meta-tags span { background: #222; padding: 5px 12px; border-radius: 4px; border: 1px solid #333; font-size: 14px; color: #aaa; }
 
-        /* EPISODE LIST */
-        .ep-list { margin-top: 20px; background: #111; border: 1px solid #222; border-radius: 8px; overflow: hidden; }
-        .ep-header { padding: 15px; background: #1a1a1a; font-weight: bold; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
-        .ep-items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; padding: 15px; }
-        .ep-item { 
-            padding: 12px; background: #222; text-align: center; border-radius: 5px; 
-            cursor: pointer; transition: 0.2s; border: 1px solid transparent; font-size: 14px;
-        }
-        .ep-item:hover { background: #333; border-color: #555; }
-        .ep-item.active { background: #e50914; color: #fff; font-weight: bold; border-color: #fff; }
+        /* Episode System */
+        .ep-list { margin-top: 20px; border-top: 1px solid #333; padding-top: 20px; }
+        .ep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-top: 15px; }
+        .ep-btn { padding: 12px; background: #1a1a1a; text-align: center; border-radius: 5px; cursor: pointer; font-size: 14px; border: 1px solid #333; transition: 0.2s; }
+        .ep-btn:hover { background: #333; }
+        .ep-btn.active { background: var(--main-red); border-color: #fff; font-weight: bold; }
+
+        /* Related Movies */
+        .related-section { max-width: 1100px; margin: 40px auto; padding: 0 15px; }
+        .related-title { font-size: 20px; margin-bottom: 20px; border-left: 4px solid var(--main-red); padding-left: 15px; }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card { background: var(--card-bg); border-radius: 5px; overflow: hidden; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-color: var(--main-red); }
+        .card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+        .card-t { padding: 10px; font-size: 13px; text-align: center; color: #ccc; }
     </style>
 </head>
 <body>
+
     <header class="nav-back">
-        <a href="index.html" style="color:#fff; text-decoration:none; font-weight: bold;">
-            <i class="fas fa-chevron-left" style="color: red;"></i> ກັບໜ້າຫລັກ
+        <a href="index.html">
+            <i class="fas fa-chevron-left" style="color: var(--main-red);"></i> ກັບໜ້າຫລັກ (กลับหน้าหลัก)
         </a>
     </header>
     
     <main class="player-container">
         <section id="adLayer" class="ad-layer">
-            <div class="ad-count-tag" id="adInfo">ໂຄສະນາ 1/2</div>
-            <video id="adVideo" autoplay muted playsinline>
+            <div class="ad-count" id="adProgress">ໂຄສະນາ: 1/2</div>
+            <video id="adVideo" autoplay>
                 <source src="UFA.mp4" type="video/mp4">
             </video>
-            <a href="https://ufasboclubauto.com/register" id="regBtn" target="_blank" class="btn-reg">ສະໝັກສະມາຊິກ</a>
-            <button id="skipBtn" class="btn-skip" disabled>ລໍຖ້າ <span id="timer">3</span> ວິ</button>
+            <a href="https://ufasboclubauto.com/register" id="adLink" target="_blank" class="btn-reg">ສະໝັກສະມາຊິກ</a>
+            <button id="skipBtn" class="btn-skip" disabled>ລໍຖ້າ... <span id="timer">5</span></button>
         </section>
 
-        <article id="video-content">
-            <div class="artplayer-app"></div>
-            <div class="movie-info-box">
-                <h1 id="m-title"></h1>
-                <div class="m-meta" id="m-meta">
-                    </div>
-            </div>
+        <div class="artplayer-app"></div>
+
+        <article class="info-box">
+            <h1 id="m-title">Loading Movie Title...</h1>
+            <div class="meta-tags" id="m-meta"></div>
             
             <div class="ep-list" id="epBox" style="display:none;">
-                <div class="ep-header"><i class="fas fa-list"></i> ເລືອກຕອນເບິ່ງ</div>
-                <div id="epItems" class="ep-items-grid"></div>
+                <p style="font-weight: bold; color: #f39c12;"><i class="fas fa-list"></i> ເລືອກຕອນເບິ່ງ (เลือกตอน):</p>
+                <div id="epItems" class="ep-grid"></div>
             </div>
         </article>
     </main>
 
+    <section class="related-section">
+        <h2 class="related-title">ໜັງທີ່ກ່ຽວຂ້ອງ (หนังที่เกี่ยวข้อง)</h2>
+        <div class="movie-grid" id="relatedGrid"></div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
     <script src="data.js"></script>
+    
     <script>
-        const id = new URLSearchParams(window.location.search).get('id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
         const m = movieDatabase.find(x => x.id === id);
-        let currentAdIndex = 0;
-        let adInterval;
-        const adList = ["UFA.mp4", "laospro.mp4"]; 
-        const adLinks = [
-            "https://ufasboclubauto.com/register",
-            "https://laosproauto.com/la"
-        ];
 
         if (m) {
-            // --- 1. อัปเดต SEO & AI Overview Metadata ---
-            const fullTitle = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ ພາກໄທ 4K | UFA-MOVIE`;
-            const fullDesc = `ເບິ່ງ ${m.title} ຄວາມຄົມຊັດ ${m.quality} ໝວດໝູ່ ${m.category} ເບິ່ງໜັງອອນໄລນ໌ 24 ชม. ที่ UFA-MOVIE`;
-            
-            document.getElementById('page-title').innerText = fullTitle;
+            // 1. SEO & Metadata Setup
+            const fullTitle = `ເບິ່ງໜັງ ${m.title} (2025) ເຕັມເລື່ອງ HD | UFA-MOVIE`;
+            document.title = fullTitle;
             document.getElementById('m-title').innerText = m.title;
-            document.getElementById('meta-description').setAttribute("content", fullDesc);
-            document.getElementById('m-meta').innerHTML = `<span><i class="fas fa-video"></i> ${m.quality}</span> <span><i class="fas fa-tag"></i> ${m.category}</span>`;
+            document.getElementById('m-meta').innerHTML = `
+                <span><i class="fas fa-video"></i> ${m.quality}</span> 
+                <span><i class="fas fa-tag"></i> ${m.category.toUpperCase()}</span>
+                <span><i class="fas fa-calendar-alt"></i> Update: 2025</span>
+            `;
             
-            // Structured Data สำหรับ AI
+            // JSON-LD for AI Search
             const schema = {
                 "@context": "https://schema.org",
                 "@type": m.type === 'series' ? "TVSeries" : "Movie",
                 "name": m.title,
                 "image": m.poster,
-                "description": fullDesc,
-                "potentialAction": {
-                    "@type": "WatchAction",
-                    "target": window.location.href
-                }
+                "description": `เບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ UFA-MOVIE`
             };
             document.getElementById('structured-data').textContent = JSON.stringify(schema);
 
-            // --- 2. ตั้งค่าเครื่องเล่นหลัก ---
-            const startUrl = m.type === 'series' ? m.episodes[0].url : m.url;
+            // 2. Initialize ArtPlayer
             const art = new Artplayer({
                 container: '.artplayer-app',
-                url: startUrl,
+                url: m.type === 'series' ? m.episodes[0].url : m.url,
                 type: 'm3u8',
-                setting: true,
-                pip: true,
-                fullscreen: true,
-                fullscreenWeb: true,
+                setting: true, fullscreen: true, pip: true,
                 customType: {
                     m3u8: (video, url) => {
                         const hls = new Hls();
@@ -159,70 +154,102 @@
                 }
             });
 
-            // --- 3. ระบบจัดการโฆษณา ---
+            // 3. Advanced Ad System (2 Ads + Anti-Sound Bug)
+            const adLayer = document.getElementById('adLayer');
             const adVideo = document.getElementById('adVideo');
             const skipBtn = document.getElementById('skipBtn');
-            const adLayer = document.getElementById('adLayer');
-            const adInfo = document.getElementById('adInfo');
-            const regBtn = document.getElementById('regBtn');
+            const adLink = document.getElementById('adLink');
+            const adProgress = document.getElementById('adProgress');
+
+            let currentAdIndex = 0;
+            const ads = [
+                { src: "UFA.mp4", link: "https://ufasboclubauto.com/register" },
+                { src: "laospro.mp4", link: "https://laosproauto.com/la" }
+            ];
+
+            let adInterval;
 
             function startTimer() {
-                let timeLeft = 3; 
+                let timeLeft = 3;
                 skipBtn.disabled = true;
                 skipBtn.classList.remove('ready');
-                skipBtn.innerHTML = `ລໍຖ້າ <span id="timer">${timeLeft}</span> ວິ`;
+                skipBtn.innerHTML = `ລໍຖ້າ... <span id="timer">${timeLeft}</span>`;
 
                 if(adInterval) clearInterval(adInterval);
                 adInterval = setInterval(() => {
                     timeLeft--;
-                    if(timeLeft > 0) {
-                        const timerSpan = document.getElementById('timer');
-                        if(timerSpan) timerSpan.innerText = timeLeft;
-                    } else {
+                    const timerSpan = document.getElementById('timer');
+                    if(timerSpan) timerSpan.innerText = timeLeft;
+                    
+                    if(timeLeft <= 0) {
                         clearInterval(adInterval);
-                        skipBtn.innerText = currentAdIndex < adList.length - 1 ? "ຂ້າມໄປຄິບຖັດ" : "ຂ້າມໂຄສະນາເພື່ອເບິ່ງໜັງ";
+                        skipBtn.innerText = currentAdIndex < ads.length - 1 ? "ຂ້ามໄປຄິບຖັດໄປ" : "ຂ້າມໂຄສະນາເພື່ອເບິ່ງໜັງ";
                         skipBtn.disabled = false;
                         skipBtn.classList.add('ready');
                     }
                 }, 1000);
             }
 
-            function nextAd() {
+            function handleNextAd() {
+                // เคลียร์วิดีโอตัวเก่าเพื่อดับเสียง
+                adVideo.pause();
+                adVideo.currentTime = 0;
+
                 currentAdIndex++;
-                if(currentAdIndex < adList.length) {
-                    adInfo.innerText = `ໂຄສະນາ ${currentAdIndex + 1}/${adList.length}`;
-                    regBtn.href = adLinks[currentAdIndex];
-                    adVideo.src = adList[currentAdIndex];
+
+                if (currentAdIndex < ads.length) {
+                    // เล่นโฆษณาตัวถัดไป
+                    adProgress.innerText = `ໂຄສະນາ: ${currentAdIndex + 1}/${ads.length}`;
+                    adVideo.src = ads[currentAdIndex].src;
+                    adLink.href = ads[currentAdIndex].link;
                     adVideo.load();
-                    adVideo.play().catch(e => console.log("Autoplay blocked, waiting for interaction"));
+                    adVideo.play();
                     startTimer();
                 } else {
-                    adVideo.pause();
+                    // จบโฆษณา เข้าหนังจริง
+                    adVideo.muted = true; 
                     adLayer.style.display = 'none';
-                    art.play(); 
+                    art.play();
                 }
             }
 
-            adVideo.onended = nextAd;
-            skipBtn.onclick = nextAd;
-            startTimer();
+            skipBtn.onclick = handleNextAd;
+            adVideo.onended = handleNextAd;
+            startTimer(); // เริ่มตัวแรก
 
-            // --- 4. ระบบซีรีส์ ---
+            // 4. Series Episode Logic
             if (m.type === 'series') {
                 document.getElementById('epBox').style.display = 'block';
-                const box = document.getElementById('epItems');
+                const epItems = document.getElementById('epItems');
                 m.episodes.forEach((ep, i) => {
-                    const d = document.createElement('div');
-                    d.className = `ep-item ${i===0?'active':''}`;
-                    d.innerText = ep.title;
-                    d.onclick = () => {
+                    const btn = document.createElement('div');
+                    btn.className = `ep-btn ${i === 0 ? 'active' : ''}`;
+                    btn.innerText = ep.title;
+                    btn.onclick = () => {
                         art.switchUrl(ep.url);
-                        document.querySelectorAll('.ep-item').forEach((el, idx) => el.classList.toggle('active', idx === i));
+                        document.querySelectorAll('.ep-btn').forEach((b, idx) => b.classList.toggle('active', idx === i));
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     };
-                    box.appendChild(d);
+                    epItems.appendChild(btn);
                 });
             }
+
+            // 5. Related Movies Logic
+            const relatedGrid = document.getElementById('relatedGrid');
+            const related = movieDatabase
+                .filter(item => item.category === m.category && item.id !== m.id)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 6);
+
+            relatedGrid.innerHTML = related.map(r => `
+                <div class="card" onclick="location.href='play.html?id=${r.id}'">
+                    <img src="${r.poster}" alt="${r.title}">
+                    <div class="card-t">${r.title}</div>
+                </div>
+            `).join('');
+
+        } else {
+            document.body.innerHTML = "<div style='text-align:center; padding:100px;'><h1>ບໍ່ພົບຂໍ້ມູນໜັງ (ไม่พบข้อมูลหนัง)</h1><a href='index.html' style='color:red;'>ກັບໜ້າຫລັກ</a></div>";
         }
     </script>
 </body>

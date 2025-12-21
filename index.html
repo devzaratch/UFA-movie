@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>UFA-MOVIE ເບິ່ງໜັງອອນໄລນ໌ຟຣີ ดูหนังออนไลน์ฟรี หนังใหม่ 2025 HD</title>
-    <meta name="description" content="UFA-MOVIE ເວັບເບິ່ງໜັງອອນໄລນ໌ຟຣີ ລວມໜັງໃໝ່ 2025 ຄົມຊັດລະດັບ HD ເຕັມເລື່ອງ ມີທັງໜັງແອັກຊັນ ໜັງຜີ ໜັງຮັກ ແລະ ກາຕູນ ອັບເດດໃໝ່ທຸກມື້ ເບິ່ງໄດ້ທຸກບ່ອນທຸກເວລາ">
-    <meta name="keywords" content="ເບິ່ງໜັງອອນໄລນ໌, ໜັງໃໝ່ 2025, ເບິ່ງໜັງຟຣີ, UFA-MOVIE, ดูหนังออนไลน์, หนังใหม่ 2025">
+    <meta name="description" content="UFA-MOVIE ເວັບເບິ່ງໜັງອອນໄລນ໌ຟຣີ ລວມໜັງໃໝ່ 2025 ຄົມຊັດລະດັບ HD ເຕັມເລື່ອງ ມີທັງໜັງແອັກຊັນ ໜັງຜີ ໜັງຮັກ ແລະ ກາຕູນ ອັບເດດໃໝ່ທຸກມື້">
+    <meta name="keywords" content="ເບິ່ງໜັງອອນໄລນ໌, ໜັງໃໝ່ 2025, ເບິ່ງໜັງຟຣີ, UFA-MOVIE, ดูหนังออนไลน์, หนังใหม่ 2025, 037HD, ดูหนังฟรี">
     
     <meta property="og:title" content="UFA-MOVIE | ເບິ່ງໜັງອອນໄລນຟຣີ 2025">
     <meta property="og:description" content="ລວມໜັງໃໝ່ຊົນໂຮງແລະຊີລີ້ດັງ ພາກໄທ 4K">
@@ -17,112 +17,134 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        :root { --main-red: #e50914; --bg-dark: #0b0c10; --card-bg: #1a1c22; }
+        :root { --main-red: #e50914; --bg-dark: #0b0c10; --card-bg: #1a1c22; --accent: #f39c12; }
         
-        body { background: var(--bg-dark); color: white; font-family: 'Prompt', sans-serif; margin: 0; padding-bottom: 120px; }
+        body { background: var(--bg-dark); color: white; font-family: 'Prompt', sans-serif; margin: 0; padding-bottom: 50px; }
 
-        /* Top Bar */
-        .top-bar { background: #000; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #888; }
-        .social-icons a { color: #fff; margin-left: 15px; font-size: 18px; transition: 0.3s; }
-        .social-icons a:hover { color: var(--main-red); }
+        /* Navigation & Header */
+        .top-bar { background: #000; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #888; border-bottom: 1px solid #222; }
+        .header { background: #111; padding: 15px 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--main-red); position: sticky; top: 0; z-index: 1000; gap: 15px; }
+        .logo img { height: 60px; }
+        .search-box { flex: 1; max-width: 400px; min-width: 250px; position: relative; }
+        .search-box input { width: 100%; padding: 12px 20px; border-radius: 25px; border: 1px solid #333; background: #222; color: #fff; outline: none; }
 
-        /* Header & Logo */
-        .header { background: #111; padding: 15px 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--main-red); gap: 15px; }
-        .logo img.main-logo { height: 60px; width: auto; display: block; object-fit: contain; transition: 0.3s; }
-        
-        /* Search Box Responsive */
-        .search-box { position: relative; flex: 1; max-width: 400px; min-width: 250px; }
-        .search-box input { width: 100%; padding: 12px 20px; border-radius: 25px; border: 1px solid #333; background: #222; color: #fff; outline: none; box-sizing: border-box; }
-        .search-box input:focus { border-color: var(--main-red); box-shadow: 0 0 10px rgba(229, 9, 20, 0.3); }
+        /* Main Layout (Sidebar + Grid) */
+        .main-layout { display: flex; padding: 20px 5%; gap: 20px; }
+        .sidebar { width: 250px; flex-shrink: 0; }
+        .content-area { flex: 1; }
 
-        /* Nav Category */
-        .nav-cat { background: #1a1a1a; padding: 12px 5%; display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid #222; }
-        .nav-cat::-webkit-scrollbar { display: none; }
-        .nav-cat a { color: #ccc; text-decoration: none; font-weight: 500; font-size: 14px; cursor: pointer; white-space: nowrap; padding: 5px 15px; border-radius: 20px; transition: 0.3s; background: #222; }
-        .nav-cat a:hover, .nav-cat a.active { color: #fff; background: var(--main-red); }
+        .side-box { background: #111; border-radius: 5px; margin-bottom: 20px; overflow: hidden; border: 1px solid #222; }
+        .side-title { background: var(--main-red); color: white; padding: 10px; font-size: 14px; font-weight: 600; text-align: center; }
+        .side-menu { list-style: none; padding: 0; margin: 0; }
+        .side-menu li { border-bottom: 1px solid #222; }
+        .side-menu a { color: #ccc; text-decoration: none; padding: 10px 15px; display: block; font-size: 13px; transition: 0.3s; cursor: pointer; }
+        .side-menu a:hover { background: #1a1a1a; color: var(--main-red); padding-left: 20px; }
 
-        /* Grid System */
-        .container { padding: 30px 5%; }
-        h2 { font-weight: 600; font-size: 22px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
-        h2::before { content: ''; width: 4px; height: 24px; background: var(--main-red); display: inline-block; border-radius: 2px; }
-
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        
-        .card { background: var(--card-bg); border-radius: 8px; overflow: hidden; border: 1px solid #222; cursor: pointer; transition: 0.3s; position: relative; }
-        .card:hover { transform: translateY(-8px); border-color: var(--main-red); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        
+        /* Movie Grid */
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card { background: var(--card-bg); border-radius: 5px; overflow: hidden; border: 1px solid #222; cursor: pointer; transition: 0.3s; position: relative; }
+        .card:hover { transform: translateY(-5px); border-color: var(--main-red); }
         .poster-box { position: relative; aspect-ratio: 2/3; overflow: hidden; }
-        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:hover img { scale: 1.1; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card-title { padding: 8px; font-size: 12px; text-align: center; height: 35px; display: flex; align-items: center; justify-content: center; }
+        .q-tag { position: absolute; top: 5px; right: 5px; background: var(--main-red); padding: 2px 6px; border-radius: 3px; font-size: 9px; font-weight: bold; z-index: 5; }
+
+        /* SEO Section */
+        .seo-box { background: #111; padding: 25px; border-radius: 5px; margin-bottom: 25px; border: 1px solid #222; }
+        .seo-box h1 { color: var(--accent); font-size: 1.5rem; margin-top: 0; }
+        .seo-box p { color: #aaa; font-size: 13px; line-height: 1.8; }
+
+        /* Footer SEO Content */
+        .footer-seo { background: #000; padding: 40px 5%; border-top: 1px solid #222; color: #666; font-size: 12px; line-height: 1.8; }
+        .footer-seo h3, .footer-seo h4 { color: #888; margin-bottom: 10px; }
         
-        .card-title { padding: 12px; font-size: 13px; line-height: 1.4; text-align: center; height: 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .q-tag { position: absolute; top: 8px; right: 8px; background: var(--main-red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-        .type-tag { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.7); padding: 2px 8px; border-radius: 4px; font-size: 10px; z-index: 10; }
-
-        /* Pagination */
-        .pagination-container { display: flex; justify-content: center; align-items: center; gap: 5px; margin: 50px 0; }
-        .page-btn { background: #1a1c22; color: #fff; border: 1px solid #333; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-size: 14px; transition: 0.3s; }
-        .page-btn:hover:not([disabled]) { background: var(--main-red); border-color: #fff; }
-        .page-btn.active { background: var(--main-red); border-color: var(--main-red); font-weight: bold; }
-        .page-btn[disabled] { opacity: 0.2; cursor: not-allowed; }
-
-        /* Sticky Ads */
-        .sticky-ads { position: fixed; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.95); padding: 10px 0; z-index: 999; border-top: 1px solid #333; }
-        .sticky-ads img { max-width: 95%; height: auto; border-radius: 5px; }
-
-        @media (max-width: 600px) {
-            .header { justify-content: center; }
-            .search-box { min-width: 100%; }
-            .movie-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
-            .logo img.main-logo { height: 50px; }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
         }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <span><i class="fas fa-play-circle" style="color:red"></i> ເບິ່ງໜັງອອນໄລນຟຣີ ພາກໄທ 4K ອັບເດດໃໝ່ທຸກມື້ 2025</span>
+        <span><i class="fas fa-play-circle" style="color:red"></i> UFA-MOVIE ເບິ່ງໜັງອອນໄລນ໌ຟຣີ 2025 ອັບເດດໃໝ່ທຸກມື້</span>
         <div class="social-icons">
-            <a href="https://web.facebook.com/profile.php?id=61577060775782" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-line"></i></a>
         </div>
     </div>
 
     <header class="header">
         <a href="index.html" class="logo">
-            <img src="favicon.png" alt="UFA-MOVIE LOGO" class="main-logo">
+            <img src="favicon.png" alt="UFA-MOVIE">
         </a>
         <div class="search-box">
-            <input type="text" id="search" placeholder="ค้นหาชื่อหนังหรือซีรีส์..." onkeyup="doSearch()">
+            <input type="text" id="search" placeholder="ค้นหาหนัง/ซีรีส์... ເບິ່ງໜັງ..." onkeyup="doSearch()">
         </div>
     </header>
 
-    <nav class="nav-cat" id="cats">
-        <a onclick="filter('all', this)" class="active">ทั้งหมด</a>
-        <a onclick="filter('action', this)">แอคชั่น</a>
-        <a onclick="filter('drama', this)">ดราม่า</a>
-        <a onclick="filter('horror', this)">สยองขวัญ</a>
-        <a onclick="filter('anime', this)">อนิเมะ</a>
-        <a onclick="filter('serie', this)">ซีรีส์</a>
-    </nav>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="side-box">
+                <div class="side-title">หมวดหมู่แนะนำ</div>
+                <ul class="side-menu">
+                    <li><a onclick="filter('all')">ທັງໝົດ (ทั้งหมด)</a></li>
+                    <li><a onclick="filter('action')">ແອັກຊັນ (Action)</a></li>
+                    <li><a onclick="filter('horror')">ໜັງຜີ (Horror)</a></li>
+                    <li><a onclick="filter('anime')">ອານິເມະ (Anime)</a></li>
+                    <li><a onclick="filter('serie')">ຊີລີ້ (Series)</a></li>
+                    <li><a onclick="filter('drama')">ດຣາມ່າ (Drama)</a></li>
+                </ul>
+            </div>
+            <div class="side-box">
+                <div class="side-title">หนังใหม่ตามปี</div>
+                <ul class="side-menu">
+                    <li><a href="#">หนังใหม่ 2025</a></li>
+                    <li><a href="#">หนังใหม่ 2024</a></li>
+                    <li><a href="#">หนังใหม่ 2023</a></li>
+                </ul>
+            </div>
+        </aside>
 
-    <main class="container">
-        <h2 id="cat-title">รายการหนังและซีรีส์แนะนำ</h2>
-        <div class="movie-grid" id="grid"></div>
-        <div id="pagination" class="pagination-container"></div>
-    </main>
+        <div class="content-area">
+            <section class="seo-box">
+                <h1>UFA-MOVIE ເບິ່ງໜັງອອນໄລນ໌ຟຣີ ดูหนังออนไลน์ฟรี 2025</h1>
+                <p>
+                    ຍິນດີຕ້ອນຮັບສູ່ <strong>UFA-MOVIE</strong> ເວັບເບິ່ງໜັງອອນໄລນ໌ທີ່ດີທີ່ສຸດ. เราคือแหล่งรวม <strong>หนังใหม่ชนโรง 2025</strong> และซีรีส์ดังจากทั่วโลก 
+                    คมชัดระดับ 4K และ HD พากย์ไทย เต็มเรื่อง ดูฟรีไม่มีค่าใช้จ่าย อัปเดตหนังใหม่ทุกวันเพื่อให้คุณไม่พลาดทุกความบันเทิง 
+                    ຮອງຮັບການເບິ່ງຜ່ານມືຖື ແລະ ຄອມພິວເຕີ ຕະຫຼອດ 24 ຊົ່ວໂມງ.
+                </p>
+            </section>
 
-    <div class="sticky-ads">
-        <a href="https://ufasboclubauto.com/register" target="_blank">
-            <img src="https://via.placeholder.com/728x90?text=UFA-MOVIE+ADS+BANNER+CLICK+HERE" alt="โฆษณา">
-        </a>
+            <h2 style="border-left: 4px solid red; padding-left: 15px; font-size: 18px; margin-bottom: 20px;">รายการหนังแนะนำล่าสุด</h2>
+            <div class="movie-grid" id="grid"></div>
+            <div id="pagination" style="display: flex; justify-content: center; gap: 5px; margin-top: 30px;"></div>
+        </div>
     </div>
+
+    <footer class="footer-seo">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <h3>UFA-MOVIE ເວັບເບິ່ງໜັງອອນໄລນ໌ ໜັງໃໝ່ຊົນໂຮງ 2025</h3>
+            <p>
+                เว็บดูหนังออนไลน์ฟรี UFA-MOVIE ให้คุณได้รับชมหนังใหม่ก่อนใคร ไม่ว่าจะเป็นหนังชนโรง หนัง Netflix หรือซีรีส์เกาหลี 
+                เราเน้นความรวดเร็วในการอัปเดตและคุณภาพของภาพที่คมชัดที่สุด. ການເບິ່ງໜັງອອນໄລນ໌ (การดูหนังออนไลน์) 
+                ผ่านเว็บของเรามีความเสถียรและใช้งานง่าย รองรับผู้ใช้งานทั้งในไทยและลาว.
+            </p>
+            <h4>ເບິ່ງໜັງອອນໄລນ໌ຟຣີ 24 ຊົ່ວໂມງ</h4>
+            <p>
+                ไม่ว่าคุณจะอยู่ที่ไหน ก็สามารถสนุกกับการดูหนังได้ทุกที่. UFA-MOVIE มีระบบรองรับการดูหนังบนมือถือ (Mobile Friendly) 
+                และมีหมวดหมู่หนังให้เลือกมากมาย เช่น หนังแอคชั่น, หนังผี, การ์ตูนอนิเมะ และอื่นๆ อีกมากมาย.
+            </p>
+            <div style="text-align: center; margin-top: 30px; border-top: 1px solid #222; padding-top: 20px;">
+                <p>Copyright © 2025 UFA-MOVIE. All Rights Reserved. | ดูหนังออนไลน์ฟรี 2025</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="data.js"></script>
     <script>
         let currentPage = 1;
-        const itemsPerPage = 21; 
-        let currentData = [...movieDatabase]; 
+        const itemsPerPage = 18;
+        let currentData = [...movieDatabase];
 
         function render(data) {
             const grid = document.getElementById('grid');
@@ -133,63 +155,37 @@
             grid.innerHTML = paginatedItems.map(m => `
                 <div class="card" onclick="location.href='play.html?id=${m.id}'">
                     <div class="q-tag">${m.quality || 'HD'}</div>
-                    <div class="type-tag">${m.type === 'series' ? 'Series' : 'Movie'}</div>
                     <div class="poster-box">
-                        <img src="${m.poster}" alt="${m.title}" loading="lazy">
+                        <img src="${m.poster}" alt="${m.title} ดูหนังออนไลน์ฟรี UFA-MOVIE" loading="lazy">
                     </div>
                     <div class="card-title">${m.title}</div>
                 </div>
             `).join('');
-
             renderPagination(data.length);
         }
 
-        function renderPagination(totalItems) {
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            const paginationBox = document.getElementById('pagination');
-            
-            if (totalPages <= 1) { paginationBox.innerHTML = ''; return; }
-
+        function renderPagination(total) {
+            const totalPages = Math.ceil(total / itemsPerPage);
+            const box = document.getElementById('pagination');
+            if (totalPages <= 1) { box.innerHTML = ''; return; }
             let html = '';
-            html += `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
-
             for (let i = 1; i <= totalPages; i++) {
-                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-                    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
-                } else if (i === currentPage - 2 || i === currentPage + 2) {
-                    html += `<span style="color:#444">...</span>`;
-                }
+                html += `<button onclick="currentPage=${i}; render(currentData);" style="padding: 8px 15px; cursor: pointer; background: ${i === currentPage ? 'red' : '#222'}; color: white; border: 1px solid #333; border-radius: 4px;">${i}</button>`;
             }
-
-            html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
-            paginationBox.innerHTML = html;
-        }
-
-        function changePage(page) {
-            currentPage = page;
-            render(currentData);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            box.innerHTML = html;
         }
 
         function doSearch() {
             const val = document.getElementById('search').value.toLowerCase();
             currentData = movieDatabase.filter(m => m.title.toLowerCase().includes(val));
-            currentPage = 1;
-            render(currentData);
+            currentPage = 1; render(currentData);
         }
 
-        function filter(c, el) {
-            // สลับปุ่ม Active
-            document.querySelectorAll('.nav-cat a').forEach(a => a.classList.remove('active'));
-            el.classList.add('active');
-
+        function filter(c) {
             currentData = (c === 'all' ? movieDatabase : movieDatabase.filter(m => m.category === c));
-            currentPage = 1;
-            render(currentData);
-            document.getElementById('cat-title').innerText = c === 'all' ? "รายการหนังและซีรีส์แนะนำ" : "หมวดหมู่: " + c.toUpperCase();
+            currentPage = 1; render(currentData);
         }
 
-        // เริ่มต้นรันหน้าเว็บ
         render(currentData);
     </script>
 </body>
