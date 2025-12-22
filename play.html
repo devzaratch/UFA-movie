@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
     
-    <title id="page-title">Watching | UFA-MOVIE เບິ່ງໜັງອອນໄລນ໌</title>
-    <meta name="description" id="meta-description" content="ເບິ່ງໜັງອອນໄລນ໌ຟຣີ 2025 ຄົມຊັດລະດັບ HD ພາກໄທ ທີ່ UFA-MOVIE">
+    <title id="page-title">Watching | DOONUNG-MOVIE เບິ່ງໜັງອອນໄລນ໌</title>
+    <meta name="description" id="meta-description" content="ເບິ່ງໜັງອອນໄລນ໌ຟຣີ 2025 ຄົມຊັດລະດັບ HD ພາກໄທ ທີ່ DOONUNG-MOVIE">
     
     <script id="structured-data" type="application/ld+json"></script>
 
@@ -85,7 +85,7 @@
         <section id="adLayer" class="ad-layer">
             <div class="ad-count" id="adProgress">ໂຄສະນາ: 1/2</div>
             <video id="adVideo" autoplay>
-                <source src="UFA.mp4" type="video/mp4">
+                <source src="mog.mp4" type="video/mp4">
             </video>
             <a href="https://ufasboclubauto.com/register" id="adLink" target="_blank" class="btn-reg">ສະໝັກສະມາຊິກ</a>
             <button id="skipBtn" class="btn-skip" disabled>ລໍຖ້າ... <span id="timer">5</span></button>
@@ -120,7 +120,7 @@
 
         if (m) {
             // 1. SEO & Metadata Setup
-            const fullTitle = `ເບິ່ງໜັງ ${m.title} (2025) ເຕັມເລື່ອງ HD | UFA-MOVIE`;
+            const fullTitle = `ເບິ່ງໜັງ ${m.title} (2025) ເຕັມເລື່ອງ HD | DOONUNG-MOVIE`;
             document.title = fullTitle;
             document.getElementById('m-title').innerText = m.title;
             document.getElementById('m-meta').innerHTML = `
@@ -135,7 +135,7 @@
                 "@type": m.type === 'series' ? "TVSeries" : "Movie",
                 "name": m.title,
                 "image": m.poster,
-                "description": `เບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ UFA-MOVIE`
+                "description": `เບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ DOONUNG-MOVIE`
             };
             document.getElementById('structured-data').textContent = JSON.stringify(schema);
 
@@ -163,8 +163,8 @@
 
             let currentAdIndex = 0;
             const ads = [
-                { src: "UFA.mp4", link: "https://ufasboclubauto.com/register" },
-                { src: "laospro.mp4", link: "https://laosproauto.com/la" }
+                { src: "mog.mp4", link: "https://ufasboclubauto.com/register" },
+                { src: "lsp.mp4", link: "https://laosproauto.com/la" }
             ];
 
             let adInterval;
