@@ -736,4 +736,49 @@ const movieDatabase = [
         poster: "https://files.thaiware.site/movie/2024-08/images-poster/240808120412Ns5.jpg",
         url: "https://master.streamhls.com/hls/4dffc3de912a685eb7e1ecc7b8ea5cca/master.m3u8"
     },
+    {
+        id: "m61",
+        type: "movie",
+        title: "Blue Lock Episode Nagi (2024) บลูล็อก เดอะมูฟวี่ ตอนนากิ",
+        quality: "HD",
+        category: "anime",
+        poster: "https://kahirihome.com/wp-content/uploads/2025/09/Blue-Lock-Episode-Nagi-%E0%B8%9A%E0%B8%A5%E0%B8%B9%E0%B8%A5%E0%B9%87%E0%B8%AD%E0%B8%81-%E0%B9%80%E0%B8%94%E0%B8%AD%E0%B8%B0%E0%B8%A1%E0%B8%B9%E0%B8%9F%E0%B8%A7%E0%B8%B5%E0%B9%88-%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%99%E0%B8%B2%E0%B8%81%E0%B8%B4-2024-187x269-1.jpg",
+        url: "https://master.streamhls.com/hls/3de3b196a0acd5d27d4fd408b336b1fb/master.m3u8"
+    },
+    {
+        id: "m62",
+        type: "movie",
+        title: "Twisters (2024) ทวิสเตอร์ส",
+        quality: "HD",
+        category: "drama",
+        poster: "https://m.media-amazon.com/images/I/71sDLtiIL5L.jpg",
+        url: "https://master.streamhls.com/hls/225490fb08d4b6a4287f2f4c3e528db4/master.m3u8"
+    },
+    {
+        id: "m63",
+        type: "movie",
+        title: "Avatar Fire and Ash (2025) อวตาร: อัคนีและธุลีดิน",
+        quality: "ZOOM",
+        category: "action",
+        poster: "https://d2dogsd00e27qz.cloudfront.net/eyJidWNrZXQiOiJzdXBlcmFwcC1wcm9kLWltYWdlIiwia2V5IjoiaW1hZ2VzLzIwMjUvNy8yOS9pbWdfMTc1Mzc2MDY3MTUyMF94emNyNmlkcjMuanBlZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJpbnNpZGUifX19",
+        url: "https://master.streamhls.com/hls/fd7d12247b53bc5b93b8a1e21ae6ceb6/master.m3u8"
+    },
+    {
+        id: "m64",
+        type: "movie",
+        title: "Blink Twice (2024) บลิงก์ ทไวซ์ ซิกอันตราย",
+        quality: "HD",
+        category: "drama",
+        poster: "https://www.posterman2000.com/wp-content/uploads/2024/08/Blink-Twice-2024.jpg",
+        url: "https://master.streamhls.com/hls/d273e7349ae91d2c44af29a6f6dbf69a/master.m3u8"
+    },
+    {
+        id: "m65",
+        type: "movie",
+        title: "Beetlejuice Beetlejuice (2024) บีเทิลจู๊ดส์ บีเทิลจู๊ดส์",
+        quality: "HD",
+        category: "drama",
+        poster: "https://cms.dmpcdn.com/ugcarticle/2025/03/31/be931060-0e10-11f0-8e8e-cbbb713c3b59_webp_original.webp",
+        url: "https://master.streamhls.com/hls/96311a3b777ce46aff24ce1ff3a1d3ad/master.m3u8"
+    },
 ];
