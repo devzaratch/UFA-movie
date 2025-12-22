@@ -633,7 +633,7 @@ const movieDatabase = [
         type: "movie",
         title: "Moana 2 (2024) โมอาน่า 2",
         quality: "HD",
-        category: "anime",
+        category: "anime", 
         poster: "https://lumiere-a.akamaihd.net/v1/images/mo2_payoff_clam_1s_s_8a7c0acc.jpeg",
         url: "https://master.streamhls.com/hls/b5d1a66d2393a15c2730b90cfd7e973e/master.m3u8"
     },
@@ -663,5 +663,77 @@ const movieDatabase = [
         category: "action",
         poster: "https://m.media-amazon.com/images/M/MV5BYzFjNjYyYTMtOTI4MS00YjE1LTllZDYtZjk0NzI5ZjUxZjYxXkEyXkFqcGc@._V1_.jpg",
         url: "https://master.streamhls.com/hls/7fc2f22831aadad32a3ec8b56ebb608f/master.m3u8"
+    },
+    {
+        id: "m53",
+        type: "movie",
+        title: "Red One (2024) เรด วัน",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/4107/thumb_4107.jpg",
+        url: "https://master.streamhls.com/hls/1a90a0fce56ba6bd80d625a824a53eb9/master.m3u8"
+    },
+    {
+        id: "m54",
+        type: "movie",
+        title: "Taklee Genesis (2024) ตาคลี เจเนซิส",
+        quality: "HD",
+        category: "action",
+        poster: "https://neramitnungfilm.com/wp-content/uploads/2024/09/AW_TKG_POSTER_IMAX_W27.5H39.5inch.jpg",
+        url: "https://master.streamhls.com/hls/94a97af14e6adf5e3dfa1a75a2a9da7d/master.m3u8"
+    },
+    {
+        id: "m55",
+        type: "movie",
+        title: "Venom: The Last Dance (2024) เวน่อม: มหาศึกอสูรอหังการ",
+        quality: "HD",
+        category: "action",
+        poster: "https://cms.dmpcdn.com/dara/2024/09/06/b8301290-6c26-11ef-8329-997e78247c41_webp_original.webp",
+        url: "https://master.streamhls.com/hls/c5602ad132fd32a1d92cac5c7c835914/master.m3u8"
+    },
+    {
+        id: "m56",
+        type: "movie",
+        title: "The Roundup: Punishment (2024) บู๊ระห่ำล่าล้างนรก นรกลงทัณฑ์",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2024-05/images-poster/240504120414nl1.jpg",
+        url: "https://master.streamhls.com/hls/2a869ad167ffeb39a65d3f3a91e972ee/master.m3u8"
+    },
+    {
+        id: "m57",
+        type: "movie",
+        title: "Haikyu!! The Dumpster Battle (2024) ไฮคิว คู่ตบฟ้าประทาน ตอน ศึกที่กองขยะ",
+        quality: "HD",
+        category: "anime",
+        poster: "https://kahirihome.com/wp-content/uploads/2025/12/Haikyuu-The-Dumpster-Battle-2024-%E0%B9%84%E0%B8%AE%E0%B8%84%E0%B8%B4%E0%B8%A7-%E0%B8%84%E0%B8%B9%E0%B9%88%E0%B8%95%E0%B8%9A%E0%B8%9F%E0%B9%89%E0%B8%B2%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%97%E0%B8%B2%E0%B8%99-%E0%B8%95%E0%B8%AD%E0%B8%99-%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%82%E0%B8%A2%E0%B8%B0-300x450-1.webp",
+        url: "https://master.streamhls.com/hls/ffd345f9b5f5e2ae0898ea1ea7c7caee/master.m3u8"
+    },
+    {
+        id: "m58",
+        type: "movie",
+        title: "Deadpool & Wolverine (2024) เดดพูล & วูล์ฟเวอรีน",
+        quality: "HD",
+        category: "action",
+        poster: "https://upload.wikimedia.org/wikipedia/th/e/eb/Deadpool_%26_Wolverine_poster.png",
+        url: "https://master.streamhls.com/hls/11de0eb5b60903ebb5ea96e752bc1c57/master.m3u8"
+    },
+    {
+        id: "m59",
+        type: "movie",
+        title: "My Hero Academia You’re Next (2024) มาย ฮีโร่ อคาเดเมีย",
+        quality: "ZOOM",
+        category: "anime",
+        poster: "https://m.media-amazon.com/images/M/MV5BNGVmZDJhNjItYzdlOC00ODA2LWFkYjctY2NmMzNiZTQ2NTVjXkEyXkFqcGc@._V1_.jpg",
+        url: "https://master.streamhls.com/hls/2e50a8dc741c42d59a8016db35d4a40d/master.m3u8"
+    },
+    {
+        id: "m60",
+        type: "movie",
+        title: "Detective Conan: The Million-Dollar Pentagram (2024) ยอดนักสืบจิ๋วโคนัน เดอะมูฟวี่ 27: ปริศนาปราการ 5 แฉก",
+        quality: "ZOOM",
+        category: "anime",
+        poster: "https://files.thaiware.site/movie/2024-08/images-poster/240808120412Ns5.jpg",
+        url: "https://master.streamhls.com/hls/4dffc3de912a685eb7e1ecc7b8ea5cca/master.m3u8"
     },
 ];
