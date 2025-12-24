@@ -988,4 +988,49 @@ const movieDatabase = [
         poster: "https://lh3.googleusercontent.com/pLpCGLd2pDZWLBTwEgLSECDUr6nNRv9aALPln75K3jH9eEWcHZoXQVwi1ThrjPIdWWuWH_jkPF7G7mAiWFUCUpImaHR8yWfd3qo=s0",
         url: "https://master.streamhls.com/hls/218866a7e5d803399b0c108099d8ea3c/master.m3u8"
     },
+    {
+        id: "m88",
+        type: "movie",
+        title: "สัปเหร่อ (2023) The Undertaker",
+        quality: "HD",
+        category: "horror",
+        poster: "https://m.media-amazon.com/images/M/MV5BMjc1ZjExMmQtYWFiYS00YTdhLThlZjEtOGFiMWNkZTJjZTQzXkEyXkFqcGc@._V1_.jpg",
+        url: "https://master.streamhls.com/hls/d4ba073646e6f07ebf796aeb239020b1/master.m3u8"
+    },
+    {
+        id: "m88",
+        type: "movie",
+        title: "พี่นาค 3 Pee Nak 3 (2022)",
+        quality: "HD",
+        category: "horror",
+        poster: "https://cdni-hw.ch7.com/dm/sz-md/i/images/2023/08/31/64f03bb18941f3.31743102.jpg",
+        url: "https://master.streamhls.com/hls/a64af3a9a3b017f7c71482784233e7c1/master.m3u8"
+    },
+    {
+        id: "m89",
+        type: "movie",
+        title: "Gran Turismo (2023) GT แกร่งทะลุไมล์",
+        quality: "HD",
+        category: "action",
+        poster: "https://image.tmdb.org/t/p/original/8nBPRgDwxi7hBmvukup8pf6M7zz.jpg",
+        url: "https://master.streamhls.com/hls/6296b585ea84e5c14096848ac7f15f79/master.m3u8"
+    },
+    {
+        id: "m90",
+        type: "movie",
+        title: "The Bridge Curse (2020) คำสาปสะพานเฮี้ยน",
+        quality: "HD",
+        category: "horror",
+        poster: "https://files.thaiware.site/movie/2020-07/images-poster/2007101800500q9.jpg",
+        url: "https://master.streamhls.com/hls/2d02f6b53ada19e9367e3766a6919653/master.m3u8"
+    },
+    {
+        id: "m91",
+        type: "movie",
+        title: "Thanksgiving (2023) คืนเดือดเชือดขาช็อป",
+        quality: "HD",
+        category: "horror",
+        poster: "https://lh3.googleusercontent.com/3NsquT44EMzNjnOxZym8g4vnTZ9A6qInGfiWC9tOuD9JabSvyX81vSxfY86aqPYCd_1-WWa8yIWVZtD5B67mo_iokaR35BCdXA=w280",
+        url: "https://master.streamhls.com/hls/64016cc564929a1f3a91f0dab9ff4b67/master.m3u8"
+    },
 ];
