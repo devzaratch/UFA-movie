@@ -1176,4 +1176,26 @@ const movieDatabase = [
             { title: "ตอนที่ 16", url: "https://online225.com/cdn/hls/9dffa1efc075be4a0b3b6776671ae028/master.txt?s=1&d=.m3u8" }
         ]
     },
+    {
+        id: "s12",
+        type: "series",
+        title: "The Manipulated (2025) พากย์ไทย",
+        quality: "HD",
+        category: "serie",
+        poster: "https://m.media-amazon.com/images/M/MV5BMzkwODU4MGEtOTNkMy00YjhmLTg5NWUtZjlhODJjOGYwNDdhXkEyXkFqcGc@._V1_.jpg",
+        episodes: [
+            { title: "ตอนที่ 1", url: "https://online225.com/cdn/hls/a32bea4fb7077b1de91a836b9670057c/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 2", url: "https://online225.com/cdn/hls/39271e35c953b1c55486a87a7c9577cb/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 3", url: "https://online225.com/cdn/hls/07a89762c9a3f5cacf2d7d602a47e987/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 4", url: "https://online225.com/cdn/hls/f73a519191dad5eb71b4d7e7975ccfc2/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 5", url: "https://online225.com/cdn/hls/9dda3398373a5b6f6f9a9e18b2370dce/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 6", url: "https://online225.com/cdn/hls/6a67f9bb98572aa7e8113234d2531c1e/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 7", url: "https://online225.com/cdn/hls/066d394cdd7579b64f63a493de2c2ef9/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 8", url: "https://online225.com/cdn/hls/ef419027a6a056d5929eec429c1e4297/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 9", url: "https://online225.com/cdn/hls/5bad1d8c3de8fb0326e1a10e2253d4af/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 10", url: "https://online225.com/cdn/hls/e6dedd99c5c2d79c02fb7e103c951a59/master.txt?s=2&d=.m3u8" },
+            { title: "ตอนที่ 11", url: "https://top-cdn.com/hls/229a15cc19ce23a0609b3cb0fe493200/master.m3u8" },
+            { title: "ตอนที่ 12", url: "https://top-cdn.com/hls/5eb74b98119656aa9a333628540bb487/master.m3u8" }
+        ]
+    },
 ];
