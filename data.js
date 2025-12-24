@@ -937,10 +937,55 @@ const movieDatabase = [
     {
         id: "m82",
         type: "movie",
-        title: "Demon Slayer Kimetsu no Yaiba To the Hashira Training (2024) ดาบพิฆาตอสูร เดอะมูฟวี่ ปาฏิหาริย์แห่งสายสัมพันธ์ สู่การสั่งสอนของเสาหลัก",
+        title: "The Fall Guy (2024) สตันท์แมนคนจริง",
         quality: "HD",
-        category: "anime",
-        poster: "https://kahirihome.com/wp-content/uploads/2025/10/Demon-Slayer-Kimetsu-no-Yaiba-To-the-Hashira-Training-2024-%E0%B8%9B%E0%B8%B2%E0%B8%8F%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%B4%E0%B8%A2%E0%B9%8C%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%AA%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C-%E0%B8%AA%E0%B8%B9%E0%B9%88%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B8%AA%E0%B8%AD%E0%B8%99%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%AA%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81-300x450-1.jpg",
-        url: "https://master.streamhls.com/hls/781711ce0316dfdfda8f54a2b1726c8b/master.m3u8"
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/3962/thumb_3962.jpg",
+        url: "https://master.streamhls.com/hls/12e700a007aea605757444a816d6e29f/master.m3u8"
+    },
+    {
+        id: "m83",
+        type: "movie",
+        title: "Argylle (2024) อาร์ไกล์ ยอดสายลับ",
+        quality: "HD",
+        category: "action",
+        poster: "https://image.tmdb.org/t/p/original/rsk1I49HCiS1T6oemVLRJ8ZhFr4.jpg",
+        url: "https://master.streamhls.com/hls/b2389aee46a340f867ee0fe67e6f06d5/master.m3u8"
+    },
+    {
+        id: "m84",
+        type: "movie",
+        title: "The Strangers: Chapter 1 (2024) เดอะ สเตรนเจอร์ส อำมหิตฆ่าไม่สน",
+        quality: "HD",
+        category: "horror",
+        poster: "https://www.dailynews.co.th/wp-content/uploads/2024/05/The-Strangers-Chapter-1-Poster-TH.jpg",
+        url: "https://master.streamhls.com/hls/cd5a1f3f37e60f0813cb682a9b4b8247/master.m3u8"
+    },
+    {
+        id: "m85",
+        type: "movie",
+        title: "Ghostbusters Frozen Empire (2024) โกสต์บัสเตอร์ส มหันตภัยเมืองเยือกแข็ง",
+        quality: "HD",
+        category: "action",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/3535/thumb_3535.jpg",
+        url: "https://master.streamhls.com/hls/f58fb261d4316d8df5ea92bd193c577a/master.m3u8"
+    },
+    {
+        id: "m86",
+        type: "movie",
+        title: "The Marvels (2023) เดอะ มาร์เวลส์",
+        quality: "HD",
+        category: "action",
+        poster: "https://kahirihome.com/wp-content/uploads/2024/03/The-Marvels-%E0%B9%80%E0%B8%94%E0%B8%AD%E0%B8%B0-%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%A7%E0%B8%A5%E0%B8%AA%E0%B9%8C-scaled.jpg",
+        url: "https://master.streamhls.com/hls/a42cc3ab08e3009453eb193b444ab3e9/master.m3u8"
+    },
+    {
+        id: "m87",
+        type: "movie",
+        title: "Meg 2 The Trench (2023) เม็ก 2 อภิมหาโคตรหลามร่องนรก",
+        quality: "HD",
+        category: "action",
+        poster: "https://lh3.googleusercontent.com/pLpCGLd2pDZWLBTwEgLSECDUr6nNRv9aALPln75K3jH9eEWcHZoXQVwi1ThrjPIdWWuWH_jkPF7G7mAiWFUCUpImaHR8yWfd3qo=s0",
+        url: "https://master.streamhls.com/hls/218866a7e5d803399b0c108099d8ea3c/master.m3u8"
     },
 ];
