@@ -3,61 +3,70 @@ from bs4 import BeautifulSoup
 import json
 
 def scrape_movies():
-    # ใช้ URL หมวดหนังใหม่โดยตรงเพื่อให้ดึงได้แม่นยำ
-    url = "https://www.037-hddmovie.com/category/%e0%b8%94%e0%b8%b9%e0%b8%ab%e0%b8%99%e0%b8%b1%e0%b8%87%e0%b9%83%e0%b8%ab%e0%b8%a1%e0%b9%88%e0%b8%8a%e0%b8%99%e0%b9%82%e0%b8%a3%e0%b8%87/"
-    
-    # ปรับ Headers ให้เหมือนคนเข้าใช้งานจริงๆ
+    # ลองเปลี่ยนไปดึงหน้าหมวดหมู่โดยตรง
+    url = "https://www.037-hddmovie.com/category/movie-hd/"
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept-Language': 'th-TH,th;q=0.9,en-US;q=0.8,en;q=0.7'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://www.google.com/'
     }
     
     try:
-        response = requests.get(url, headers=headers, timeout=20)
-        response.encoding = 'utf-8' # ป้องกันภาษาต่างดาว
+        session = requests.Session()
+        response = session.get(url, headers=headers, timeout=20)
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # ค้นหาบล็อกหนัง (ใช้ Selector ที่กว้างขึ้นครอบคลุมหลายชื่อ Class)
-        movie_blocks = soup.select('.movie-block, .ml-item, .item')
         new_data = []
-
-        print(f"กำลังสแกน... เจอเป้าหมาย {len(movie_blocks)} จุด")
-
-        for i, block in enumerate(movie_blocks[:24]): # ดึง 24 เรื่องล่าสุด
-            # พยายามหาชื่อหนังจากหลายจุด
-            title_el = block.select_one('.movie-title, h3, h2, .title')
-            img_el = block.select_one('img')
-            link_el = block.select_one('a')
-
-            if title_el and link_el:
-                title = title_el.get_text(strip=True)
-                poster = img_el.get('src', '') if img_el else ""
-                # ปรับแต่ง URL รูปภาพถ้าเป็นลิงก์แบบย่อ
-                if poster.startswith('//'):
-                    poster = 'https:' + poster
-                
-                detail_url = link_el.get('href', '')
-
-                new_data.append({
-                    "id": f"m{i+1}",
-                    "title": title,
-                    "poster": poster,
-                    "url": detail_url, # ใช้ลิงก์หน้าดูของเขาเพื่อความเสถียร
-                    "category": "หนังใหม่",
-                    "quality": "HD",
-                    "type": "movie"
-                })
-                print(f"ดึงสำเร็จ [{i+1}]: {title}")
-
-        # บันทึกเป็นไฟล์ data.js
-        with open('data.js', 'w', encoding='utf-8') as f:
-            json_data = json.dumps(new_data, ensure_ascii=False, indent=2)
-            f.write(f"const movieDatabase = {json_data};")
+        # วิธีใหม่: ค้นหาจากทุกลิงก์ที่มีคำว่า 'movie' และมีรูปภาพอยู่ข้างใน
+        all_links = soup.find_all('a')
         
-        print(f"เสร็จสิ้น! บันทึกข้อมูลหนัง {len(new_data)} เรื่องลงใน data.js")
+        for link in all_links:
+            img = link.find('img')
+            href = link.get('href', '')
+            
+            # กรองเฉพาะลิงก์ที่มีรูปและเป็นลิงก์หนังจริงๆ
+            if img and '/movie/' in href and len(new_data) < 30:
+                title = img.get('alt', '').strip() or link.get('title', '').strip()
+                if not title: continue
+                
+                poster = img.get('src', '')
+                if poster.startswith('//'): poster = 'https:' + poster
+
+                # ป้องกันข้อมูลซ้ำ
+                if not any(d['title'] == title for d in new_data):
+                    new_data.append({
+                        "id": f"m{len(new_data)+1}",
+                        "title": title,
+                        "poster": poster,
+                        "url": href,
+                        "category": "หนังใหม่",
+                        "quality": "HD",
+                        "type": "movie"
+                    })
+                    print(f"เจอหนังแล้ว: {title}")
+
+        if not new_data:
+            print("ยังไม่เจอหนัง ลองเปลี่ยนวิธีค้นหาแบบสำรอง...")
+            # ถ้ายังไม่เจอ ให้ดึงจากทุกลิงก์ที่มีคำว่า ดูหนัง
+            for a in soup.find_all('a', title=True):
+                if 'ดูหนัง' in a['title'] and len(new_data) < 30:
+                    new_data.append({
+                        "id": f"m{len(new_data)+1}",
+                        "title": a['title'],
+                        "poster": "",
+                        "url": a['href'],
+                        "category": "หนังใหม่",
+                        "quality": "HD",
+                        "type": "movie"
+                    })
+
+        # บันทึกไฟล์
+        with open('data.js', 'w', encoding='utf-8') as f:
+            f.write(f"const movieDatabase = {json.dumps(new_data, ensure_ascii=False, indent=2)};")
+        
+        print(f"สำเร็จ! ดึงมาได้ {len(new_data)} เรื่อง")
 
     except Exception as e:
-        print(f"เกิดข้อผิดพลาด: {e}")
+        print(f"พังตรงนี้: {e}")
 
 if __name__ == "__main__":
     scrape_movies()
