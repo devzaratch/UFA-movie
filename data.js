@@ -1369,4 +1369,58 @@ const movieDatabase = [
         poster: "https://img.pptvhd36.com/thumbor/2024/08/05/news-185fbee.jpg",
         url: "https://master.streamhls.com/hls/5c624d297d560a9e9fc8c0dddc29bf75/master.m3u8"
     },
+    {
+        id: "m125",
+        type: "movie",
+        title: "The Predator (2018) เดอะ เพรดเดเทอร์",
+        quality: "HD",
+        category: "action",
+        poster: "https://i.redd.it/cznt5a1njq8f1.jpeg",
+        url: "https://master.streamhls.com/hls/e4a0067e41d54f69a5c129e79caa22cb/master.m3u8"
+    },
+    {
+        id: "m126",
+        type: "movie",
+        title: "The Darkest Minds (2018) จิตทมิฬ",
+        quality: "HD",
+        category: "action",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHjafQ-ZyoWUHWkOzjMv0qolHgOyrFSzufhQ&s",
+        url: "https://master.streamhls.com/hls/12c347b660eabee5047d091e2f42a22f/master.m3u8"
+    },
+    {
+        id: "m127",
+        type: "movie",
+        title: "Ant-Man 2 (2018) แอนท์-แมน 2 และ เดอะ วอสพ์",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-06/images-poster/180619090004410.jpg",
+        url: "https://master.streamhls.com/hls/7d2515b43d61767a50ba2f389bdbc78f/master.m3u8"
+    },
+    {
+        id: "m128",
+        type: "movie",
+        title: "Luis and The Aliens (2018) หลุยส์ตัวแสบ กับแก๊งเอเลี่ยนตัวป่วน",
+        quality: "HD",
+        category: "anime",
+        poster: "https://cdn.majorcineplex.com/uploads/movie/2433/thumb_2433.jpg",
+        url: "https://master.streamhls.com/hls/d725463a9b1128bb8cfd1430e9ed19d5/master.m3u8"
+    },
+    {
+        id: "m129",
+        type: "movie",
+        title: "Hotel Transylvania 3: Summer Vacation (2018) โรงแรมผีหนีไปพักร้อน 3: ซัมเมอร์หฤหรรษ์",
+        quality: "HD",
+        category: "anime",
+        poster: "https://files.thaiware.site/movie/2018-05/images-336/1805291000463A0.jpg",
+        url: "https://master.streamhls.com/hls/57df7916f1c943e335a7e3f856291a2c/master.m3u8"
+    },
+    {
+        id: "m130",
+        type: "movie",
+        title: "Johnny English Strikes Again (2018) จอห์นนี่ อิงลิช พยัคฆ์ร้าย ศูนย์ ศูนย์ ก๊าก รีเทิร์น",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-09/images-poster/180916070008M4f.jpg",
+        url: "https://master.streamhls.com/hls/b8223d041d64e1e25f79cee798c881f4/master.m3u8"
+    },
 ];
