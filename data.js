@@ -1423,4 +1423,94 @@ const movieDatabase = [
         poster: "https://files.thaiware.site/movie/2018-09/images-poster/180916070008M4f.jpg",
         url: "https://master.streamhls.com/hls/b8223d041d64e1e25f79cee798c881f4/master.m3u8"
     },
+    {
+        id: "m131",
+        type: "movie",
+        title: "First Man (2018) มนุษย์คนแรกบนดวงจันทร์",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-10/images-poster/1810110730061W9.jpg",
+        url: "https://master.streamhls.com/hls/77873a71eafbfc78002c3fba5942f028/master.m3u8"
+    },
+    {
+        id: "m132",
+        type: "movie",
+        title: "Mile 22 (2018) คนมหากาฬเดือดมหาประลัย",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-08/images-poster/180825073006e1O.jpg",
+        url: "https://master.streamhls.com/hls/03ea95d15108ed2ad3355724a8635424/master.m3u8"
+    },
+    {
+        id: "m133",
+        type: "movie",
+        title: "The House with a Clock in Its Walls (2018) บ้านเวทมนตร์และนาฬิกาอาถรรพ์",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-09/images-poster/1809250700108a3.jpg",
+        url: "https://master.streamhls.com/hls/b61ccd5890f2a0a674eb800050e68cf4/master.m3u8"
+    },
+    {
+        id: "m134",
+        type: "movie",
+        title: "Hunter Killer (2018) สงครามอเมริกาผ่ารัสเซีย",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-10/images-poster/18102207300672B.jpg",
+        url: "https://master.streamhls.com/hls/8a87c55e38d56827bfaa5fb4a677217e/master.m3u8"
+    },
+    {
+        id: "m135",
+        type: "movie",
+        title: "The Girl in the Spider’s Web (2018) พยัคฆ์สาวล่ารหัสใยมรณะ",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-11/images-336/181106070021bN6.jpg",
+        url: "https://master.streamhls.com/hls/6b12128ef550886049a9e9a2a390426f/master.m3u8"
+    },
+    {
+        id: "m136",
+        type: "movie",
+        title: "Hell Fest (2018) สวนสนุกนรก",
+        quality: "HD",
+        category: "action",
+        poster: "https://www.boomerangshop.com/web/files/product/201901/01563915-20190115100406-0.jpg",
+        url: "https://master.streamhls.com/hls/34b72d790bc7675a719bb1bd688e803f/master.m3u8"
+    },
+    {
+        id: "m137",
+        type: "movie",
+        title: "Ralph Breaks the Internet (2018) ราล์ฟตะลุยโลกอินเทอร์เน็ต วายร้ายหัวใจฮีโร่ 2",
+        quality: "HD",
+        category: "anime",
+        poster: "https://files.thaiware.site/movie/2018-11/images-poster/181115073009541.jpg",
+        url: "https://master.streamhls.com/hls/99e155b6acecc37bce2c5e0a250720fb/master.m3u8"
+    },
+    {
+        id: "m138",
+        type: "movie",
+        title: "Kursk (2019) คูร์ส หนีตายโคตรนรกรัสเซีย",
+        quality: "HD",
+        category: "action",
+        poster: "https://lh3.googleusercontent.com/9Mn0NTCrzBWW_Ub-k4A04Yv9jLuaMu4ZtUT9aon3oKotoFSDbQeDTDfP7mEnja9kzyx7D9ktDZGkah8kohK9=s0",
+        url: "https://master.streamhls.com/hls/867c9e6f19d3861ab2b0d8995abe55b6/master.m3u8"
+    },
+    {
+        id: "m139",
+        type: "movie",
+        title: "Final Score (2018) ยุทธการดับแผน ผ่าแมตช์เส้นตาย",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2018-09/images-poster/180925070012pu9.jpg",
+        url: "https://master.streamhls.com/hls/38529dc867fb14a958f25e1977904392/master.m3u8"
+    },
+    {
+        id: "m140",
+        type: "movie",
+        title: "How to Train Your Dragon 3: The Hidden World (2019) อภินิหารไวกิ้งพิชิตมังกร 3",
+        quality: "HD",
+        category: "action",
+        poster: "https://files.thaiware.site/movie/2019-01/images-poster/190111073006418.jpg",
+        url: "https://master.streamhls.com/hls/c30fef7ca5d3ed584d4ff0b47e62034e/master.m3u8"
+    },
 ];
