@@ -1513,4 +1513,13 @@ const movieDatabase = [
         poster: "https://files.thaiware.site/movie/2019-01/images-poster/190111073006418.jpg",
         url: "https://master.streamhls.com/hls/c30fef7ca5d3ed584d4ff0b47e62034e/master.m3u8"
     },
+    {
+        id: "m141",
+        type: "movie",
+        title: "Us (2019) หลอน ลวง เรา",
+        quality: "HD",
+        category: "horror",
+        poster: "https://files.thaiware.site/movie/2019-03/images-poster/190309120013133.jpg",
+        url: "https://master.streamhls.com/hls/13b092535ff1cafe587f1f7b5cf94bfc/master.m3u8"
+    },
 ];
