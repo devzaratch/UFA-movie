@@ -1,0 +1,24 @@
+---
+// Shared footer: gold border + category keyword links + copyright.
+import { movieDatabase } from '../data/movies.js';
+const total = movieDatabase.length;
+---
+
+<div id="footborder"></div>
+<footer class="footer-seo">
+    <p>
+        <a href="/">ดูหนังออนไลน์</a>
+        <a href="/?year=2025">หนังใหม่ 2025</a>
+        <a onclick={`window.filter('serie')`}>ซีรีย์ออนไลน์</a>
+        <a onclick={`window.filter('action')`}>หนังแอ็คชั่น</a>
+        <a onclick={`window.filter('horror')`}>หนังผี สยองขวัญ</a>
+        <a onclick={`window.filter('anime')`}>หนังการ์ตูน</a>
+        <a onclick={`window.filter('drama')`}>หนังดราม่า</a>
+    </p>
+    <p>
+        DOONUNG-MOVIE ຄືເວັບດ່ວນໜັງອອນໄລນ໌ ທີ່ລວມໜັງຊົນໂຮງ ໜັງຜີ ກາຕູນ ແລະ ຊີລີ້ໄວ້ຄັບທຸກໝວດ
+        ອັບເດດໜັງໃຝ່ທຸກມື້ ຮອງຮັບການເບິ່ງຜ່ານມືຖື ແລະ ຄອມພິວເຕີ ຕະຫຼອດ 24 ຊົ່ວໂມງ
+        ອອກແບບໃຫ້ຮ້າຍໃຊ້ງ່າຍ ຊອກຫາໜັງໄດ້ຢ່າງລະອຽດ.
+    </p>
+    <p class="copy">Copyright © 2025-2026 DOONUNG-MOVIE. All Rights Reserved. | ເບິ່ງໜັງອອນໄລນ໌ຟຣີ</p>
+</footer>

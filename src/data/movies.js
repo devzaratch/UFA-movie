@@ -1,4 +1,4 @@
-const movieDatabase = [
+export const movieDatabase = [
     {
         id: "m1",
         type: "movie",
