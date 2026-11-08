@@ -1,0 +1,128 @@
+/* DOONUNG-MOVIE — global styles (ported from the previous single-file pages).
+   Black + gold theme; see AGENTS.md "Design language". */
+
+:root {
+    --gold: #ffcf18;
+    --gold-soft: #ffc900;
+    --imdb-bar: #f0d78c;
+    --bg: #000;
+    --panel: #0d0d0d;
+    --border: #262626;
+    --ribbon: #e50914;
+    --main-red: #e50914;
+    --card-bg: #1a1c22;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; margin: 0; }
+
+/* ── Top notice bar ── */
+.notice { background: #161004; border-bottom: 1px solid var(--border); color: var(--gold); font-size: 13px; font-weight: bold; padding: 8px 5%; text-align: center; }
+
+/* ── Header ── */
+.header { background: var(--bg); padding: 14px 3% 10px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 25px; position: relative; }
+.logo img { height: 64px; display: block; }
+.search-box { position: relative; width: 100%; max-width: 430px; flex: 1; }
+.search-box input { width: 100%; height: 38px; border-radius: 20px; border: none; background: #fff; color: #242424; font-size: 12px; padding: 0 52px 0 18px; outline: none; }
+.search-btn { position: absolute; right: 4px; top: 4px; width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--bg); color: #fff; cursor: pointer; }
+.social-icons { display: flex; gap: 14px; }
+.social-icons a { color: #ccc; font-size: 20px; text-decoration: none; }
+.social-icons a:hover { color: var(--gold); }
+
+/* ── Main nav ── */
+.mainnav { border-bottom: 1px solid var(--border); padding: 10px 3%; display: flex; flex-wrap: wrap; gap: 8px 34px; }
+.mainnav a { color: #f0f0f0; font-family: 'Oswald', Arial, Helvetica, sans-serif; font-size: 19px; text-decoration: none; cursor: pointer; }
+.mainnav a:hover { color: var(--gold); }
+
+/* ── Layout ── */
+.wrap { padding: 15px 3%; }
+.top-slider { display: flex; gap: 12px; overflow-x: auto; padding: 10px 2px; scrollbar-width: thin; }
+.top-slider li { list-style: none; flex: 0 0 155px; }
+.top-slider a { display: block; }
+.top-slider img { width: 155px; height: 205px; object-fit: cover; object-position: center; display: block; border: 2px solid #1c1c1c; }
+.top-slider img:hover { border-color: var(--gold); }
+
+.layout { display: flex; gap: 18px; margin-top: 15px; }
+.content { flex: 1; min-width: 0; }
+.sidebar { width: 310px; flex-shrink: 0; }
+
+/* ── SEO box ── */
+.seo-box { margin: 10px 0 20px; }
+.seo-box h1 { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--gold); color: var(--gold); font-size: 19px; margin: 0 0 12px; padding: 10px 14px; }
+.seo-box p { color: var(--gold-soft); font-size: 13px; line-height: 1.9; margin: 8px 0; }
+.seo-box strong { color: var(--gold); }
+
+/* ── Catalog cards (white) ── */
+.movie-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.card { width: 216px; background: #fff; cursor: pointer; position: relative; overflow: hidden; display: block; text-decoration: none; }
+.card img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; display: block; }
+.ribbon { position: absolute; top: 6px; right: -30px; transform: rotate(45deg); background: var(--ribbon); color: #fff; font-size: 11px; font-weight: bold; padding: 3px 34px; z-index: 5; box-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
+.rating-bar { background: var(--imdb-bar); color: #222; font-size: 12px; font-weight: bold; text-align: center; padding: 5px 4px; }
+.card-title { color: #000; font-size: 14px; font-weight: bold; text-align: center; padding: 8px 6px 10px; min-height: 58px; display: flex; align-items: center; justify-content: center; }
+
+#pagination { display: flex; justify-content: center; gap: 6px; margin: 28px 0; flex-wrap: wrap; }
+#pagination button { background: var(--panel); border: 1px solid var(--border); border-radius: 3px; color: #ccc; cursor: pointer; font-size: 13px; padding: 6px 12px; }
+#pagination button.cur { background: var(--gold); border-color: var(--gold); color: #000; font-weight: bold; }
+
+/* ── Sidebar ── */
+.side-box { background: var(--panel); border: 1px solid var(--border); margin-bottom: 16px; }
+.side-title { background: var(--gold); color: #000; font-family: 'Oswald', Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .5px; padding: 9px 12px; }
+.side-list { list-style: none; margin: 0; padding: 0; }
+.side-list li { border-bottom: 1px solid #1a1a1a; }
+.side-list li:last-child { border-bottom: none; }
+.side-list a { color: #ccc; cursor: pointer; display: flex; gap: 10px; align-items: center; font-size: 13px; padding: 8px 12px; text-decoration: none; transition: .2s; }
+.side-list a:hover { background: #191919; color: var(--gold); padding-left: 18px; }
+.side-list img { width: 36px; height: 54px; object-fit: cover; flex-shrink: 0; }
+.side-promo { background: linear-gradient(135deg, #1a1204, #342305); border: 1px solid var(--gold); color: var(--gold); display: block; font-weight: bold; padding: 18px 14px; text-align: center; text-decoration: none; font-size: 15px; }
+.side-promo span { display: block; font-size: 12px; color: #ddd; margin-top: 6px; }
+
+/* ── Footer ── */
+#footborder { border-top: 3px solid var(--gold); }
+.footer-seo { background: var(--bg); color: #999; font-size: 12px; line-height: 1.9; padding: 28px 5% 40px; }
+.footer-seo a { color: var(--gold); text-decoration: none; margin-right: 12px; cursor: pointer; }
+.footer-seo a:hover { text-decoration: underline; }
+.footer-seo .copy { border-top: 1px solid var(--border); margin-top: 20px; padding-top: 15px; text-align: center; }
+
+/* ── Per-title player page ── */
+.nav-back { padding: 15px 5%; background: #000; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #262626; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.nav-back .back-link { color: #fff; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--gold); font-family: 'Oswald', Arial, sans-serif; font-size: 20px; font-weight: 600; text-decoration: none; }
+.brand img { height: 40px; display: block; }
+
+.player-container { max-width: 1100px; margin: 20px auto; padding: 0 15px; position: relative; }
+.ad-layer { position: absolute; top: 0; left: 15px; right: 15px; bottom: 0; background: #000; z-index: 100; display: flex; align-items: center; justify-content: center; border-radius: 10px; overflow: hidden; }
+#adVideo, .ad-layer video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.btn-skip { position: absolute; bottom: 40px; right: 30px; background: rgba(0, 0, 0, 0.8); color: #fff; border: 1px solid #777; padding: 12px 25px; border-radius: 5px; cursor: not-allowed; z-index: 101; font-weight: bold; }
+.btn-skip.ready { background: var(--main-red); cursor: pointer; border-color: #fff; box-shadow: 0 0 15px rgba(229, 9, 20, 0.5); }
+.btn-reg { position: absolute; top: 20px; right: 30px; background: #f5c518; color: #000; padding: 10px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; z-index: 101; font-size: 15px; box-shadow: 0 0 15px rgba(245, 197, 24, 0.5); }
+.ad-count { position: absolute; top: 20px; left: 30px; background: rgba(0, 0, 0, 0.6); padding: 5px 15px; border-radius: 20px; font-size: 13px; border: 1px solid #444; z-index: 101; }
+.artplayer-app { width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid #333; }
+
+.info-box { margin-top: 25px; background: var(--panel); padding: 25px; border-radius: 8px; border: 1px solid var(--border); }
+.info-box h1 { font-size: 24px; margin: 0 0 15px 0; color: var(--gold); }
+.meta-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.meta-tags span { background: #222; padding: 5px 12px; border-radius: 4px; border: 1px solid #333; font-size: 14px; color: #aaa; }
+.ep-list { margin-top: 20px; border-top: 1px solid #333; padding-top: 20px; }
+.ep-list > p { font-weight: bold; color: #f39c12; }
+.ep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-top: 15px; }
+.ep-btn { padding: 12px; background: #1a1a1a; text-align: center; border-radius: 5px; cursor: pointer; font-size: 14px; border: 1px solid #333; transition: 0.2s; }
+.ep-btn:hover { background: #333; }
+.ep-btn.active { background: var(--main-red); border-color: #fff; font-weight: bold; }
+
+/* ── Related grid (dark cards, suffixed to avoid clashing with catalog .card) ── */
+.related-section { max-width: 1100px; margin: 40px auto; padding: 0 15px; }
+.related-title { font-size: 20px; margin-bottom: 20px; border-left: 4px solid var(--main-red); padding-left: 15px; }
+.rel-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.rel-card { width: 216px; background: var(--card-bg); border-radius: 5px; overflow: hidden; border: 1px solid #222; cursor: pointer; display: block; text-decoration: none; }
+.rel-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+.rel-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+.rel-t { padding: 10px; font-size: 13px; text-align: center; color: #ccc; }
+
+/* Utility for the client-side pagination/filter hiding */
+.card-hide { display: none !important; }
+
+@media (max-width: 900px) {
+    .sidebar { display: none; }
+    .mainnav { gap: 8px 18px; }
+    .mainnav a { font-size: 16px; }
+}

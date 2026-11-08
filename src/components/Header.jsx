@@ -1,0 +1,46 @@
+// Site header: notice bar (optional), logo + white pill search, social icons, horizontal nav.
+// Filter links are plain <a> so landing on the homepage always does a full load
+// and the grid reads ?cat= / ?year= from the URL on mount. Search is the only
+// interactive control, extracted into the small client component below.
+import Link from 'next/link';
+import SearchBox from './SearchBox.jsx';
+
+export default function Header({ total = null }) {
+    const navItems = [
+        { label: 'หน้าแรก', href: '/' },
+        { label: 'หนังใหม่ 2025', href: '/?year=2025' },
+        { label: 'หนังใหม่ 2024', href: '/?year=2024' },
+        { label: 'ຊີລີ່ອອນໄລນ໌ (ซีรีย์)', href: '/?cat=serie' },
+        { label: 'หนังแอ็คชั่น', href: '/?cat=action' },
+        { label: 'หนังผี สยองขวัญ', href: '/?cat=horror' },
+        { label: 'การ์ตูน', href: '/?cat=anime' },
+        { label: 'ດຣາມ່າ (Drama)', href: '/?cat=drama' },
+    ];
+
+    return (
+        <>
+            {total !== null && (
+                <div className="notice">
+                    ดูหนังออนไลน์ฟรี DOONUNG-MOVIE มีหนังและซีรีส์ทั้งหมด {total} ເລື່ອງ ອັບເດດໜັງໃຝ່ທຸກວັນ.
+                </div>
+            )}
+
+            <header className="header">
+                <Link href="/" className="logo">
+                    <img src="/favicon.png" alt="DOONUNG-MOVIE" loading="eager" />
+                </Link>
+                <SearchBox />
+                <div className="social-icons">
+                    <a href="#" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Line"><i className="fab fa-line"></i></a>
+                </div>
+            </header>
+
+            <nav className="mainnav">
+                {navItems.map((item) => (
+                    <a key={item.label} href={item.href}>{item.label}</a>
+                ))}
+            </nav>
+        </>
+    );
+}

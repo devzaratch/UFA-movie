@@ -176,7 +176,7 @@ export const movieDatabase = [
         type: "movie",
         title: "Left Handed Girl (2025) เด็กมือซ้าย",
         quality: "HD",
-        category: "romantic",
+        category: "drama",
         poster: "https://image.tmdb.org/t/p/original/hfuxIKRCNsecLmoDdO0HJ1YUvv1.jpg",
         url: "https://master.streamhls.com/hls/14ac7e60c627d60415358165ec973d76/master.m3u8"
     },
@@ -1545,7 +1545,7 @@ export const movieDatabase = [
         type: "movie",
         title: "The Quake (2019) มหาวิบัติแผ่นดินถล่มโลก",
         quality: "HD",
-        category: "ັaction",
+        category: "action",
         poster: "https://files.thaiware.site/movie/2019-02/images-poster/190219073004A91.jpg",
         url: "https://master.streamhls.com/hls/2fbe9b93fed63d62c30cc20f0bc6baf9/master.m3u8"
     },
