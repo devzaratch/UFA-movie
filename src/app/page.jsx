@@ -19,15 +19,17 @@ export default function HomePage() {
             <Header total={movieDatabase.length} />
 
             <div className="wrap">
-                <ul className="top-slider">
-                    {entries.slice(0, 28).map((m) => (
-                        <li key={m.id}>
-                            <a href={`/movie/${m.slug}/`}>
-                                <img src={m.poster} alt={`${m.title} DOONUNG-MOVIE`} loading="eager" />
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                <div className="slider-box">
+                    <ul className="top-slider">
+                        {entries.slice(0, 28).map((m) => (
+                            <li key={m.id}>
+                                <a href={`/movie/${m.slug}/`}>
+                                    <img src={m.poster} alt={`${m.title} DOONUNG-MOVIE`} loading="eager" />
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
                 <div className="layout">
                     <div className="content">

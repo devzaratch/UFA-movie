@@ -1,6 +1,5 @@
 // Per-title player page: /movie/<slug>/ — one static page per entry, generated at build time.
 import Header from '../../../components/Header.jsx';
-import PlayHeader from '../../../components/PlayHeader.jsx';
 import Footer from '../../../components/Footer.jsx';
 import Player from '../../../components/Player.jsx';
 import { movieDatabase } from '../../../data/movies.js';
@@ -86,20 +85,58 @@ export default function MoviePage({ params }) {
             <meta name="referrer" content="no-referrer" />
             <Header />
             <main>
-                <PlayHeader />
-
-                <div className="player-container">
-                    <Player movie={m} />
+                {/* title bar: title left, breadcrumb right (server-side crawlable) */}
+                <div className="title-bar">
+                    <a className="tb-title" href={`/movie/${slugify(m.id, m.title)}/`}>{m.title}</a>
+                    <span className="crumbs">
+                        <a href="/">หน้าแรก</a> &gt; <a href={`/?cat=${m.category}`}>ดูหนังออนไลน์</a> &gt; <a href={`/?cat=${m.category}`}>{catLabel}</a> &gt; {m.quality || 'HD'}
+                    </span>
                 </div>
 
-                <article className="info-box" style={{ maxWidth: 1100, margin: '0 auto 25px' }}>
-                    <h1>{m.title}</h1>
-                    <div className="meta-tags">
-                        <span><i className="fas fa-video"></i> {m.quality || 'HD'}</span>
-                        <span><i className="fas fa-tag"></i> {catLabel}</span>
-                        <span><i className="fas fa-calendar-alt"></i> Update: 2025</span>
+                <div className="movie-layout">
+                    <div className="movie-main">
+                        <Player movie={m} />
+
+                        <article className="info-box">
+                            <h1>{m.title}</h1>
+                            <div className="meta-tags">
+                                <span><i className="fas fa-video"></i> {m.quality || 'HD'}</span>
+                                <span><i className="fas fa-tag"></i> <a href={`/?cat=${m.category}`} style={{ color: '#aaa', textDecoration: 'none' }}>{catLabel}</a></span>
+                                <span><i className="fas fa-calendar-alt"></i> Update: 2025</span>
+                            </div>
+                        </article>
                     </div>
-                </article>
+
+                    <aside className="movie-side">
+                        <div className="side-box">
+                            <div className="side-title">ໝວດໝູ່ (หมวดหมู่)</div>
+                            <ul className="side-list">
+                                <li><a href="/">ທັງໝົດ (ทั้งหมด)</a></li>
+                                <li><a href="/?cat=action">ແອັກຊັນ (Action)</a></li>
+                                <li><a href="/?cat=horror">ໜັງຜີ (Horror)</a></li>
+                                <li><a href="/?cat=anime">ອານິເມະ (Anime)</a></li>
+                                <li><a href="/?cat=serie">ຊີລີ້ (Series)</a></li>
+                                <li><a href="/?cat=drama">ດຣາມ່າ (Drama)</a></li>
+                            </ul>
+                        </div>
+                        <div className="side-box">
+                            <div className="side-title">ໜັງທີ່ກ່ຽວຂ້ອງ (หนังแนะนำ)</div>
+                            <ul className="side-list">
+                                {related.slice(0, 6).map((r) => (
+                                    <li key={r.id}>
+                                        <a href={`/movie/${r.slug}/`}>
+                                            <img src={r.poster} alt={r.title} loading="lazy" /> <span>{r.title}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <a className="side-promo" href="https://ufasboclubauto.com/register" target="_blank" rel="noreferrer">
+                            ສະໝັກສະມາຊິກ (สมัครสมาชิก)
+                            <span>ຮັບໜັງຄົມຊັດ HD ພາກໄທ ເຕັມເລື່ອງ ທຸກຮູບແບບ</span>
+                        </a>
+                    </aside>
+                </div>
             </main>
 
             <section className="related-section">

@@ -31,8 +31,9 @@ export default function Header({ total = null }) {
                 </Link>
                 <SearchBox />
                 <div className="social-icons">
-                    <a href="#" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
-                    <a href="#" aria-label="Line"><i className="fab fa-line"></i></a>
+                    <a href="#" aria-label="Facebook"><i className="fab fa-facebook" style={{ color: '#1877f2' }}></i></a>
+                    <a href="#" aria-label="Twitter / X"><i className="fab fa-twitter" style={{ color: '#fff' }}></i></a>
+                    <a href="#" aria-label="RSS"><i className="fas fa-rss" style={{ color: '#ff8c00' }}></i></a>
                 </div>
             </header>
 

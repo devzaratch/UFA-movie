@@ -144,7 +144,7 @@ export default function Player({ movie }) {
                     {/* title/meta are rendered server-side; only the episode picker needs interactivity */}
                     <div className="ep-list">
                         <p><i className="fas fa-list"></i> ເລືອກຕອນເບິ່ງ (เลือกตอน):</p>
-                        <div className="ep-grid">
+                        <div className="ep-tabs">
                             {m.episodes.map((ep, i) => (
                                 <div
                                     key={i}
