@@ -21,13 +21,13 @@ export default function Header({ total = null }) {
         <>
             {total !== null && (
                 <div className="notice">
-                    ดูหนังออนไลน์ฟรี BOENG NANG MOVIE มีหนังและซีรีส์ทั้งหมด {total} ເລື່ອງ ອັບເດດໜັງໃຝ່ທຸກວັນ.
+                    ดูหนังออนไลน์ฟรี BOENGNANG มีหนังและซีรีส์ทั้งหมด {total} ເລື່ອງ ອັບເດດໜັງໃຝ່ທຸກວັນ.
                 </div>
             )}
 
             <header className="header">
                 <Link href="/" className="logo">
-                    <img src="/favicon.png" alt="BOENG NANG MOVIE" loading="eager" />
+                    <img src="/favicon.png" alt="BOENGNANG" loading="eager" />
                 </Link>
                 <SearchBox />
                 <div className="social-icons">

@@ -24,7 +24,7 @@ export default function HomePage() {
                         {entries.slice(0, 28).map((m) => (
                             <li key={m.id}>
                                 <a href={`/movie/${m.slug}/`}>
-                                    <img src={m.poster} alt={`${m.title} BOENG NANG MOVIE`} loading="eager" />
+                                    <img src={m.poster} alt={`${m.title} BOENGNANG`} loading="eager" />
                                 </a>
                             </li>
                         ))}
@@ -34,9 +34,9 @@ export default function HomePage() {
                 <div className="layout">
                     <div className="content">
                         <div className="seo-box">
-                            <h1>BOENG NANG MOVIE ‌ເບິ່ງໜັງອອນໄລນ໌ຟຣີ ดูหนังออนไลน์ฟรี ລວມໜັງໃຝ່ 2025 HD ພາກໄທ ເຕັມເລື່ອງ</h1>
+                            <h1>BOENGNANG ‌ເບິ່ງໜັງອອນໄລນ໌ຟຣີ ดูหนังออนไลน์ฟรี ລວມໜັງໃຝ່ 2025 HD ພາກໄທ ເຕັມເລື່ອງ</h1>
                             <p>
-                                <strong>BOENG NANG MOVIE</strong> ຍິນດີຕ້ອນຮັບສູ່ ເວັບເບິ່ງໜັງອອນໄລນ໌ທີ່ດີທີ່ສຸດ. ເຮົາຄືແຫຼ່ງຮວມ
+                                <strong>BOENGNANG</strong> ຍິນດີຕ້ອນຮັບສູ່ ເວັບເບິ່ງໜັງອອນໄລນ໌ທີ່ດີທີ່ສຸດ. ເຮົາຄືແຫຼ່ງຮວມ
                                 <strong>ໜັງໃຝ່ຊົນໂຮງ 2025</strong> ແລະ ຊີລີ້ດັງຈາກທົ່ວໂລກ ຄົມຊັດລະດັບ 4K ແລະ HD
                                 ພາກໄທ ເຕັມເລື່ອງ ເບິ່ງຟຣີບໍ່ມີຄ່າບໍລິການ ອັບເດດໜັງໃຝ່ໃນທຸກມື້.
                             </p>
