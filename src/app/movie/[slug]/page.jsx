@@ -39,9 +39,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
     const m = findMovie(params.slug);
-    if (!m) return { title: 'DOONUNG-MOVIE' };
-    const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | DOONUNG-MOVIE`;
-    const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ DOONUNG-MOVIE`;
+    if (!m) return { title: 'BOENG NANG MOVIE' };
+    const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENG NANG MOVIE`;
+    const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENG NANG MOVIE`;
     return { title, description, robots: { index: true } };
 }
 
@@ -61,8 +61,8 @@ export default function MoviePage({ params }) {
         );
     }
 
-    const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | DOONUNG-MOVIE`;
-    const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ DOONUNG-MOVIE`;
+    const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENG NANG MOVIE`;
+    const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENG NANG MOVIE`;
     const schema = {
         "@context": "https://schema.org",
         "@type": m.type === 'series' ? "TVSeries" : "Movie",

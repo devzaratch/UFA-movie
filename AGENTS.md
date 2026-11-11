@@ -2,7 +2,7 @@
 
 ## Project overview
 
-- Movie streaming site for a Thai/Lao audience; user-visible brand is **DOONUNG-MOVIE** (the old folder name `UFA-movie-main` carries no branding).
+- Movie streaming site for a Thai/Lao audience; user-visible brand is **BOENG NANG MOVIE** (the old folder name `UFA-movie-main` carries no branding).
 - **Next.js 15 (App Router), fully static export, no server features.** `next.config.mjs` sets `output: 'export'`, `trailingSlash: true`, `images.unoptimized`. A build emits `out/` with 1 catalog page + one `/movie/<slug>/` page per entry (159 pages total) + `out/sitemap.xml`.
 - Production: Cloudflare Pages at `https://doonung-movie.pages.dev`.
   **Deployment settings:** build command `npx next build`, output dir `out`, framework preset — none/"other" (Static). Do NOT use the old settings (commit root / no build / Astro preset).
@@ -40,7 +40,7 @@
 
 ## Design language (keep new pages/components on-theme)
 
-Black background, gold accents `#ffcf18`/`#ffc900`, Arial body text, Oswald for nav/box titles (Google Fonts). Header: big logo left, white pill search center, social icons right, centered nav row. Catalog cards are dark panels (`.card`, `#181a1f`) with a **white** IMDb/rating bar (black text) and **white** title, red ribbon, 252px wide, centered wrapping flex (`.movie-grid` — center + stacked rows like the reference). Related grid shares the same dark style. Accents are gold, never blue. The layout closely mirrors a well-known Thai movie-site layout but intentionally keeps DOONUNG-MOVIE branding, its own logo, and originally-written SEO copy — do not paste copy, logos or ad assets from other sites. Below ~900px the sidebars hide and cards go ~46% width.
+Black background, gold accents `#ffcf18`/`#ffc900`, Arial body text, Oswald for nav/box titles (Google Fonts). Header: big logo left, white pill search center, social icons right, centered nav row. Catalog cards are dark panels (`.card`, `#181a1f`) with a **white** IMDb/rating bar (black text) and **white** title, red ribbon, 252px wide, centered wrapping flex (`.movie-grid` — center + stacked rows like the reference). Related grid shares the same dark style. Accents are gold, never blue. The layout closely mirrors a well-known Thai movie-site layout but intentionally keeps BOENG NANG MOVIE branding, its own logo, and originally-written SEO copy — do not paste copy, logos or ad assets from other sites. Below ~900px the sidebars hide and cards go ~46% width.
 
 ## SEO (intentional, don't trim)
 

@@ -21,11 +21,11 @@ export default function Footer() {
                     ))}
                 </p>
                 <p>
-                    DOONUNG-MOVIE ຄືເວັບດ່ວນໜັງອອນໄລນ໌ ທີ່ລວມໜັງຊົນໂຮງ ໜັງຜີ ກາຕູນ ແລະ ຊີລີ້ໄວ້ຄັບທຸກໝວດ
+                    BOENG NANG MOVIE ຄືເວັບດ່ວນໜັງອອນໄລນ໌ ທີ່ລວມໜັງຊົນໂຮງ ໜັງຜີ ກາຕູນ ແລະ ຊີລີ້ໄວ້ຄັບທຸກໝວດ
                     ອັບເດດໜັງໃຝ່ທຸກມື້ ຮອງຮັບການເບິ່ງຜ່ານມືຖື ແລະ ຄອມພິວເຕີ ຕະຫຼອດ 24 ຊົ່ວໂມງ
                     ອອກແບບໃຫ້ຮ້າຍໃຊ້ງ່າຍ ຊອກຫາໜັງໄດ້ຢ່າງລະອຽດ.
                 </p>
-                <p className="copy">Copyright © 2025-2026 DOONUNG-MOVIE. All Rights Reserved. | ເບິ່ງໜັງອອນໄລນ໌ຟຣີ</p>
+                <p className="copy">Copyright © 2025-2026 BOENG NANG MOVIE. All Rights Reserved. | ເບິ່ງໜັງອອນໄລນ໌ຟຣີ</p>
             </footer>
         </>
     );

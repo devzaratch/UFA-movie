@@ -8,7 +8,7 @@ export default function PlayHeader() {
                 <i className="fas fa-chevron-left" style={{ color: 'var(--gold)' }}></i> ກັບໜ້າຫລັກ (กลับหน้าหลัก)
             </Link>
             <Link href="/" className="brand">
-                <img src="/favicon.png" alt="DOONUNG-MOVIE" loading="eager" /> DOONUNG-MOVIE
+                <img src="/favicon.png" alt="BOENG NANG MOVIE" loading="eager" /> BOENG NANG MOVIE
             </Link>
         </header>
     );
