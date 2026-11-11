@@ -5,6 +5,8 @@ import Player from '../../../components/Player.jsx';
 import { movieDatabase } from '../../../data/movies.js';
 import { slugify } from '../../../lib/slug.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
+import { SITE } from '../../sitemap.js';
+import AdBanner from '../../../components/AdBanner.jsx';
 import Link from 'next/link';
 
 // Robust slug lookup. Preferred: exact string match (with decode/encode/NFC
@@ -63,6 +65,7 @@ export default function MoviePage({ params }) {
 
     const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENGNANG`;
     const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENGNANG`;
+    const catLabel = CATEGORY_LABEL[m.category] || m.category;
     const schema = {
         "@context": "https://schema.org",
         "@type": m.type === 'series' ? "TVSeries" : "Movie",
@@ -70,8 +73,24 @@ export default function MoviePage({ params }) {
         "image": m.poster,
         "description": description,
     };
-
-    const catLabel = CATEGORY_LABEL[m.category] || m.category;
+    // Only real IMDb-style ratings from the data get an aggregateRating.
+    if (m.rating) {
+        schema.aggregateRating = {
+            "@type": "AggregateRating",
+            "ratingValue": String(m.rating),
+            "bestRating": "10",
+            "worstRating": "1",
+        };
+    }
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": `${SITE}/` },
+            { "@type": "ListItem", "position": 2, "name": catLabel, "item": `${SITE}/?cat=${m.category}` },
+            { "@type": "ListItem", "position": 3, "name": m.title },
+        ],
+    };
 
     // "Related" is picked once at build time: same category, deterministic order
     const related = movieDatabase
@@ -105,6 +124,8 @@ export default function MoviePage({ params }) {
                                 <span><i className="fas fa-calendar-alt"></i> Update: 2025</span>
                             </div>
                         </article>
+
+                        <AdBanner />
                     </div>
 
                     <aside className="movie-side">
@@ -157,6 +178,10 @@ export default function MoviePage({ params }) {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
         </>
     );

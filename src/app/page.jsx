@@ -1,6 +1,7 @@
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import HomeGrid from '../components/HomeGrid.jsx';
+import AdBanner from '../components/AdBanner.jsx';
 import { movieDatabase } from '../data/movies.js';
 import { slugify, yearOf } from '../lib/slug.js';
 
@@ -31,13 +32,15 @@ export default function HomePage() {
                     </ul>
                 </div>
 
+                <AdBanner />
+
                 <div className="layout">
                     <div className="content">
                         <div className="seo-box">
-                            <h1>BOENGNANG ‌ເບິ່ງໜັງອອນໄລນ໌ຟຣີ ดูหนังออนไลน์ฟรี ລວມໜັງໃຝ່ 2025 HD ພາກໄທ ເຕັມເລື່ອງ</h1>
+                            <h1>BOENGNANG ‌ເບິ່ງໜັງອອນໄລນ໌ຟຣີ ดูหนังออนไลน์ฟรี ລວມໜັງໃໝ່ 2025 HD ພາກໄທ ເຕັມເລື່ອງ</h1>
                             <p>
                                 <strong>BOENGNANG</strong> ຍິນດີຕ້ອນຮັບສູ່ ເວັບເບິ່ງໜັງອອນໄລນ໌ທີ່ດີທີ່ສຸດ. ເຮົາຄືແຫຼ່ງຮວມ
-                                <strong>ໜັງໃຝ່ຊົນໂຮງ 2025</strong> ແລະ ຊີລີ້ດັງຈາກທົ່ວໂລກ ຄົມຊັດລະດັບ 4K ແລະ HD
+                                <strong>ໜັງໃໝ່ຊົນໂຮງ 2025</strong> ແລະ ຊີລີ້ດັງຈາກທົ່ວໂລກ ຄົມຊັດລະດັບ 4K ແລະ HD
                                 ພາກໄທ ເຕັມເລື່ອງ ເບິ່ງຟຣີບໍ່ມີຄ່າບໍລິການ ອັບເດດໜັງໃຝ່ໃນທຸກມື້.
                             </p>
                             <p>
@@ -72,7 +75,7 @@ export default function HomePage() {
                                 <li><a href="/">ທັງໝົດ (ทั้งหมด)</a></li>
                                 <li><a href="/?cat=action">ແອັກຊັນ (Action)</a></li>
                                 <li><a href="/?cat=horror">ໜັງຜີ (Horror)</a></li>
-                                <li><a href="/?cat=anime">ອານິເມະ (Anime)</a></li>
+                                <li><a href="/?cat=anime">ອະນິເມະ (Anime)</a></li>
                                 <li><a href="/?cat=serie">ຊີລີ້ (Series)</a></li>
                                 <li><a href="/?cat=drama">ດຣາມ່າ (Drama)</a></li>
                             </ul>
