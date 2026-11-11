@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap:https://doonung-movie.pages.dev/sitemap.xml
+Sitemap:https://boengnang.vercel.app/sitemap.xml

@@ -4,7 +4,7 @@
 import { movieDatabase } from '../data/movies.js';
 import { slugify } from '../lib/slug.js';
 
-export const SITE = 'https://doonung-movie.pages.dev';
+export const SITE = 'https://boengnang.vercel.app';
 
 // Required for `output: 'export'`
 export const dynamic = 'force-static';
