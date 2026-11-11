@@ -18,7 +18,10 @@ const nextConfig = {
     output: 'export',
     trailingSlash: true,      // keep /movie/<slug>/ style URLs like before
     images: { unoptimized: true }, // posters are hotlinked externals; no server needed
-    redirects: playRedirects,
+    // Function form (Next.js 15 warns on the plain-array form).
+    async redirects() {
+        return playRedirects;
+    },
 };
 
 export default nextConfig;
