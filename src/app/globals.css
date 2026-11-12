@@ -83,6 +83,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 /* ── Catalog cards (dark, IMDb bar white, white title) ── */
 .movie-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+/* ── Sticky catalog filter bar (category chips + year + result count) ── */
+.filter-bar { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; background: rgba(7, 7, 9, .94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin: 14px 0 18px; }
+.chip-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 999px; color: #ccc; cursor: pointer; font-size: 14px; transition: background .2s, color .2s, border-color .2s, transform .15s; }
+.chip:hover { border-color: var(--gold-deep); color: #fff; transform: translateY(-1px); }
+.chip .cnt { background: rgba(255, 207, 24, .12); color: var(--gold); font-size: 12px; padding: 2px 8px; border-radius: 999px; }
+.chip.cur { background: linear-gradient(90deg, var(--gold-deep), var(--gold)); border-color: var(--gold); color: #000; font-weight: bold; }
+.chip.cur .cnt { background: rgba(0, 0, 0, .18); color: #000; }
+.bar-right { display: flex; align-items: center; gap: 10px; }
+.year-select { min-height: 44px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; color: #ddd; font-size: 14px; padding: 0 10px; cursor: pointer; }
+.year-select:hover, .year-select:focus-visible { border-color: var(--gold-deep); }
+.result-info { color: var(--text-2); font-size: 13px; white-space: nowrap; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.grid-empty { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; color: var(--text-2); padding: 46px 20px; text-align: center; font-size: 15px; }
+
+@media (max-width: 900px) {
+    .filter-bar { position: sticky; gap: 8px; padding: 8px 10px; }
+    .chip { min-height: 42px; padding: 0 11px; font-size: 13px; }
+    .result-info { display: none; }
+    #pagination { margin: 18px 0; }
+}
 .card { width: 252px; background: #181a1f; border: 1px solid #262626; cursor: pointer; position: relative; overflow: hidden; display: block; text-decoration: none; transition: transform .2s, border-color .2s, box-shadow .2s; }
 .card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0, 0, 0, .5), 0 4px 14px rgba(255, 122, 24, .12); }
 .card img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; display: block; transition: opacity .2s; }
@@ -93,8 +115,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 #pagination { display: flex; justify-content: center; gap: 8px; margin: 28px 0; flex-wrap: wrap; }
 #pagination button { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; color: #ccc; cursor: pointer; font-size: 14px; padding: 9px 16px; min-height: 40px; min-width: 40px; transition: background .2s, color .2s, border-color .2s; }
-#pagination button:hover { background: #1d1d22; border-color: var(--gold-deep); color: #fff; }
+#pagination button:hover:not(:disabled) { background: #1d1d22; border-color: var(--gold-deep); color: #fff; }
 #pagination button.cur { background: var(--gold); border-color: var(--gold); color: #000; font-weight: bold; }
+#pagination button:disabled { opacity: .35; cursor: default; }
+#pagination .dots { color: var(--text-2); padding: 0 2px; }
+#pagination .page-note { color: var(--text-2); font-size: 13px; margin-left: 8px; }
 
 /* ── Sidebar ── */
 .side-box { background: var(--panel); border: 1px solid var(--border); margin-bottom: 16px; }
