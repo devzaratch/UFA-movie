@@ -41,12 +41,15 @@ export default function Player({ movie }) {
     useEffect(() => {
         let disposed = false;
         Promise.all([
-            loadScript('https://cdn.jsdelivr.net/npm/hls.js@latest'),
-            loadScript('https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js'),
+            loadScript('https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js'),
+            loadScript('https://cdn.jsdelivr.net/npm/artplayer@5/dist/artplayer.js'),
         ])
             .then(() => {
                 if (disposed || !window.Artplayer || !window.Hls) return;
-                const art = window.Artplayer({
+                // Artplayer is a class — it must be constructed with `new`
+                // (calling it bare throws "Class constructor cannot be invoked
+                // without 'new'" and the player never initializes).
+                const art = new window.Artplayer({
                     container: '.artplayer-app',
                     url: m.type === 'series' ? m.episodes[0].url : m.url,
                     type: 'm3u8',
@@ -56,6 +59,13 @@ export default function Player({ movie }) {
                     customType: {
                         m3u8: (video, url) => {
                             const hls = new window.Hls();
+                            // Dead/expired stream links would otherwise leave an
+                            // endless buffering spinner — surface a clear notice.
+                            hls.on(window.Hls.Events.ERROR, (_, data) => {
+                                if (data && data.fatal && artRef.current && artRef.current.notice) {
+                                    artRef.current.notice.show = 'ບໍ່ສາມາດໂຫຼດວິດີໂອໄດ້ (โหลดวิดีโอไม่ได้) — ແຫຼ່ງສຕຼີມອາດໝົດອາຍຸ ກະລຸນາລອງໜັງອື່ນກ່ອນ';
+                                }
+                            });
                             hls.loadSource(url);
                             hls.attachMedia(video);
                         },
