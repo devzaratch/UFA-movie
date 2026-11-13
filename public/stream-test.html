@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ทดสอบการเล่นสตรีม — BOENGNANG</title>
+<style>
+    body { background: #070709; color: #ddd; font-family: Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 20px; }
+    h1 { color: #ffcf18; font-size: 20px; }
+    .p { background: #181a1f; border: 1px solid #333; border-radius: 6px; margin-bottom: 24px; padding: 14px; }
+    .p h2 { font-size: 15px; color: #fff; margin: 0 0 10px; }
+    .player { aspect-ratio: 16/9; background: #000; }
+    .log { font-size: 12px; color: #9a9; white-space: pre-wrap; margin-top: 8px; min-height: 18px; }
+    .ok { color: #4f4; } .err { color: #f66; }
+</style>
+</head>
+<body>
+<h1>ทดสอบเล่นสตรีม (เวอร์ชัน https บนโดเมนเว็บจริง)</h1>
+<p>เปิดหน้านี้บนโดเมน boengnang.vercel.app — เพื่อทดสอบว่าโฮสต์สตรีมอนุญาตเฉพาะเว็บต้นทางหรือเปิดให้ทุกเว็บ</p>
+
+<div class="p">
+    <h2>1) vdohls.com — ลิงก์ Quiz Lady (รหัสที่ได้ 200 OK ใน DevTools)</h2>
+    <div class="player" id="p1"></div>
+    <div class="log" id="log1">กำลังโหลด…</div>
+</div>
+
+<div class="p">
+    <h2>2) master.streamhls.com — ลิงก์แบบเก่า</h2>
+    <div class="player" id="p2"></div>
+    <div class="log" id="log2">กำลังโหลด…</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+<script>
+    function play(id, logId, url) {
+        const log = document.getElementById(logId);
+        const say = (msg, cls) => { log.textContent += (log.textContent ? '\n' : '') + msg; if (cls) log.className = 'log ' + cls; };
+        const video = document.createElement('video');
+        video.controls = true; video.autoplay = true; video.muted = true;
+        video.style.width = '100%'; video.style.height = '100%';
+        document.getElementById(id).appendChild(video);
+        say('URL: ' + url);
+        const hls = new Hls();
+        hls.on(Hls.Events.MANIFEST_PARSED, () => say('✓ โหลด playlist สำเร็จ — กำลังเล่น', 'ok'));
+        hls.on(Hls.Events.ERROR, (_, d) => {
+            if (d.fatal) say('✗ FATAL: ' + d.type + ' / ' + d.details + (d.response ? ' (HTTP ' + d.response.code + ')' : ''), 'err');
+            else say('… ' + d.details);
+        });
+        hls.loadSource(url);
+        hls.attachMedia(video);
+    }
+    play('p1', 'log1', 'https://vdohls.com/g-gfKNRClJ_xK/video.m3u8');
+    play('p2', 'log2', 'https://master.streamhls.com/hls/f67f50e408c9f566c7d08fc4ac518a1c/master.m3u8');
+</script>
+</body>
+</html>
