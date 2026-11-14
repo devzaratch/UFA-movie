@@ -10,12 +10,23 @@ const ADS = [
     { src: '/lsp.mp4', link: 'https://shorturl.at/Ej7uF' },
 ];
 
-// The upstream stream hosts (vdohls.com etc.) reject requests whose Referer is
-// not one of their partner sites, so every m3u8 is fetched through our
-// Cloudflare Worker proxy (stream-proxy/worker.js) which injects the accepted
-// Referer and rewrites child playlists/segments to loop back through itself.
+// The vdohls.com hosts reject requests whose Referer is not one of their
+// partner sites, so those m3u8s are fetched through our Cloudflare Worker
+// proxy (stream-proxy/worker.js) which injects the accepted Referer and
+// rewrites child playlists/segments to loop back through itself.
+// master.streamhls.com / steamhls88.com are the opposite: any cross-site
+// Referer gets a Cloudflare challenge, while no-referer requests pass — our
+// title pages already send no referrer, so those play directly.
 const STREAM_PROXY = 'https://boengnang-stream.phonthebtilavun25599.workers.dev/stream/';
-const withProxy = (url) => STREAM_PROXY + '?u=' + encodeURIComponent(url);
+const withProxy = (url) => {
+    try {
+        return new URL(url).hostname.endsWith('vdohls.com')
+            ? STREAM_PROXY + '?u=' + encodeURIComponent(url)
+            : url;
+    } catch {
+        return url;
+    }
+};
 
 function loadScript(src) {
     return new Promise((resolve, reject) => {
