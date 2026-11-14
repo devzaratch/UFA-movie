@@ -7,6 +7,7 @@ import { slugify } from '../../../lib/slug.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
 import { SITE } from '../../sitemap.js';
 import AdBanner from '../../../components/AdBanner.jsx';
+import BottomNav from '../../../components/BottomNav.jsx';
 import Link from 'next/link';
 
 // Robust slug lookup. Preferred: exact string match (with decode/encode/NFC
@@ -173,6 +174,7 @@ export default function MoviePage({ params }) {
             </section>
 
             <Footer />
+            <BottomNav />
 
             {/* JSON-LD for AI/structured search */}
             <script

@@ -21,7 +21,7 @@ export default function Header({ total = null }) {
         <>
             {total !== null && (
                 <div className="notice">
-                    ดูหนังออนไลน์ฟรี BOENGNANG มีหนังและซีรีส์ทั้งหมด {total} ເລື່ອງ ອັບເດດໜັງໃຝ່ທຸກວັນ.
+                    ดูหนังออนไลน์ฟรี BOENGNANG มีหนังและซีรีส์ทั้งหมด {total} ເລື່ອງ ອັບເດດໜັງໃໝ່ທຸກວັນ.
                 </div>
             )}
 

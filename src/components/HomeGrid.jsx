@@ -102,7 +102,7 @@ export default function HomeGrid({ entries }) {
     const setCatAndReset = (k) => { setCat(k); setPage(1); scrollToBar(); };
 
     return (
-        <>
+        <div className="catalog-wrap">
             <div className="filter-bar" ref={barRef}>
                 <div className="chip-list" role="tablist" aria-label="ໝວດໝູ່ (หมวดหมู่)">
                     {CATS.map((k) => (
@@ -184,6 +184,6 @@ export default function HomeGrid({ entries }) {
                     </>
                 )}
             </div>
-        </>
+        </div>
     );
 }

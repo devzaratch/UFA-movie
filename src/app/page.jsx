@@ -1,5 +1,6 @@
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
+import BottomNav from '../components/BottomNav.jsx';
 import HomeGrid from '../components/HomeGrid.jsx';
 import AdBanner from '../components/AdBanner.jsx';
 import { movieDatabase } from '../data/movies.js';
@@ -94,6 +95,7 @@ export default function HomePage() {
             </div>
 
             <Footer />
+            <BottomNav />
         </>
     );
 }
