@@ -5,3 +5,5 @@ out/
 dist/
 
 stream-proxy/.wrangler/
+
+scripts/.link-health-cache.json

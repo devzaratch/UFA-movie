@@ -3,21 +3,26 @@ import Footer from '../components/Footer.jsx';
 import HomeGrid from '../components/HomeGrid.jsx';
 import AdBanner from '../components/AdBanner.jsx';
 import { movieDatabase } from '../data/movies.js';
+import { DEAD_IDS } from '../data/dead-links.js';
 import { slugify, yearOf } from '../lib/slug.js';
 
 export default function HomePage() {
     // All entries are rendered server-side (build time): slider, sidebar and every card.
     // HomeGrid is a client component that only toggles visibility for
     // search / category / year filtering + pagination.
-    const entries = movieDatabase.map((m) => ({
-        ...m,
-        slug: slugify(m.id, m.title),
-        year: yearOf(m.title),
-    }));
+    // Titles whose stream links are all dead (see scripts/check-links.mjs)
+    // are left out of the catalog; their /movie/<slug>/ pages still exist.
+    const entries = movieDatabase
+        .filter((m) => !DEAD_IDS.has(m.id))
+        .map((m) => ({
+            ...m,
+            slug: slugify(m.id, m.title),
+            year: yearOf(m.title),
+        }));
 
     return (
         <>
-            <Header total={movieDatabase.length} />
+            <Header total={entries.length} />
 
             <div className="wrap">
                 <div className="slider-box">

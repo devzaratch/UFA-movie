@@ -1,0 +1,39 @@
+{
+ "checkedAt": "2026-11-14T12:57:32.572Z",
+ "titles": 5046,
+ "deadTitles": 3274,
+ "hosts": {
+  "master.streamhls.com": {
+   "total": 3098,
+   "alive": 0
+  },
+  "master.steamhls88.com": {
+   "total": 317,
+   "alive": 0
+  },
+  "online225.com": {
+   "total": 26,
+   "alive": 0
+  },
+  "top-cdn.com": {
+   "total": 2,
+   "alive": 0
+  },
+  "vdohls.com": {
+   "total": 9103,
+   "alive": 8775
+  },
+  "playerufa2.com": {
+   "total": 2,
+   "alive": 0
+  },
+  "boengnang.com": {
+   "total": 2,
+   "alive": 0
+  },
+  "bdbx5i74v8f9pk2i.010014.xyz": {
+   "total": 12,
+   "alive": 0
+  }
+ }
+}

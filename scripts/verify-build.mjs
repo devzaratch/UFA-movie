@@ -7,10 +7,15 @@ const OUT = 'out';
 const home = readFileSync(join(OUT, 'index.html'), 'utf8');
 const sitemap = readFileSync(join(OUT, 'sitemap.xml'), 'utf8');
 
+// The homepage hides dead-link titles (see scripts/check-links.mjs).
+let deadCount = 0;
+try { deadCount = (await import('../src/data/dead-links.js')).DEAD_IDS.size; } catch {}
+
 const checkHome = {
     cards: (home.match(/card-title/g) || []).length,
     hiddenCards: (home.match(/card-hide/g) || []).length,
     sliderLinks: (home.match(/top-slider/g) || []).length,
+    deadLinkTitles: deadCount,
 };
 
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);

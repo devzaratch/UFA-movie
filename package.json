@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/gen-play-redirect.mjs",
-    "start": "next start"
+    "start": "next start",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "next": "^15.3.0",
