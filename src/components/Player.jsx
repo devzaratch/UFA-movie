@@ -10,6 +10,13 @@ const ADS = [
     { src: '/lsp.mp4', link: 'https://shorturl.at/Ej7uF' },
 ];
 
+// The upstream stream hosts (vdohls.com etc.) reject requests whose Referer is
+// not one of their partner sites, so every m3u8 is fetched through our
+// Cloudflare Worker proxy (stream-proxy/worker.js) which injects the accepted
+// Referer and rewrites child playlists/segments to loop back through itself.
+const STREAM_PROXY = 'https://boengnang-stream.phonthebtilavun25599.workers.dev/stream/';
+const withProxy = (url) => STREAM_PROXY + '?u=' + encodeURIComponent(url);
+
 function loadScript(src) {
     return new Promise((resolve, reject) => {
         if (document.querySelector(`script[src="${src}"]`)) return resolve();
@@ -51,7 +58,7 @@ export default function Player({ movie }) {
                 // without 'new'" and the player never initializes).
                 const art = new window.Artplayer({
                     container: '.artplayer-app',
-                    url: m.type === 'series' ? m.episodes[0].url : m.url,
+                    url: withProxy(m.type === 'series' ? m.episodes[0].url : m.url),
                     type: 'm3u8',
                     setting: true,
                     fullscreen: true,
@@ -107,7 +114,7 @@ export default function Player({ movie }) {
     const pickEp = (i) => {
         const art = artRef.current;
         if (!art) return;
-        art.switchUrl(movie.episodes[i].url);
+        art.switchUrl(withProxy(movie.episodes[i].url));
         setActiveEp(i);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
