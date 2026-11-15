@@ -233,8 +233,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
     .bn-item.active .bn-icon { transform: translateY(-1px); }
     .bn-item:active { background: rgba(255, 207, 24, .1); }
 
-    /* Catalog on mobile: single-column full-width cards + thumb-friendly */
-    .movie-grid { gap: 12px; }
+    /* Catalog on mobile: 2 cards per row (CSS Grid), thumb-friendly */
+    .movie-grid, .rel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 10px; }
     .card, .rel-card { width: 100%; max-width: 100%; }
 
     /* SEO box must not push cards too far down the fold */
