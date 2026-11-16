@@ -3,6 +3,7 @@ import Header from '../../../components/Header.jsx';
 import Footer from '../../../components/Footer.jsx';
 import Player from '../../../components/Player.jsx';
 import { movieDatabase } from '../../../data/movies.js';
+import { DEAD_IDS } from '../../../data/dead-links.js';
 import { slugify } from '../../../lib/slug.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
 import { SITE } from '../../sitemap.js';
@@ -112,6 +113,14 @@ export default function MoviePage({ params }) {
                         <a href="/">หน้าแรก</a> &gt; <a href={`/?cat=${m.category}`}>ดูหนังออนไลน์</a> &gt; <a href={`/?cat=${m.category}`}>{catLabel}</a> &gt; {m.quality || 'HD'}
                     </span>
                 </div>
+
+                {DEAD_IDS.has(m.id) && (
+                    <div className="dead-note">
+                        <i className="fas fa-triangle-exclamation" aria-hidden="true"></i>{' '}
+                        ບໍ່ສາມາດເບິ່ງເລື່ອງນີ້ໄດ້ໃນຂະນະນີ້ (ดูเรื่องนี้ไม่ได้ชั่วคราว) — ແຫຼ່ງວິດີໂອໝົດອາຍຸ ພວກເຮົາກຳລັງຫາແຫຼ່ງໃໝ່.
+                        ລອງເບິ່ງ <a href="/?cat=serie">ຊີລີ້ (ซีรีส์)</a> ຫຼື <a href="/?cat=action">ແອັກຊັນ (แอคชั่น)</a> ກ່ອນ.
+                    </div>
+                )}
 
                 <div className="movie-layout">
                     <div className="movie-main">

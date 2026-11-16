@@ -48,14 +48,26 @@ export default function Player({ movie }) {
     };
 
     const artRef = useRef(null);
+    const hlsRef = useRef(null);
     const adVideoRef = useRef(null);
     const [adIndex, setAdIndex] = useState(0);
     const [adsDone, setAdsDone] = useState(false);
     const [timeLeft, setTimeLeft] = useState(3);
     const [activeEp, setActiveEp] = useState(0);
     const [initError, setInitError] = useState(null);
+    const [playError, setPlayError] = useState(false);
+    // Bumping this re-runs the init effect: used by the "try again" button
+    // after a fatal stream/player error.
+    const [reloadKey, setReloadKey] = useState(0);
 
-    // Load CDN libs + create the player once per entry
+    const destroyHls = () => {
+        if (hlsRef.current) {
+            try { hlsRef.current.destroy(); } catch {}
+            hlsRef.current = null;
+        }
+    };
+
+    // Load CDN libs + create the player once per entry (and on manual retry)
     useEffect(() => {
         let disposed = false;
         Promise.all([
@@ -76,12 +88,22 @@ export default function Player({ movie }) {
                     pip: true,
                     customType: {
                         m3u8: (video, url) => {
+                            // One live hls instance at a time: destroying the old one
+                            // before every load prevents the memory leak that used to
+                            // freeze long binge sessions / episode switching.
+                            destroyHls();
                             const hls = new window.Hls();
+                            hlsRef.current = hls;
                             // Dead/expired stream links would otherwise leave an
-                            // endless buffering spinner — surface a clear notice.
+                            // endless buffering spinner — surface a clear notice
+                            // and a retry button.
                             hls.on(window.Hls.Events.ERROR, (_, data) => {
-                                if (data && data.fatal && artRef.current && artRef.current.notice) {
-                                    artRef.current.notice.show = 'ບໍ່ສາມາດໂຫຼດວິດີໂອໄດ້ (โหลดวิดีโอไม่ได้) — ແຫຼ່ງສຕຼີມອາດໝົດອາຍຸ ກະລຸນາລອງໜັງອື່ນກ່ອນ';
+                                if (data && data.fatal && !disposed) {
+                                    destroyHls();
+                                    setPlayError(true);
+                                    if (artRef.current && artRef.current.notice) {
+                                        artRef.current.notice.show = 'ບໍ່ສາມາດໂຫຼດວິດີໂອໄດ້ (โหลดวิดีโอไม่ได้) — ແຫຼ່ງສຕຼີມອາດໝົດອາຍຸ ກະລຸນາລອງໜັງອື່ນກ່ອນ';
+                                    }
                                 }
                             });
                             hls.loadSource(url);
@@ -92,9 +114,18 @@ export default function Player({ movie }) {
                 artRef.current = art;
             })
             .catch((err) => !disposed && setInitError(err.message));
-        return () => { disposed = true; };
+        return () => {
+            disposed = true;
+            destroyHls();
+            // destroy(false) keeps the .artplayer-app container div so a
+            // re-init (retry) can rebuild into it.
+            if (artRef.current) {
+                try { artRef.current.destroy(false); } catch {}
+                artRef.current = null;
+            }
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [movie.id]);
+    }, [movie.id, reloadKey]);
 
     // Skip timer for the current ad
     useEffect(() => {
@@ -125,9 +156,16 @@ export default function Player({ movie }) {
     const pickEp = (i) => {
         const art = artRef.current;
         if (!art) return;
+        setPlayError(false);
         art.switchUrl(withProxy(movie.episodes[i].url));
         setActiveEp(i);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const retry = () => {
+        setPlayError(false);
+        setInitError(null);
+        setReloadKey((k) => k + 1);
     };
 
     const currentAd = ADS[adIndex];
@@ -162,8 +200,13 @@ export default function Player({ movie }) {
                 )}
 
                 <div className="artplayer-app"></div>
-                {initError && (
-                    <p style={{ color: '#f39c12', fontSize: 13, marginTop: 8 }}>โหลดเครื่องเล่นไม่สำเร็จ: {initError}</p>
+                {(initError || playError) && (
+                    <div className="retry-row">
+                        <button type="button" className="retry-btn" onClick={retry}>
+                            <i className="fas fa-rotate-right" aria-hidden="true"></i>{' '}
+                            ລອງໂຫຼດໃໝ່ (ลองโหลดใหม่)
+                        </button>
+                    </div>
                 )}
             </div>
 
@@ -173,14 +216,16 @@ export default function Player({ movie }) {
                     <div className="ep-list">
                         <p><i className="fas fa-list"></i> ເລືອກຕອນເບິ່ງ (เลือกตอน):</p>
                         <div className="ep-tabs">
+                            {/* real buttons: keyboard/screen-reader operable (class kept for verify-build) */}
                             {m.episodes.map((ep, i) => (
-                                <div
+                                <button
+                                    type="button"
                                     key={i}
                                     className={`ep-btn${i === activeEp ? ' active' : ''}`}
                                     onClick={() => pickEp(i)}
                                 >
                                     {ep.title}
-                                </div>
+                                </button>
                             ))}
                         </div>
                     </div>

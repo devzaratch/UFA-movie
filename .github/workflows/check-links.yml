@@ -1,0 +1,48 @@
+# Daily link-health check (plan item #1).
+# Runs scripts/check-links.mjs, which updates src/data/dead-links.js with the
+# ids whose streams no longer answer. When that file changes, the change is
+# pushed back to main — Vercel then rebuilds automatically, so the homepage
+# only shows titles that still play. The health cache is force-added
+# (it is gitignored) so the next run stays incremental instead of re-checking
+# all ~12.5k urls.
+name: check-links
+
+on:
+  schedule:
+    - cron: '30 17 * * *'   # 00:30 Asia/Bangkok, every day
+  workflow_dispatch: {}     # manual run button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: check-links
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No npm install needed: check-links.mjs uses only node builtins.
+      - name: Check stream links (rewrites src/data/dead-links.js)
+        run: node scripts/check-links.mjs
+
+      - name: Commit & push update (only when changed)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/dead-links.js scripts/link-health-report.json
+          git add -f scripts/.link-health-cache.json
+          if git diff --cached --quiet; then
+            echo "No dead-link changes — nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore: refresh link health (automated daily check)"
+          git pull --rebase origin main
+          git push
