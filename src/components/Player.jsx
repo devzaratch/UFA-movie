@@ -60,6 +60,24 @@ export default function Player({ movie }) {
     // after a fatal stream/player error.
     const [reloadKey, setReloadKey] = useState(0);
 
+    const activeEpRef = useRef(0);
+
+    // "ดูต่อจากที่ค้าง" (plan item #9): per-title { ep, t } in localStorage,
+    // capped at 60 titles to stay small.
+    const RESUME_KEY = 'bn:resume';
+    const readResume = (id) => {
+        try { return JSON.parse(localStorage.getItem(RESUME_KEY) || '{}')[id] || null; } catch { return null; }
+    };
+    const saveResume = (id, v) => {
+        try {
+            const all = JSON.parse(localStorage.getItem(RESUME_KEY) || '{}');
+            all[id] = v;
+            const keys = Object.keys(all);
+            if (keys.length > 60) delete all[keys[0]];
+            localStorage.setItem(RESUME_KEY, JSON.stringify(all));
+        } catch {}
+    };
+
     const destroyHls = () => {
         if (hlsRef.current) {
             try { hlsRef.current.destroy(); } catch {}
@@ -112,6 +130,30 @@ export default function Player({ movie }) {
                     },
                 });
                 artRef.current = art;
+
+            // Resume where the viewer left off: saved episode + position
+            const saved = readResume(m.id);
+            if (saved) {
+                if (m.type === 'series' && saved.ep > 0 && m.episodes && m.episodes[saved.ep]) {
+                    art.switchUrl(withProxy(m.episodes[saved.ep].url));
+                    activeEpRef.current = saved.ep;
+                    setActiveEp(saved.ep);
+                }
+                if (saved.t > 20) {
+                    art.once('video:canplay', () => { try { art.seek(saved.t); } catch {} });
+                }
+            }
+            // Save progress while watching (throttled to one write / 5s)
+            let lastSave = 0;
+            art.on('video:timeupdate', () => {
+                const now = Date.now();
+                if (now - lastSave < 5000) return;
+                lastSave = now;
+                try {
+                    const t = art.getCurrentTime ? art.getCurrentTime() : 0;
+                    if (t > 0) saveResume(m.id, { ep: activeEpRef.current, t });
+                } catch {}
+            });
             })
             .catch((err) => !disposed && setInitError(err.message));
         return () => {
@@ -157,6 +199,8 @@ export default function Player({ movie }) {
         const art = artRef.current;
         if (!art) return;
         setPlayError(false);
+        activeEpRef.current = i;
+        saveResume(m.id, { ep: i, t: 0 });
         art.switchUrl(withProxy(movie.episodes[i].url));
         setActiveEp(i);
         window.scrollTo({ top: 0, behavior: 'smooth' });

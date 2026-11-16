@@ -5,9 +5,11 @@ import Player from '../../../components/Player.jsx';
 import { movieDatabase } from '../../../data/movies.js';
 import { DEAD_IDS } from '../../../data/dead-links.js';
 import { slugify } from '../../../lib/slug.js';
+import { posterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
 import { SITE } from '../../sitemap.js';
 import AdBanner from '../../../components/AdBanner.jsx';
+import ShareRow from '../../../components/ShareRow.jsx';
 import BottomNav from '../../../components/BottomNav.jsx';
 import Link from 'next/link';
 
@@ -46,7 +48,20 @@ export async function generateMetadata({ params }) {
     if (!m) return { title: 'BOENGNANG' };
     const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENGNANG`;
     const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENGNANG`;
-    return { title, description, robots: { index: true } };
+    const slug = slugify(m.id, m.title);
+    return {
+        title,
+        description,
+        robots: { index: true },
+        // canonical + per-title og:image (poster) — plan item #6
+        alternates: { canonical: `${SITE}/movie/${slug}/` },
+        openGraph: {
+            title,
+            description,
+            images: [{ url: posterFor(m) }],
+            type: m.type === 'series' ? 'video.tv_show' : 'video.movie',
+        },
+    };
 }
 
 export default function MoviePage({ params }) {
@@ -72,7 +87,7 @@ export default function MoviePage({ params }) {
         "@context": "https://schema.org",
         "@type": m.type === 'series' ? "TVSeries" : "Movie",
         "name": m.title,
-        "image": m.poster,
+        "image": posterFor(m),
         "description": description,
     };
     // Only real IMDb-style ratings from the data get an aggregateRating.
@@ -156,7 +171,7 @@ export default function MoviePage({ params }) {
                                 {related.slice(0, 6).map((r) => (
                                     <li key={r.id}>
                                         <a href={`/movie/${r.slug}/`}>
-                                            <img src={r.poster} alt={r.title} loading="lazy" /> <span>{r.title}</span>
+                                            <img src={posterFor(r)} alt={r.title} loading="lazy" /> <span>{r.title}</span>
                                         </a>
                                     </li>
                                 ))}
@@ -170,12 +185,16 @@ export default function MoviePage({ params }) {
                 </div>
             </main>
 
+            <div className="share-wrap">
+                <ShareRow />
+            </div>
+
             <section className="related-section">
                 <h2 className="related-title">ໜັງທີ່ກ່ຽວຂ້ອງ (หนังที่เกี่ยวข้อง)</h2>
                 <div className="rel-grid">
                     {related.map((r) => (
                         <a className="rel-card" key={r.id} href={`/movie/${r.slug}/`}>
-                            <img src={r.poster} alt={r.title} loading="lazy" />
+                            <img src={posterFor(r)} alt={r.title} loading="lazy" />
                             <div className="rel-t">{r.title}</div>
                         </a>
                     ))}

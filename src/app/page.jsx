@@ -5,6 +5,7 @@ import HomeGrid from '../components/HomeGrid.jsx';
 import AdBanner from '../components/AdBanner.jsx';
 import { movieDatabase } from '../data/movies.js';
 import { DEAD_IDS } from '../data/dead-links.js';
+import { posterFor } from '../lib/posters.js';
 import { slugify, yearOf } from '../lib/slug.js';
 
 export default function HomePage() {
@@ -19,6 +20,9 @@ export default function HomePage() {
             ...m,
             slug: slugify(m.id, m.title),
             year: yearOf(m.title),
+            // locally mirrored poster when available (posterFor falls back
+            // to the external url) — slider, sidebar and grid all use m.poster
+            poster: posterFor(m),
         }));
 
     return (
