@@ -1,7 +1,7 @@
 {
- "checkedAt": "2026-11-14T12:57:32.572Z",
+ "checkedAt": "2026-11-17T00:58:33.699Z",
  "titles": 5046,
- "deadTitles": 3274,
+ "deadTitles": 3275,
  "hosts": {
   "master.streamhls.com": {
    "total": 3098,
@@ -21,7 +21,7 @@
   },
   "vdohls.com": {
    "total": 9103,
-   "alive": 8775
+   "alive": 8774
   },
   "playerufa2.com": {
    "total": 2,
