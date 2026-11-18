@@ -1,0 +1,35 @@
+# CI gate (plan item #2): validates the dataset and runs the static build +
+# verify-build on every push/PR. Catches breakage in the 3MB movies.js and
+# regressions in the exported pages before Vercel deploys them.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate dataset
+        run: npm run validate:data
+
+      - name: Static build
+        run: npm run build
+
+      - name: Verify exported pages
+        run: node scripts/verify-build.mjs

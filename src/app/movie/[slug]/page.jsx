@@ -4,6 +4,7 @@ import Footer from '../../../components/Footer.jsx';
 import Player from '../../../components/Player.jsx';
 import { movieDatabase } from '../../../data/movies.js';
 import { DEAD_IDS } from '../../../data/dead-links.js';
+import { DUPLICATE_TO_CANONICAL } from '../../../data/duplicates.js';
 import { slugify } from '../../../lib/slug.js';
 import { posterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
@@ -49,12 +50,17 @@ export async function generateMetadata({ params }) {
     const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENGNANG`;
     const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENGNANG`;
     const slug = slugify(m.id, m.title);
+    // Duplicate entries (same title as another entry) point their canonical at
+    // the main page so Google indexes one URL per film — plan item #5.
+    const canonId = DUPLICATE_TO_CANONICAL[m.id];
+    const canon = canonId ? movieDatabase.find((x) => x.id === canonId) : null;
+    const canonicalUrl = canon ? `${SITE}/movie/${slugify(canon.id, canon.title)}/` : `${SITE}/movie/${slug}/`;
     return {
         title,
         description,
         robots: { index: true },
-        // canonical + per-title og:image (poster) — plan item #6
-        alternates: { canonical: `${SITE}/movie/${slug}/` },
+        // canonical + per-title og:image (poster)
+        alternates: { canonical: canonicalUrl },
         openGraph: {
             title,
             description,
@@ -83,6 +89,9 @@ export default function MoviePage({ params }) {
     const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENGNANG`;
     const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENGNANG`;
     const catLabel = CATEGORY_LABEL[m.category] || m.category;
+    // Same-title duplicate → link the visitor to the main page (plan item #5).
+    const canonId = DUPLICATE_TO_CANONICAL[m.id];
+    const canonMovie = canonId ? movieDatabase.find((x) => x.id === canonId) : null;
     const schema = {
         "@context": "https://schema.org",
         "@type": m.type === 'series' ? "TVSeries" : "Movie",
@@ -134,6 +143,15 @@ export default function MoviePage({ params }) {
                         <i className="fas fa-triangle-exclamation" aria-hidden="true"></i>{' '}
                         ບໍ່ສາມາດເບິ່ງເລື່ອງນີ້ໄດ້ໃນຂະນະນີ້ (ดูเรื่องนี้ไม่ได้ชั่วคราว) — ແຫຼ່ງວິດີໂອໝົດອາຍຸ ພວກເຮົາກຳລັງຫາແຫຼ່ງໃໝ່.
                         ລອງເບິ່ງ <a href="/?cat=serie">ຊີລີ້ (ซีรีส์)</a> ຫຼື <a href="/?cat=action">ແອັກຊັນ (แอคชั่น)</a> ກ່ອນ.
+                    </div>
+                )}
+
+                {canonMovie && (
+                    <div className="dead-note dup-note">
+                        <i className="fas fa-circle-info" aria-hidden="true"></i>{' '}
+                        ເລື່ອງນີ້ມີຫຼາຍກວ່າໜຶ່ງໜ້າ (เรื่องนี้มีหน้าหลักแล้ว) — ລອງເບິ່ງທີ່{' '}
+                        <a href={`/movie/${slugify(canonMovie.id, canonMovie.title)}/`}>{canonMovie.title}</a>{' '}
+                        ເພື່ອລິ້ງທີ່ໃໝ່ກວ່າ.
                     </div>
                 )}
 

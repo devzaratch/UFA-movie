@@ -2,6 +2,7 @@
 // generate-sitemap.mjs script). Build-time only; never hand-edit the output.
 // The base URL must match the Sitemap line in public/robots.txt — update both together.
 import { movieDatabase } from '../data/movies.js';
+import { DUPLICATE_TO_CANONICAL } from '../data/duplicates.js';
 import { slugify } from '../lib/slug.js';
 
 export const SITE = 'https://boengnang.vercel.app';
@@ -17,7 +18,7 @@ export default function sitemap() {
             changeFrequency: 'daily',
             priority: 1.0,
         },
-        ...movieDatabase.map((m) => ({
+        ...movieDatabase.filter((m) => !DUPLICATE_TO_CANONICAL[m.id]).map((m) => ({
             url: `${SITE}/movie/${slugify(m.id, m.title)}/`,
             lastModified: new Date(),
             changeFrequency: m.type === 'series' ? 'weekly' : 'monthly',

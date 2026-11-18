@@ -5,6 +5,7 @@ import HomeGrid from '../components/HomeGrid.jsx';
 import AdBanner from '../components/AdBanner.jsx';
 import { movieDatabase } from '../data/movies.js';
 import { DEAD_IDS } from '../data/dead-links.js';
+import { DUPLICATE_TO_CANONICAL } from '../data/duplicates.js';
 import { posterFor } from '../lib/posters.js';
 import { slugify, yearOf } from '../lib/slug.js';
 
@@ -15,7 +16,7 @@ export default function HomePage() {
     // Titles whose stream links are all dead (see scripts/check-links.mjs)
     // are left out of the catalog; their /movie/<slug>/ pages still exist.
     const entries = movieDatabase
-        .filter((m) => !DEAD_IDS.has(m.id))
+        .filter((m) => !DEAD_IDS.has(m.id) && !DUPLICATE_TO_CANONICAL[m.id])
         .map((m) => ({
             ...m,
             slug: slugify(m.id, m.title),

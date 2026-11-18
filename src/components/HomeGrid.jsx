@@ -13,6 +13,7 @@
 // from the header box, and keeps the URL in sync via history.replaceState.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CATEGORY_LABEL } from '../lib/categories.js';
+import { normalizeText, stripMarks } from '../lib/search.js';
 
 const PER_PAGE = 24;
 const CATS = ['all', 'action', 'horror', 'anime', 'serie', 'drama'];
@@ -70,10 +71,26 @@ export default function HomeGrid({ entries }) {
         [entries],
     );
 
-    const base = useMemo(
-        () => entries.filter((m) => (!year || m.year === year) && (!q || m.title.toLowerCase().includes(q))),
-        [entries, year, q],
-    );
+    // Cross-script search index: Thai queries now match Lao titles (and back).
+    const searchIndex = useMemo(() => {
+        const idx = new Map();
+        for (const m of entries) {
+            const full = normalizeText(m.title);
+            idx.set(m.id, { full, loose: stripMarks(full) });
+        }
+        return idx;
+    }, [entries]);
+
+    const base = useMemo(() => {
+        const nq = normalizeText(q);
+        const nqLoose = stripMarks(nq);
+        return entries.filter((m) => {
+            if (year && m.year !== year) return false;
+            if (!nq) return true;
+            const t = searchIndex.get(m.id);
+            return !!t && (t.full.includes(nq) || t.loose.includes(nqLoose));
+        });
+    }, [entries, year, q, searchIndex]);
     const counts = useMemo(() => {
         const c = { all: base.length };
         for (const k of CATS.slice(1)) c[k] = 0;
