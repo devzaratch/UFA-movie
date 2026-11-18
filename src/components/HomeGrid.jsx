@@ -12,6 +12,7 @@
 // plain <a>, so landing here always does a full load), listens to dm:search
 // from the header box, and keeps the URL in sync via history.replaceState.
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { track } from '@vercel/analytics';
 import { CATEGORY_LABEL } from '../lib/categories.js';
 import { normalizeText, stripMarks } from '../lib/search.js';
 
@@ -50,7 +51,12 @@ export default function HomeGrid({ entries }) {
         if (urlPage > 1) setPage(urlPage);
         setReady(true);
 
-        const onSearch = (e) => { setQ(e.detail || ''); setPage(1); };
+        const onSearch = (e) => {
+            setQ(e.detail || '');
+            setPage(1);
+            // Analytics (plan item #8): what people look for but may not find
+            if (e.detail && e.detail.trim().length > 1) track('search_used', { q: e.detail.trim().slice(0, 40) });
+        };
         window.addEventListener('dm:search', onSearch);
         return () => window.removeEventListener('dm:search', onSearch);
     }, []);

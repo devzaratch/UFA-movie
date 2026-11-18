@@ -4,11 +4,12 @@
 // The movie entry is passed as a prop (build-time data), the CDN libraries
 // (hls.js, Artplayer) are injected at runtime and awaited before init.
 import { useEffect, useRef, useState } from 'react';
+import { track } from '@vercel/analytics';
+import { AD_CONFIG, activeAds } from '../data/ads.js';
 
-const ADS = [
-    { src: '/mog.mp4', link: 'https://shorturl.at/riU34' },
-    { src: '/lsp.mp4', link: 'https://shorturl.at/Ej7uF' },
-];
+// Pre-roll ads come from src/data/ads.js (edit campaigns there, not here).
+const ADS = activeAds();
+const SKIP_SECONDS = AD_CONFIG.skipSeconds;
 
 // The vdohls.com hosts reject requests whose Referer is not one of their
 // partner sites, so those m3u8s are fetched through our Cloudflare Worker
@@ -51,8 +52,8 @@ export default function Player({ movie }) {
     const hlsRef = useRef(null);
     const adVideoRef = useRef(null);
     const [adIndex, setAdIndex] = useState(0);
-    const [adsDone, setAdsDone] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(3);
+    const [adsDone, setAdsDone] = useState(ADS.length === 0);
+    const [timeLeft, setTimeLeft] = useState(SKIP_SECONDS);
     const [activeEp, setActiveEp] = useState(0);
     const [initError, setInitError] = useState(null);
     const [playError, setPlayError] = useState(false);
@@ -131,6 +132,14 @@ export default function Player({ movie }) {
                 });
                 artRef.current = art;
 
+            // Analytics: first real playback of this title (plan item #8)
+            let started = false;
+            art.on('video:play', () => {
+                if (started) return;
+                started = true;
+                track('play_started', { movie: m.id, category: m.category, type: m.type || 'movie' });
+            });
+
             // Resume where the viewer left off: saved episode + position
             const saved = readResume(m.id);
             if (saved) {
@@ -172,7 +181,7 @@ export default function Player({ movie }) {
     // Skip timer for the current ad
     useEffect(() => {
         if (adsDone) return;
-        setTimeLeft(3);
+        setTimeLeft(SKIP_SECONDS);
         const t = setInterval(() => {
             setTimeLeft((left) => {
                 if (left <= 1) { clearInterval(t); return 0; }
@@ -193,6 +202,17 @@ export default function Player({ movie }) {
             const art = artRef.current;
             if (art) art.play();
         }
+    };
+
+    // Custom analytics events (plan item #8): tells us which titles and
+    // campaigns actually get watched, so replacement streams go to the titles
+    // people want first.
+    const skipAd = () => {
+        track('ad_skipped', { slot: ADS[adIndex]?.id || 'none', movie: m.id });
+        switchAd();
+    };
+    const clickAd = () => {
+        track('ad_click', { slot: ADS[adIndex]?.id || 'none', movie: m.id });
     };
 
     const pickEp = (i) => {
@@ -229,12 +249,12 @@ export default function Player({ movie }) {
                         >
                             <source src={currentAd.src} type="video/mp4" />
                         </video>
-                        <a href={currentAd.link} target="_blank" rel="noreferrer" className="btn-reg">ສະໝັກສະມາຊິກ</a>
+                        <a href={currentAd.link} target="_blank" rel="noreferrer" className="btn-reg" onClick={clickAd}>{currentAd.label || 'ສະໝັກສະມາຊິກ'}</a>
                         <button
                             id="skipBtn"
                             className={`btn-skip${timeLeft === 0 ? ' ready' : ''}`}
                             disabled={timeLeft > 0}
-                            onClick={switchAd}
+                            onClick={skipAd}
                         >
                             {timeLeft > 0
                                 ? <>ລໍຖ້າ... <span id="timer">{timeLeft}</span></>
