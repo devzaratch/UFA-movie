@@ -94,13 +94,43 @@ export default function MoviePage({ params }) {
     // Same-title duplicate → link the visitor to the main page (plan item #5).
     const canonId = DUPLICATE_TO_CANONICAL[m.id];
     const canonMovie = canonId ? movieDatabase.find((x) => x.id === canonId) : null;
+    // JSON-LD needs absolute urls (local posters are stored as "/posters/x.webp").
+    const abs = (u) => (/^https?:\/\//i.test(u || '') ? u : `${SITE}${u || ''}`);
     const schema = {
         "@context": "https://schema.org",
         "@type": m.type === 'series' ? "TVSeries" : "Movie",
         "name": m.title,
-        "image": posterFor(m),
+        "image": abs(posterFor(m)),
         "description": description,
+        "url": `${SITE}/movie/${slugify(m.id, m.title)}/`,
     };
+    // VideoObject (plan item #3): makes the page eligible for video rich
+    // results. contentUrl points at the same stream the player uses.
+    // Dead titles are skipped on purpose — a 404 video would get the rich
+    // result stripped by Google.
+    const streamUrl = m.type === 'series'
+        ? (m.episodes && m.episodes[0] && m.episodes[0].url)
+        : m.url;
+    const yearMatch = m.title.match(/\((\d{4})\)/);
+    const videoSchema = (!DEAD_IDS.has(m.id) && streamUrl) ? {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": `${m.title} (${m.quality || 'HD'})`,
+        "description": description,
+        "thumbnailUrl": [abs(posterFor(m))],
+        "uploadDate": `${yearMatch ? yearMatch[1] : '2025'}-01-01T00:00:00+07:00`,
+        "contentUrl": streamUrl,
+        "embedUrl": `${SITE}/movie/${slugify(m.id, m.title)}/`,
+        "inLanguage": ["th", "lo"],
+        "isFamilyFriendly": m.category !== 'horror',
+        "potentialAction": {
+            "@type": "WatchAction",
+            "target": `${SITE}/movie/${slugify(m.id, m.title)}/`,
+        },
+        ...(m.type === 'series'
+            ? { "duration": `PT${Math.max(1, (m.episodes || []).length)}H` }
+            : {}),
+    } : null;
     // Only real IMDb-style ratings from the data get an aggregateRating.
     if (m.rating) {
         schema.aggregateRating = {
@@ -233,6 +263,12 @@ export default function MoviePage({ params }) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
+            {videoSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+                />
+            )}
         </>
     );
 }

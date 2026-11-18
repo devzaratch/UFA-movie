@@ -8,6 +8,7 @@ import { DEAD_IDS } from '../data/dead-links.js';
 import { DUPLICATE_TO_CANONICAL } from '../data/duplicates.js';
 import { posterFor } from '../lib/posters.js';
 import { categoryOf } from '../lib/category.js';
+import { SITE } from './sitemap.js';
 import { slugify, yearOf } from '../lib/slug.js';
 
 export default function HomePage() {
@@ -31,6 +32,29 @@ export default function HomePage() {
 
     return (
         <>
+            {/* WebSite + SearchAction: tells Google our catalog search lives at
+                /?q=…, which is a real, shareable URL (HomeGrid reads it). */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'WebSite',
+                        name: 'BOENGNANG',
+                        alternateName: 'ເບິ່ງໜັງອອນໄລນ໌ BOENGNANG',
+                        url: `${SITE}/`,
+                        inLanguage: ['th', 'lo'],
+                        potentialAction: {
+                            '@type': 'SearchAction',
+                            target: {
+                                '@type': 'EntryPoint',
+                                urlTemplate: `${SITE}/?q={search_term_string}`,
+                            },
+                            'query-input': 'required name=search_term_string',
+                        },
+                    }),
+                }}
+            />
             <Header total={entries.length} />
 
             <div className="wrap">

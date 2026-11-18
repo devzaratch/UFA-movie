@@ -46,9 +46,11 @@ export default function HomeGrid({ entries }) {
         const urlCat = sp.get('cat');
         const urlYear = sp.get('year');
         const urlPage = parseInt(sp.get('page') || '1', 10);
+        const urlQ = sp.get('q');
         if (urlCat && CATS.includes(urlCat)) setCat(urlCat);
         if (urlYear) setYear(urlYear);
         if (urlPage > 1) setPage(urlPage);
+        if (urlQ) setQ(urlQ);
         setReady(true);
 
         const onSearch = (e) => {
@@ -68,6 +70,8 @@ export default function HomeGrid({ entries }) {
         cat === 'all' ? sp.delete('cat') : sp.set('cat', cat);
         year ? sp.set('year', year) : sp.delete('year');
         page > 1 ? sp.set('page', String(page)) : sp.delete('page');
+        // ?q= makes the search shareable and backs the WebSite SearchAction
+        q ? sp.set('q', q) : sp.delete('q');
         const qs = sp.toString();
         window.history.replaceState(null, '', qs ? `/?${qs}` : '/');
     }, [cat, year, page, ready, q]);
