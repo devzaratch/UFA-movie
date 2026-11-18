@@ -8,6 +8,7 @@ import { DUPLICATE_TO_CANONICAL } from '../../../data/duplicates.js';
 import { slugify } from '../../../lib/slug.js';
 import { posterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
+import { categoryOf } from '../../../lib/category.js';
 import { SITE } from '../../sitemap.js';
 import AdBanner from '../../../components/AdBanner.jsx';
 import ShareRow from '../../../components/ShareRow.jsx';
@@ -88,7 +89,8 @@ export default function MoviePage({ params }) {
 
     const title = `ເບິ່ງໜັງ ${m.title} ເຕັມເລື່ອງ HD | BOENGNANG`;
     const description = `ເບິ່ງໜັງ ${m.title} ອອນໄລນ໌ຟຣີ ຄົມຊັດ HD ທີ່ BOENGNANG`;
-    const catLabel = CATEGORY_LABEL[m.category] || m.category;
+    const mcat = categoryOf(m);
+    const catLabel = CATEGORY_LABEL[mcat] || mcat;
     // Same-title duplicate → link the visitor to the main page (plan item #5).
     const canonId = DUPLICATE_TO_CANONICAL[m.id];
     const canonMovie = canonId ? movieDatabase.find((x) => x.id === canonId) : null;
@@ -113,14 +115,14 @@ export default function MoviePage({ params }) {
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": `${SITE}/` },
-            { "@type": "ListItem", "position": 2, "name": catLabel, "item": `${SITE}/?cat=${m.category}` },
+            { "@type": "ListItem", "position": 2, "name": catLabel, "item": `${SITE}/?cat=${mcat}` },
             { "@type": "ListItem", "position": 3, "name": m.title },
         ],
     };
 
     // "Related" is picked once at build time: same category, deterministic order
     const related = movieDatabase
-        .filter((x) => x.category === m.category && x.id !== m.id)
+        .filter((x) => categoryOf(x) === mcat && x.id !== m.id)
         .slice(0, 6)
         .map((x) => ({ ...x, slug: slugify(x.id, x.title) }));
 
@@ -134,7 +136,7 @@ export default function MoviePage({ params }) {
                 <div className="title-bar">
                     <a className="tb-title" href={`/movie/${slugify(m.id, m.title)}/`}>{m.title}</a>
                     <span className="crumbs">
-                        <a href="/">หน้าแรก</a> &gt; <a href={`/?cat=${m.category}`}>ดูหนังออนไลน์</a> &gt; <a href={`/?cat=${m.category}`}>{catLabel}</a> &gt; {m.quality || 'HD'}
+                        <a href="/">หน้าแรก</a> &gt; <a href={`/?cat=${mcat}`}>ดูหนังออนไลน์</a> &gt; <a href={`/?cat=${mcat}`}>{catLabel}</a> &gt; {m.quality || 'HD'}
                     </span>
                 </div>
 
@@ -163,7 +165,7 @@ export default function MoviePage({ params }) {
                             <h1>{m.title}</h1>
                             <div className="meta-tags">
                                 <span><i className="fas fa-video"></i> {m.quality || 'HD'}</span>
-                                <span><i className="fas fa-tag"></i> <a href={`/?cat=${m.category}`} style={{ color: '#aaa', textDecoration: 'none' }}>{catLabel}</a></span>
+                                <span><i className="fas fa-tag"></i> <a href={`/?cat=${mcat}`} style={{ color: '#aaa', textDecoration: 'none' }}>{catLabel}</a></span>
                                 <span><i className="fas fa-calendar-alt"></i> Update: 2025</span>
                             </div>
                         </article>
