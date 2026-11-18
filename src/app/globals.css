@@ -99,6 +99,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .year-select { min-height: 44px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; color: #ddd; font-size: 14px; padding: 0 10px; cursor: pointer; }
 .year-select:hover, .year-select:focus-visible { border-color: var(--gold-deep); }
 .result-info { color: var(--text-2); font-size: 13px; white-space: nowrap; }
+.random-btn { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--gold-deep); border-radius: 6px; color: var(--gold); font-family: inherit; font-weight: bold; font-size: 13.5px; padding: 0 14px; cursor: pointer; white-space: nowrap; transition: background .2s, color .2s, transform .15s; }
+.random-btn:hover { background: linear-gradient(90deg, var(--gold-deep), var(--gold)); color: #000; transform: translateY(-1px); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .grid-empty { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; color: var(--text-2); padding: 46px 20px; text-align: center; font-size: 15px; }
 
@@ -106,6 +108,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
     .filter-bar { position: sticky; gap: 8px; padding: 8px 10px; }
     .chip { min-height: 42px; padding: 0 11px; font-size: 13px; }
     .result-info { display: none; }
+    .random-btn { padding: 0 11px; font-size: 12.5px; }
+    .random-btn span { display: none; }
     #pagination { margin: 18px 0; }
 }
 .card { width: 252px; background: #181a1f; border: 1px solid #262626; cursor: pointer; position: relative; overflow: hidden; display: block; text-decoration: none; transition: transform .2s, border-color .2s, box-shadow .2s; }
@@ -144,7 +148,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .ad-banner .ab-sub { color: #ddd; font-size: 13px; }
 
 /* ── 404 page ── */
-.notfound { max-width: 640px; margin: 0 auto; padding: 60px 20px 80px; text-align: center; }
+.notfound { max-width: 1240px; margin: 0 auto; padding: 60px 20px 80px; text-align: center; }
+.notfound .nf-text { max-width: 640px; margin: 0 auto; }
+.notfound .nf-suggest { margin-top: 48px; }
+.notfound .nf-suggest .rel-grid { margin-top: 18px; }
 .notfound .nf-code { font-family: 'Oswald', Arial, sans-serif; font-size: 110px; font-weight: 700; line-height: 1; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .notfound h1 { color: #fff; font-size: 22px; margin: 18px 0 10px; }
 .notfound p { color: var(--text-2); font-size: 14px; line-height: 1.9; margin: 0 0 26px; }

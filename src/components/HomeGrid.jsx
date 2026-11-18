@@ -146,6 +146,23 @@ export default function HomeGrid({ entries }) {
                     <span className="result-info" aria-live="polite">
                         {q ? `ພົບ (พบ) ${fmt(filtered.length)} ເລື່ອງ` : `${fmt(filtered.length)} ເລື່ອງ`}
                     </span>
+                    <button
+                        type="button"
+                        className="random-btn"
+                        title="ສຸ່ມໜັງ (สุ่มหนัง)"
+                        onClick={() => {
+                            // Pick from the cards that are currently visible, so the
+                            // random pick respects the active search / category / year.
+                            const ids = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+                            const pool = ids.length ? ids : filtered;
+                            if (!pool.length) return;
+                            const pick = pool[Math.floor(Math.random() * pool.length)];
+                            window.location.href = `/movie/${pick.slug}/`;
+                        }}
+                    >
+                        <i className="fas fa-shuffle" aria-hidden="true"></i>{' '}
+                        <span>ສຸ່ມໜັງ (สุ่มหนัง)</span>
+                    </button>
                 </div>
             </div>
 
