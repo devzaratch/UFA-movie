@@ -50,6 +50,76 @@ function proxied(absUrl, base) {
     return base + '?u=' + encodeURIComponent(absUrl);
 }
 
+// ── Broken-link reports ────────────────────────────────────────────────────
+// One KV namespace (REPORTS) stores one key per report:
+//   report:<iso ts>:<rand> → { id, title, url, note, country, ua, ts }
+// and a short-lived rate-limit key per client so a visitor cannot spam.
+const REPORT_MAX_NOTE = 280;
+const RATE_LIMIT_SECONDS = 600;
+
+async function handleReport(request, env) {
+    if (!env || !env.REPORTS) return json('reports not configured (bind KV as REPORTS)', 503);
+
+    let body;
+    try { body = await request.json(); } catch { return json('bad json', 400); }
+
+    const id = String(body.id || '').trim();
+    if (!/^[ms]\d{1,6}$/.test(id)) return json('bad id', 400);
+    const title = String(body.title || '').slice(0, 200);
+    const url = String(body.url || '').slice(0, 500);
+    const note = String(body.note || '').slice(0, REPORT_MAX_NOTE);
+
+    // Rate limit: the CF-Connecting-IP is only used as a hashed bucket, never stored.
+    const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+    const bucket = 'rl:' + (await sha256(ip + id));
+    if (await env.REPORTS.get(bucket)) {
+        return new Response(JSON.stringify({ ok: true, duplicate: true }), {
+            status: 200,
+            headers: { ...corsHeaders, 'content-type': 'application/json' },
+        });
+    }
+    await env.REPORTS.put(bucket, '1', { expirationTtl: RATE_LIMIT_SECONDS });
+
+    const ts = new Date().toISOString();
+    const key = `report:${ts}:${Math.random().toString(36).slice(2, 8)}`;
+    await env.REPORTS.put(key, JSON.stringify({
+        id, title, url, note, ts,
+        country: request.headers.get('cf-ipcountry') || '',
+        ua: (request.headers.get('user-agent') || '').slice(0, 160),
+    }));
+
+    return new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'content-type': 'application/json' },
+    });
+}
+
+async function handleReportList(request, env, reqUrl) {
+    if (!env || !env.REPORTS) return json('reports not configured', 503);
+    const token = request.headers.get('x-admin-token') || '';
+    if (!env.ADMIN_TOKEN || token !== env.ADMIN_TOKEN) return json('forbidden', 403);
+
+    const limit = Math.min(200, Math.max(1, parseInt(reqUrl.searchParams.get('limit') || '50', 10) || 50));
+    const list = await env.REPORTS.list({ prefix: 'report:', limit });
+    const items = [];
+    for (const k of list.keys) {
+        const raw = await env.REPORTS.get(k.name);
+        if (raw) {
+            try { items.push(JSON.parse(raw)); } catch {}
+        }
+    }
+    items.sort((a, b) => (a.ts < b.ts ? 1 : -1));
+    return new Response(JSON.stringify({ count: items.length, items }), {
+        status: 200,
+        headers: { ...corsHeaders, 'content-type': 'application/json' },
+    });
+}
+
+async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return [...new Uint8Array(buf)].slice(0, 12).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 // Rewrite an HLS playlist: wrap every URI (segments, child playlists, keys,
 // maps) so they loop back through this worker.
 function rewritePlaylist(text, targetUrl, base) {
@@ -76,11 +146,25 @@ function rewritePlaylist(text, targetUrl, base) {
 }
 
 export default {
-    async fetch(request) {
+    async fetch(request, env) {
         if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders });
-        if (request.method !== 'GET' && request.method !== 'HEAD') return json('method not allowed', 405);
 
         const reqUrl = new URL(request.url);
+
+        // ── Broken-link reports (plan item #9) ──────────────────────────────
+        // POST /report  { id, title, url, note }  → stored in KV namespace REPORTS
+        // GET  /reports?limit=50   (header x-admin-token: <ADMIN_TOKEN>)
+        if (reqUrl.pathname === '/report' || reqUrl.pathname === '/report/') {
+            if (request.method !== 'POST') return json('method not allowed', 405);
+            return handleReport(request, env);
+        }
+        if (reqUrl.pathname === '/reports' || reqUrl.pathname === '/reports/') {
+            if (request.method !== 'GET') return json('method not allowed', 405);
+            return handleReportList(request, env, reqUrl);
+        }
+
+        if (request.method !== 'GET' && request.method !== 'HEAD') return json('method not allowed', 405);
+
         const base = reqUrl.origin + '/stream/';
         const target = reqUrl.searchParams.get('u');
         if (!target) return json('missing ?u=', 400);

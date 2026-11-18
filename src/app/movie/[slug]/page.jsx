@@ -12,6 +12,7 @@ import { categoryOf } from '../../../lib/category.js';
 import { SITE } from '../../sitemap.js';
 import AdBanner from '../../../components/AdBanner.jsx';
 import ShareRow from '../../../components/ShareRow.jsx';
+import ReportButton from '../../../components/ReportButton.jsx';
 import BottomNav from '../../../components/BottomNav.jsx';
 import Link from 'next/link';
 
@@ -190,6 +191,8 @@ export default function MoviePage({ params }) {
                 <div className="movie-layout">
                     <div className="movie-main">
                         <Player movie={m} />
+
+                        <ReportButton movie={m} />
 
                         <article className="info-box">
                             <h1>{m.title}</h1>

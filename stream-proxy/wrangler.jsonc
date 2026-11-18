@@ -2,5 +2,17 @@
     "name": "boengnang-stream",
     "main": "worker.js",
     "compatibility_date": "2025-01-01",
-    "workers_dev": true
+    "workers_dev": true,
+    // KV namespace for broken-link reports (plan item #9).
+    // Until it is bound, POST /report answers 503 and /stream/ keeps working.
+    // To enable:
+    //   npx wrangler kv namespace create REPORTS
+    //   -> paste the printed id below as "id", uncomment, then:
+    //   npx wrangler deploy
+    // Optional, to read the reports:
+    //   npx wrangler secret put ADMIN_TOKEN      (any long random string)
+    //   curl -H "x-admin-token: <token>" https://<worker>/reports?limit=50
+    // "kv_namespaces": [
+    //     { "binding": "REPORTS", "id": "PASTE_KV_NAMESPACE_ID" }
+    // ],
 }

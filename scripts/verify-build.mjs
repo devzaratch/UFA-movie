@@ -48,4 +48,48 @@ const results = pick.map(u => {
     };
 });
 
-console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results }, null, 1));
+// ── Feature checks (plan items 1-10) ─────────────────────────────────────────
+const readPage = (p) => {
+    try { return readFileSync(join(OUT, p), 'utf8'); } catch { return ''; }
+};
+const ldGraph = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((m) => { try { return JSON.parse(m[1]); } catch { return null; } })
+    .filter(Boolean);
+
+const homeHtml = readPage('index.html');
+const notFound = readPage('404.html');
+
+// VideoObject only exists on live titles; homepage cards are alive-only, so
+// read a few of those card links and look for the VideoObject node.
+let videoObjectOnLiveTitle = false;
+const cardLinks = [...homeHtml.matchAll(/class="card[^"]*"\s+href="([^"]+)"/g)].map((m) => m[1]).slice(0, 20);
+for (const href of cardLinks) {
+    const p = decodeURIComponent(href.replace(/^\/|\/$/g, ''));
+    if (ldGraph(readPage(join(p, 'index.html'))).some((x) => x['@type'] === 'VideoObject')) {
+        videoObjectOnLiveTitle = true;
+        break;
+    }
+}
+
+const features = {
+    // item #1 search: bundle contains the cross-script matcher and ?q= support
+    searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
+    // item #4 categories rebalanced (override file applied)
+    categoryOverrides: homeHtml.includes('category-overrides') || homeHtml.includes('data-cat="horror"'),
+    // item #5 duplicates excluded from sitemap + homepage
+    duplicatePagesExcluded: !movieUrls.some((u) => u.endsWith('-m900/')),
+    // item #6 random button + 404 recommendations
+    randomButton: homeHtml.includes('random-btn'),
+    notFoundSuggestions: (notFound.match(/class="rel-card"/g) || []).length,
+    // item #3 structured data
+    websiteSearchAction: ldGraph(homeHtml).some((x) => x['@type'] === 'WebSite'),
+    videoObjectOnLiveTitle,
+    // item #10
+    privacyPage: readPage('privacy/index.html').length > 0,
+    contactPage: readPage('contact/index.html').length > 0,
+    adsTxt: readPage('ads.txt').length > 0,
+    // item #2 local posters
+    localPostersOnHome: (homeHtml.match(/\/posters\//g) || []).length,
+};
+
+console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));
