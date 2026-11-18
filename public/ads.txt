@@ -1,0 +1,14 @@
+# ads.txt — Authorized Digital Sellers for BOENGNANG
+# https://iabtechlab.com/ads-txt/
+#
+# Format per row:  <domain>, <publisher id>, <DIRECT|RESELLER>, [certification authority id]
+# Keep this file even while it is empty: ad networks (and the IAB crawler)
+# treat a missing ads.txt as "unknown", while an existing one that lists your
+# partners protects your revenue from unauthorized resellers.
+#
+# When an ad network approves the site, add the exact line they give you, e.g.
+#   google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+#   media.net, 8CUXXXXXX, DIRECT
+#
+# Status: no third-party ad network is authorized yet — the site runs its own
+# house ads (src/data/ads.js). Listed below: none.

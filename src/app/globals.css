@@ -210,6 +210,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .retry-btn { min-height: 44px; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); color: #000; font-weight: bold; font-size: 14px; border: none; border-radius: 5px; padding: 10px 22px; cursor: pointer; box-shadow: 0 2px 10px rgba(255, 122, 24, .25); transition: transform .15s, box-shadow .2s; }
 .retry-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255, 122, 24, .35); }
 
+/* ── Static text pages (privacy / contact) ── */
+.legal { max-width: 900px; margin: 0 auto; padding: 40px 18px 70px; }
+.legal h1 { color: #fff; font-family: 'Oswald', Arial, sans-serif; font-size: 26px; margin: 0 0 6px; }
+.legal-updated { color: var(--text-2); font-size: 12.5px; margin: 0 0 26px; }
+.legal h2 { color: var(--gold); font-size: 17px; margin: 30px 0 10px; }
+.legal p, .legal li { color: #c8c8c8; font-size: 14.5px; line-height: 1.95; }
+.legal ul { padding-left: 22px; margin: 0 0 14px; }
+.legal a { color: var(--gold); }
+.legal-note { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 5px; padding: 12px 14px; }
+
 /* ── Share row on title pages (LINE / Facebook / copy link) ── */
 .share-wrap { max-width: 1240px; margin: 22px auto 0; padding: 0 15px; }
 .share-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; }

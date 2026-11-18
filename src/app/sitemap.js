@@ -18,6 +18,18 @@ export default function sitemap() {
             changeFrequency: 'daily',
             priority: 1.0,
         },
+        {
+            url: `${SITE}/privacy/`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        },
+        {
+            url: `${SITE}/contact/`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        },
         ...movieDatabase.filter((m) => !DUPLICATE_TO_CANONICAL[m.id]).map((m) => ({
             url: `${SITE}/movie/${slugify(m.id, m.title)}/`,
             lastModified: new Date(),

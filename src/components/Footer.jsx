@@ -9,6 +9,8 @@ export default function Footer() {
         { label: 'หนังผี สยองขวัญ', href: '/?cat=horror' },
         { label: 'หนังการ์ตูน', href: '/?cat=anime' },
         { label: 'หนังดราม่า', href: '/?cat=drama' },
+        { label: 'ນະໂຍບາຍຄວາມສ່ວນຕົວ (Privacy)', href: '/privacy/' },
+        { label: 'ຕິດຕໍ່ເຮົາ (Contact)', href: '/contact/' },
     ];
 
     return (
