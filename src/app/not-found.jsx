@@ -45,7 +45,7 @@ export default function NotFound() {
                     <div className="rel-grid">
                         {suggested.map((m) => (
                             <a key={m.id} className="rel-card" href={`/movie/${slugify(m.id, m.title)}/`}>
-                                <img src={posterFor(m)} alt={m.title} loading="lazy" />
+                                <img src={posterFor(m)} alt={m.title} width={252} height={378} loading="lazy" />
                                 <span>{m.title}</span>
                             </a>
                         ))}

@@ -188,7 +188,7 @@ export default function HomeGrid({ entries }) {
                             data-cat={m.category}
                         >
                             <div className="ribbon">{m.quality || 'HD'}</div>
-                            <img src={m.poster} alt={`${m.title} ເບິ່ງໜັງອອນໄລນ໌ຟຣີ BOENGNANG`} loading="lazy" />
+                            <img src={m.poster} alt={`${m.title} ເບິ່ງໜັງອອນໄລນ໌ຟຣີ BOENGNANG`} width={252} height={378} loading="lazy" />
                             <div className="rating-bar">
                                 {m.rating ? `ເບິ່ງໜັງອອນໄລນ໌ IMDb: ${m.rating}` : CATEGORY_LABEL[m.category] || ''}
                             </div>

@@ -6,7 +6,7 @@ import AdBanner from '../components/AdBanner.jsx';
 import { movieDatabase } from '../data/movies.js';
 import { DEAD_IDS } from '../data/dead-links.js';
 import { DUPLICATE_TO_CANONICAL } from '../data/duplicates.js';
-import { posterFor } from '../lib/posters.js';
+import { posterFor, microPosterFor } from '../lib/posters.js';
 import { categoryOf } from '../lib/category.js';
 import { SITE } from './sitemap.js';
 import { slugify, yearOf } from '../lib/slug.js';
@@ -28,6 +28,9 @@ export default function HomePage() {
             // locally mirrored poster when available (posterFor falls back
             // to the external url) — slider, sidebar and grid all use m.poster
             poster: posterFor(m),
+            // 120px thumb for the sidebar list (36×54 on screen) — saves ~35KB
+            // per row on mobile; falls back to the full poster.
+            micro: microPosterFor(m),
         }));
 
     return (
@@ -63,7 +66,7 @@ export default function HomePage() {
                         {entries.slice(0, 28).map((m) => (
                             <li key={m.id}>
                                 <a href={`/movie/${m.slug}/`}>
-                                    <img src={m.poster} alt={`${m.title} BOENGNANG`} loading="eager" />
+                                    <img src={m.poster} alt={`${m.title} BOENGNANG`} width={198} height={297} loading="eager" />
                                 </a>
                             </li>
                         ))}
@@ -101,7 +104,7 @@ export default function HomePage() {
                                 {entries.slice(0, 12).map((m) => (
                                     <li key={m.id}>
                                         <a href={`/movie/${m.slug}/`}>
-                                            <img src={m.poster} alt={m.title} loading="lazy" /> <span>{m.title}</span>
+                                            <img src={m.micro} alt={m.title} width={36} height={54} loading="lazy" /> <span>{m.title}</span>
                                         </a>
                                     </li>
                                 ))}

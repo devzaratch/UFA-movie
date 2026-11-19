@@ -6,7 +6,7 @@ import { movieDatabase } from '../../../data/movies.js';
 import { DEAD_IDS } from '../../../data/dead-links.js';
 import { DUPLICATE_TO_CANONICAL } from '../../../data/duplicates.js';
 import { slugify } from '../../../lib/slug.js';
-import { posterFor } from '../../../lib/posters.js';
+import { posterFor, microPosterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
 import { categoryOf } from '../../../lib/category.js';
 import { SITE } from '../../sitemap.js';
@@ -224,7 +224,7 @@ export default function MoviePage({ params }) {
                                 {related.slice(0, 6).map((r) => (
                                     <li key={r.id}>
                                         <a href={`/movie/${r.slug}/`}>
-                                            <img src={posterFor(r)} alt={r.title} loading="lazy" /> <span>{r.title}</span>
+                                            <img src={microPosterFor(r)} alt={r.title} width={36} height={54} loading="lazy" /> <span>{r.title}</span>
                                         </a>
                                     </li>
                                 ))}
@@ -247,7 +247,7 @@ export default function MoviePage({ params }) {
                 <div className="rel-grid">
                     {related.map((r) => (
                         <a className="rel-card" key={r.id} href={`/movie/${r.slug}/`}>
-                            <img src={posterFor(r)} alt={r.title} loading="lazy" />
+                            <img src={posterFor(r)} alt={r.title} width={252} height={378} loading="lazy" />
                             <div className="rel-t">{r.title}</div>
                         </a>
                     ))}
