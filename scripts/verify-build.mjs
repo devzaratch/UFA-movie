@@ -138,6 +138,11 @@ const noPosterPage = noPosterSample
     : '';
 const fallbackOgOk = !!noPosterSample && noPosterPage.includes('/og/default.jpg');
 
+// ── Mobile sticky ad + frequency cap (plan #4 item 8) ────────────────────────
+const { STICKY_AD } = await import('../src/data/ads.js');
+const stickySlotOnHome = homeHtml.includes('class="sticky-ad') && homeHtml.includes('sa-close');
+const capConfigured = STICKY_AD.maxPerDay > 0 && STICKY_AD.cooldownMinutes > 0 && STICKY_AD.dismissHours > 0;
+
 const features = {
     // item #1 search: bundle contains the cross-script matcher and ?q= support
     searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
@@ -186,6 +191,9 @@ const features = {
     ogDefaultGenerated: ogDefaultOk,
     livePageHasPerTitleOg: liveOgOk,
     noPosterPageUsesDefaultOg: fallbackOgOk,
+    // plan #4 item 8
+    stickyMobileAdSlot: stickySlotOnHome,
+    stickyAdFrequencyCap: capConfigured,
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));

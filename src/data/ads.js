@@ -68,3 +68,19 @@ export const PROMO = {
     title: 'ສະໝັກສະມາຊິກ (สมัครสมาชิก)',
     subtitle: 'ຮັບໜັງຄົມຊັດ HD ພາກໄທ ເຕັມເລື່ອງ ທຸກຮູບແບບ',
 };
+
+// Mobile sticky strip (plan #4 item 8) — same house ad, docked above the
+// bottom nav. Frequency capping happens in StickyAd.jsx with these limits:
+// maxPerDay impressions per local day, at least cooldownMinutes apart; closing
+// it pauses the slot for dismissHours. No cookies, just bn:stickyad in localStorage.
+export const STICKY_AD = {
+    enabled: true,
+    id: 'sticky-mobile',
+    link: PROMO.link,
+    title: PROMO.title,
+    subtitle: PROMO.subtitle,
+    delayMs: 4000,
+    maxPerDay: 3,
+    cooldownMinutes: 20,
+    dismissHours: 12,
+};

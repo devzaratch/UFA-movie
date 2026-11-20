@@ -289,6 +289,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 /* ── Mobile UX/UI refresh (≤900px): bottom nav + touch polish ── */
 .bottom-nav { display: none; }
+.sticky-ad { display: none; }
 @media (max-width: 900px) {
     body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
 
@@ -300,6 +301,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
     .bn-item.active { color: var(--gold); }
     .bn-item.active .bn-icon { transform: translateY(-1px); }
     .bn-item:active { background: rgba(255, 207, 24, .1); }
+
+    /* Plan #4 item 8: capped mobile promo, docked just above the tab bar. */
+    .sticky-ad { position: fixed; left: 8px; right: 8px; bottom: calc(68px + env(safe-area-inset-bottom)); z-index: 1190; background: linear-gradient(135deg, #1a1204, #342305); border: 1px solid var(--gold); border-radius: 8px; box-shadow: 0 -4px 18px rgba(0, 0, 0, .7); }
+    .sticky-ad.is-visible { display: block; animation: sa-in .25s ease-out; }
+    @keyframes sa-in { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .sticky-ad .sa-link { display: block; padding: 10px 42px 10px 12px; text-decoration: none; }
+    .sticky-ad .sa-title { display: block; color: var(--gold); font-family: 'Oswald', Arial, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.2; }
+    .sticky-ad .sa-sub { display: block; color: #ddd; font-size: 11px; line-height: 1.3; margin-top: 2px; }
+    .sticky-ad .sa-close { position: absolute; top: 2px; right: 2px; width: 36px; height: 36px; border: none; background: none; color: #bbb; font-size: 24px; line-height: 1; cursor: pointer; }
+    body.sticky-ad-on { padding-bottom: calc(140px + env(safe-area-inset-bottom)); }
 
     /* Catalog on mobile: 2 cards per row (CSS Grid), thumb-friendly */
     .movie-grid, .rel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 10px; }

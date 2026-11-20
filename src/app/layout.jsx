@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import StickyAd from '../components/StickyAd.jsx';
 import { SITE } from './sitemap.js';
 import './globals.css';
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
                 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap" rel="stylesheet" />
                 {children}
+                <StickyAd />
                 {/* Vercel Analytics (privacy-friendly, no cookie banner needed) */}
                 <Analytics />
             </body>
