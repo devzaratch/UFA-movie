@@ -8,6 +8,7 @@ import { DUPLICATE_TO_CANONICAL } from '../../../data/duplicates.js';
 import { slugify } from '../../../lib/slug.js';
 import { posterFor, microPosterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
+import { ogFor } from '../../../lib/og.js';
 import { categoryOf } from '../../../lib/category.js';
 import { relatedFor } from '../../../lib/related.js';
 import { ratingOf } from '../../../lib/rating.js';
@@ -72,7 +73,7 @@ export async function generateMetadata({ params }) {
         openGraph: {
             title,
             description,
-            images: [{ url: posterFor(m) }],
+            images: [{ url: ogFor(m), width: 1200, height: 630 }],
             type: m.type === 'series' ? 'video.tv_show' : 'video.movie',
         },
     };

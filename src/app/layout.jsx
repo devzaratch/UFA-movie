@@ -10,7 +10,7 @@ export const metadata = {
     openGraph: {
         title: 'BOENGNANG | ເບິ່ງໜັງອອນໄລນ໌ຟຣີ 2025',
         description: 'ລວມໜັງໃຝ່ຊົນໂຮງ ແລະ ຊີລີ້ດັງ ພາກໄທ HD',
-        images: ['/favicon.png'],
+        images: ['/og/default.jpg'],
     },
     icons: { icon: '/favicon.png' },
 };
