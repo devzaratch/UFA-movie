@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/gen-play-redirect.mjs",
+    "build": "node scripts/og-images.mjs && next build && node scripts/gen-play-redirect.mjs",
+    "og:images": "node scripts/og-images.mjs",
     "start": "next start",
     "check:links": "node scripts/check-links.mjs",
     "validate:data": "node scripts/validate-data.mjs",
@@ -17,5 +18,8 @@
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

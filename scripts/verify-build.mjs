@@ -1,5 +1,5 @@
 // One-off verification of the exported site in out/ (UTF-8 safe).
-import { readFileSync, readdirSync, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const OUT = 'out';
@@ -123,6 +123,21 @@ const deadPagesStillSuggest = movieDatabase
     .slice(0, 3)
     .every((m) => relHrefs(readPage(join('movie', slugify(m.id, m.title), 'index.html'))).length >= 6);
 
+// ── Build-time OG cards (plan #4 item 5) ─────────────────────────────────────
+const { LOCAL_POSTERS } = await import('../src/data/posters-local.js');
+const ogIds = Object.keys(LOCAL_POSTERS);
+const ogMissing = ogIds.filter((id) => !existsSync(join(OUT, 'og', `${id}.jpg`)));
+const isJpeg = (p) => {
+    try { const b = readFileSync(p); return b[0] === 0xff && b[1] === 0xd8; } catch { return false; }
+};
+const ogDefaultOk = isJpeg(join(OUT, 'og', 'default.jpg'));
+const liveOgOk = !!liveSample && livePage.includes(`/og/${liveSample.id}.jpg`);
+const noPosterSample = movieDatabase.find((m) => !LOCAL_POSTERS[m.id]);
+const noPosterPage = noPosterSample
+    ? readPage(join('movie', slugify(noPosterSample.id, noPosterSample.title), 'index.html'))
+    : '';
+const fallbackOgOk = !!noPosterSample && noPosterPage.includes('/og/default.jpg');
+
 const features = {
     // item #1 search: bundle contains the cross-script matcher and ?q= support
     searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
@@ -166,6 +181,11 @@ const features = {
     ratingFallbackWorks: (await import('../src/lib/rating.js')).ratingOf({ id: 'zzz', rating: 0 }) === 0,
     ratingValueWorks: (await import('../src/lib/rating.js')).ratingOf({ id: 'zzz', rating: 7.9 }) === 7.9,
     ratingsFilePresent: (await import('../src/data/ratings.js')).RATINGS !== undefined,
+    // plan #4 item 5: every poster-backed title has a 1200×630 OG card in out/
+    ogCardsGenerated: ogMissing.length === 0,
+    ogDefaultGenerated: ogDefaultOk,
+    livePageHasPerTitleOg: liveOgOk,
+    noPosterPageUsesDefaultOg: fallbackOgOk,
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));

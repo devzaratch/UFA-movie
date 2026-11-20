@@ -7,3 +7,4 @@ dist/
 stream-proxy/.wrangler/
 
 scripts/.link-health-cache.json
+public/og/
