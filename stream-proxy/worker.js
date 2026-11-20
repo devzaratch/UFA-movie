@@ -151,6 +151,16 @@ export default {
 
         const reqUrl = new URL(request.url);
 
+        // ── Uptime probe (plan #4 item 10) ──────────────────────────────────
+        // Public, read-only and dependency-free so the ops page can measure
+        // worker availability/latency from a browser (no admin token needed).
+        if (reqUrl.pathname === '/ping' || reqUrl.pathname === '/ping/') {
+            return new Response(JSON.stringify({ ok: true, service: 'stream-proxy', ts: new Date().toISOString() }), {
+                status: 200,
+                headers: { ...corsHeaders, 'content-type': 'application/json', 'cache-control': 'no-store' },
+            });
+        }
+
         // ── Broken-link reports (plan item #9) ──────────────────────────────
         // POST /report  { id, title, url, note }  → stored in KV namespace REPORTS
         // GET  /reports?limit=50   (header x-admin-token: <ADMIN_TOKEN>)

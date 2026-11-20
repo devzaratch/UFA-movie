@@ -11,6 +11,7 @@ export default function Footer() {
         { label: 'หนังดราม่า', href: '/?cat=drama' },
         { label: 'ນະໂຍບາຍຄວາມສ່ວນຕົວ (Privacy)', href: '/privacy/' },
         { label: 'ຕິດຕໍ່ເຮົາ (Contact)', href: '/contact/' },
+        { label: 'ສະຖານະລະບົບ (Ops)', href: '/ops/' },
     ];
 
     return (

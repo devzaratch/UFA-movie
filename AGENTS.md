@@ -75,3 +75,9 @@ Black background, gold accents `#ffcf18`/`#ffc900`, Arial body text, Oswald for 
 - Static server (`npx http-server out`), then check: catalog (cards, search via the `dm:search` event, `?cat=`, `?year=`, pagination pages), one movie page and one series page (ep buttons, JSON-LD type, player ad cues).
 - Console errors about failed poster/video hosts are external hotlinks — check before assuming a regression.
 - Windows console mangles Thai/Lao text; never judge encoding from console output — read files with node/fs (e.g. `scripts/verify-build.mjs`).
+
+## Plan #4 additions (ops + revenue)
+
+- `npm run og:images` (also part of `npm run build`) generates gitignored 1200�630 cards in `public/og/` from local posters; `src/lib/og.js` picks `/og/<id>.jpg` only when `LOCAL_POSTERS` has that id, otherwise `/og/default.jpg`. Never commit `public/og/`.
+- `src/components/StickyAd.jsx` is the mobile-only promo docked above `BottomNav`; its `bn:stickyad` localStorage state caps impressions (`STICKY_AD` in `src/data/ads.js`: max/day, cooldown, dismiss hours). Keep the wrapper server-rendered.
+- `/ops/` (`src/app/ops/page.jsx`, noindex) shows build-time catalog health from `src/lib/catalog-health.js` plus live worker uptime from `UptimeMonitor.jsx` polling `GET /ping`. The worker's `/ping` is public and read-only; `dead-links.js` now also exports `LAST_CHECK` (keep it in sync in scripts/check-links.mjs).

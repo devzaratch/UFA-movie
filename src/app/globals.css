@@ -254,6 +254,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .legal a { color: var(--gold); }
 .legal-note { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 5px; padding: 12px 14px; }
 
+/* Ops dashboard (plan #4 item 10) — compact, on-brand data readout. */
+.ops-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 4px; }
+.ops-stat { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 12px 10px; text-align: center; }
+.ops-stat strong { display: block; color: var(--gold); font-family: 'Oswald', Arial, sans-serif; font-size: 22px; line-height: 1.2; }
+.ops-stat span { display: block; color: var(--text-2); font-size: 11.5px; margin-top: 4px; }
+.ops-bars { display: grid; gap: 8px; margin: 10px 0; }
+.ops-bar-row { display: grid; grid-template-columns: 130px 1fr 48px; align-items: center; gap: 10px; }
+.ops-bar-label { color: #ddd; font-size: 13px; }
+.ops-bar-track { height: 10px; background: #222; border-radius: 5px; overflow: hidden; }
+.ops-bar-track span { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); }
+.ops-bar-num { color: var(--text-2); font-size: 12px; text-align: right; }
+.ops-list strong { color: #fff; }
+.ops-code code { color: var(--gold); background: #1a1a1f; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; }
+.ops-note { font-size: 13px !important; color: var(--text-2) !important; }
+.uptime-card { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin: 10px 0; }
+.up-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.up-head strong { color: #fff; font-family: 'Oswald', Arial, sans-serif; font-size: 16px; }
+.up-pill { font-size: 12px; font-weight: bold; border-radius: 20px; padding: 4px 12px; }
+.up-ok { color: #0b2a12; background: #7bd88f; }
+.up-down { color: #fff; background: #b63a3a; }
+.up-checking { color: #000; background: var(--gold); }
+.up-meta { color: var(--text-2) !important; font-size: 12px !important; margin: 8px 0 0 !important; }
+@media (max-width: 900px) {
+    .ops-stats { grid-template-columns: repeat(2, 1fr); }
+    .ops-bar-row { grid-template-columns: 92px 1fr 40px; gap: 6px; }
+    .ops-bar-label { font-size: 11.5px; }
+}
+
 /* ── Share row on title pages (LINE / Facebook / copy link) ── */
 .share-wrap { max-width: 1240px; margin: 22px auto 0; padding: 0 15px; }
 .share-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; }

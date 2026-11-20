@@ -143,6 +143,12 @@ const { STICKY_AD } = await import('../src/data/ads.js');
 const stickySlotOnHome = homeHtml.includes('class="sticky-ad') && homeHtml.includes('sa-close');
 const capConfigured = STICKY_AD.maxPerDay > 0 && STICKY_AD.cooldownMinutes > 0 && STICKY_AD.dismissHours > 0;
 
+// ── Ops dashboard + worker uptime probe (plan #4 item 10) ────────────────────
+const opsHtml = readPage('ops/index.html');
+const workerSource = (() => {
+    try { return readFileSync(join('stream-proxy', 'worker.js'), 'utf8'); } catch { return ''; }
+})();
+
 const features = {
     // item #1 search: bundle contains the cross-script matcher and ?q= support
     searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
@@ -194,6 +200,11 @@ const features = {
     // plan #4 item 8
     stickyMobileAdSlot: stickySlotOnHome,
     stickyAdFrequencyCap: capConfigured,
+    // plan #4 item 10
+    opsPageExists: opsHtml.includes('Ops Dashboard') && opsHtml.includes('ops-stat'),
+    opsPageNoindex: /name="robots"[^>]*content="noindex/i.test(opsHtml),
+    opsPageUptimeWidget: opsHtml.includes('uptime-card'),
+    workerPingEndpoint: workerSource.includes("'/ping'"),
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));
