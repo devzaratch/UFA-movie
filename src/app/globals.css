@@ -103,6 +103,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .random-btn:hover { background: linear-gradient(90deg, var(--gold-deep), var(--gold)); color: #000; transform: translateY(-1px); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .grid-empty { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; color: var(--text-2); padding: 46px 20px; text-align: center; font-size: 15px; }
+.grid-empty .ge-title { color: #fff; font-family: 'Oswald', Arial, sans-serif; font-size: 20px; letter-spacing: .3px; margin: 0 0 10px; }
+.grid-empty .ge-sub { font-size: 14px; line-height: 1.7; margin: 0 auto 20px; max-width: 640px; }
+.grid-empty .ge-reset { border: 0; margin-bottom: 26px; }
+.grid-empty .ge-suggest-title { color: var(--gold); font-family: 'Oswald', Arial, sans-serif; font-size: 16px; letter-spacing: .3px; margin: 0 0 14px; text-transform: uppercase; }
+.grid-empty .rel-grid { padding: 0; }
 
 @media (max-width: 900px) {
     .filter-bar { position: sticky; gap: 8px; padding: 8px 10px; }

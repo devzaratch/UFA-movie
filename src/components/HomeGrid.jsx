@@ -127,6 +127,18 @@ export default function HomeGrid({ entries }) {
         scrollToBar();
     };
     const setCatAndReset = (k) => { setCat(k); setPage(1); scrollToBar(); };
+    // Clear every filter (and the header search box, which listens to dm:search).
+    const resetFilters = () => {
+        setQ('');
+        setCat('all');
+        setYear('');
+        setPage(1);
+        window.dispatchEvent(new CustomEvent('dm:search', { detail: '' }));
+        scrollToBar();
+    };
+    // "Nothing matched" suggestions: the newest live titles (data order is
+    // oldest → newest), minus whatever is already on screen.
+    const fallbackPicks = useMemo(() => [...entries].slice(-6).reverse(), [entries]);
 
     return (
         <div className="catalog-wrap">
@@ -177,7 +189,24 @@ export default function HomeGrid({ entries }) {
             </div>
 
             {filtered.length === 0 ? (
-                <div className="grid-empty">ບໍ່ພົບໜັງທີ່ຄົ້ນຫາ (ไม่พบหนังที่ค้นหา) — ລອງຄຳອື່ນ ຫຼື ເລືອກໝວດໃໝ່</div>
+                <div className="grid-empty">
+                    <p className="ge-title">ບໍ່ພົບໜັງທີ່ຄົ້ນຫາ (ไม่พบหนังที่ค้นหา)</p>
+                    <p className="ge-sub">
+                        ລອງຄຳອື່ນ ຫຼື ເລືອກໝວດໃໝ່ (ลองคำอื่น หรือเลือกหมวดใหม่) — ຄົ້ນຫາໄດ້ທັງພາສາໄທ ແລະ ລາວ
+                    </p>
+                    <button type="button" className="chip cur ge-reset" onClick={resetFilters}>
+                        ລ້າງຕົວກອງ (ล้างตัวกรอง)
+                    </button>
+                    <p className="ge-suggest-title">ໜັງແນະນຳ ລອງເບິ່ງ (หนังแนะนำ ลองดู)</p>
+                    <div className="rel-grid">
+                        {fallbackPicks.map((m) => (
+                            <a key={m.id} className="rel-card" href={`/movie/${m.slug}/`}>
+                                <img src={m.poster} alt={m.title} width={252} height={378} loading="lazy" />
+                                <span>{m.title}</span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
             ) : (
                 <div className="movie-grid" id="grid">
                     {entries.map((m) => (
