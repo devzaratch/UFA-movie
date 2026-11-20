@@ -60,6 +60,14 @@ export default function Player({ movie }) {
     // Bumping this re-runs the init effect: used by the "try again" button
     // after a fatal stream/player error.
     const [reloadKey, setReloadKey] = useState(0);
+    // Auto-play next episode (plan #4 item 9): an 8s countdown after "ended",
+    // cancellable, and switchable off once and for all.
+    const AUTO_NEXT_KEY = 'bn:autonext';
+    const NEXT_SECONDS = 8;
+    const [autoNext, setAutoNext] = useState(true);
+    const [nextIn, setNextIn] = useState(0);
+    const nextTimerRef = useRef(null);
+    const autoNextRef = useRef(true);
 
     const activeEpRef = useRef(0);
 
@@ -77,6 +85,44 @@ export default function Player({ movie }) {
             if (keys.length > 60) delete all[keys[0]];
             localStorage.setItem(RESUME_KEY, JSON.stringify(all));
         } catch {}
+    };
+
+    // Remember the auto-play preference (default on).
+    useEffect(() => {
+        try {
+            const stored = localStorage.getItem(AUTO_NEXT_KEY);
+            const on = stored === null ? true : stored === '1';
+            setAutoNext(on);
+            autoNextRef.current = on;
+        } catch {}
+    }, []);
+
+    const setAutoNextPref = (on) => {
+        setAutoNext(on);
+        autoNextRef.current = on;
+        try { localStorage.setItem(AUTO_NEXT_KEY, on ? '1' : '0'); } catch {}
+        if (!on) cancelNext();
+    };
+
+    // Countdown to the next episode; cancelling is one click away.
+    const cancelNext = () => {
+        if (nextTimerRef.current) { clearInterval(nextTimerRef.current); nextTimerRef.current = null; }
+        setNextIn(0);
+    };
+
+    const startNextCountdown = (next) => {
+        cancelNext();
+        const startedAt = Date.now();
+        setNextIn(NEXT_SECONDS);
+        nextTimerRef.current = setInterval(() => {
+            const left = NEXT_SECONDS - Math.floor((Date.now() - startedAt) / 1000);
+            if (left <= 0) {
+                cancelNext();
+                playEpisode(next, true);
+            } else {
+                setNextIn(left);
+            }
+        }, 250);
     };
 
     const destroyHls = () => {
@@ -140,6 +186,15 @@ export default function Player({ movie }) {
                 track('play_started', { movie: m.id, category: m.category, type: m.type || 'movie' });
             });
 
+            // Series: roll into the next episode when this one ends
+            // (plan #4 item 9) — unless the viewer switched it off.
+            art.on('video:ended', () => {
+                if (m.type !== 'series' || !m.episodes) return;
+                const next = activeEpRef.current + 1;
+                if (next >= m.episodes.length || !autoNextRef.current) return;
+                startNextCountdown(next);
+            });
+
             // Resume where the viewer left off: saved episode + position
             const saved = readResume(m.id);
             if (saved) {
@@ -167,6 +222,7 @@ export default function Player({ movie }) {
             .catch((err) => !disposed && setInitError(err.message));
         return () => {
             disposed = true;
+            cancelNext();
             destroyHls();
             // destroy(false) keeps the .artplayer-app container div so a
             // re-init (retry) can rebuild into it.
@@ -215,14 +271,16 @@ export default function Player({ movie }) {
         track('ad_click', { slot: ADS[adIndex]?.id || 'none', movie: m.id });
     };
 
-    const pickEp = (i) => {
+    const playEpisode = (i, auto = false) => {
         const art = artRef.current;
         if (!art) return;
+        cancelNext();
         setPlayError(false);
         activeEpRef.current = i;
         saveResume(m.id, { ep: i, t: 0 });
         art.switchUrl(withProxy(movie.episodes[i].url));
         setActiveEp(i);
+        track(auto ? 'auto_next_played' : 'episode_selected', { movie: m.id, ep: i });
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -264,6 +322,28 @@ export default function Player({ movie }) {
                 )}
 
                 <div className="artplayer-app"></div>
+                {nextIn > 0 && (
+                    <div className="next-ep" role="status" aria-live="polite">
+                        <p className="next-ep-title">
+                            ຕອນຕໍ່ໄປ (ตอนต่อไป) ໃນ {nextIn} ວິນາທີ
+                            {m.episodes && m.episodes[activeEp + 1]
+                                ? <> — <strong>{m.episodes[activeEp + 1].title}</strong></>
+                                : null}
+                        </p>
+                        <div className="next-ep-actions">
+                            <button type="button" className="next-ep-play" onClick={() => playEpisode(activeEp + 1, true)}>
+                                <i className="fas fa-play" aria-hidden="true"></i> ເບິ່ງຕອນນີ້ (เล่นเลย)
+                            </button>
+                            <button type="button" className="next-ep-cancel" onClick={cancelNext}>
+                                ຍົກເລີກ (ยกเลิก)
+                            </button>
+                        </div>
+                        <label className="next-ep-auto">
+                            <input type="checkbox" checked={autoNext} onChange={(e) => setAutoNextPref(e.target.checked)} />
+                            {' '}ຫຼິ້ນຕອນຕໍ່ໄປອັດຕະໂນມັດ (เล่นตอนถัดไปอัตโนมัติ)
+                        </label>
+                    </div>
+                )}
                 {(initError || playError) && (
                     <div className="retry-row">
                         <button type="button" className="retry-btn" onClick={retry}>
@@ -279,6 +359,10 @@ export default function Player({ movie }) {
                     {/* title/meta are rendered server-side; only the episode picker needs interactivity */}
                     <div className="ep-list">
                         <p><i className="fas fa-list"></i> ເລືອກຕອນເບິ່ງ (เลือกตอน):</p>
+                        <label className="auto-next-toggle">
+                            <input type="checkbox" checked={autoNext} onChange={(e) => setAutoNextPref(e.target.checked)} />
+                            {' '}ຫຼິ້ນຕອນຕໍ່ໄປອັດຕະໂນມັດ (เล่นตอนถัดไปอัตโนมัติ)
+                        </label>
                         <div className="ep-tabs">
                             {/* real buttons: keyboard/screen-reader operable (class kept for verify-build) */}
                             {m.episodes.map((ep, i) => (
@@ -286,7 +370,7 @@ export default function Player({ movie }) {
                                     type="button"
                                     key={i}
                                     className={`ep-btn${i === activeEp ? ' active' : ''}`}
-                                    onClick={() => pickEp(i)}
+                                    onClick={() => playEpisode(i)}
                                 >
                                     {ep.title}
                                 </button>
