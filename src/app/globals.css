@@ -126,10 +126,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .card-title { color: #fff; font-size: 14.5px; text-align: center; padding: 10px 8px 12px; min-height: 60px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 #pagination { display: flex; justify-content: center; gap: 8px; margin: 28px 0; flex-wrap: wrap; }
-#pagination button { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; color: #ccc; cursor: pointer; font-size: 14px; padding: 9px 16px; min-height: 40px; min-width: 40px; transition: background .2s, color .2s, border-color .2s; }
-#pagination button:hover:not(:disabled) { background: #1d1d22; border-color: var(--gold-deep); color: #fff; }
-#pagination button.cur { background: var(--gold); border-color: var(--gold); color: #000; font-weight: bold; }
-#pagination button:disabled { opacity: .35; cursor: default; }
+#pagination button, #pagination a { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; color: #ccc; cursor: pointer; font-size: 14px; padding: 9px 16px; min-height: 40px; min-width: 40px; transition: background .2s, color .2s, border-color .2s; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+#pagination button:hover:not(:disabled), #pagination a:hover { background: #1d1d22; border-color: var(--gold-deep); color: #fff; }
+#pagination button.cur, #pagination a.cur { background: var(--gold); border-color: var(--gold); color: #000; font-weight: bold; }
+#pagination button:disabled, #pagination a.off { opacity: .35; cursor: default; }
 #pagination .dots { color: var(--text-2); padding: 0 2px; }
 #pagination .page-note { color: var(--text-2); font-size: 13px; margin-left: 8px; }
 
@@ -317,7 +317,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
     .card:hover, .rel-card:hover, .top-slider img:hover { transform: none; box-shadow: none; border-color: #262626; }
 
     /* Pagination buttons meet 44px touch target */
-    #pagination button { min-height: 44px; min-width: 44px; font-size: 13px; padding: 8px 12px; }
+    #pagination button, #pagination a { min-height: 44px; min-width: 44px; font-size: 13px; padding: 8px 12px; }
 
     /* Footer breathing room above the tab bar */
     .footer-seo { padding: 20px 5% calc(30px + env(safe-area-inset-bottom)); }

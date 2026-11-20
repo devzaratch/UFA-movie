@@ -97,6 +97,15 @@ const deadPage = deadSample ? readPage(join('movie', slugify(deadSample.id, dead
 const liveSample = movieDatabase.find((m) => !DEAD_IDS.has(m.id));
 const livePage = liveSample ? readPage(join('movie', slugify(liveSample.id, liveSample.title), 'index.html')) : '';
 
+// ── Catalog ordering / static pagination (plan #4 item 2) ────────────────────
+const { PER_PAGE } = await import('../src/lib/paging.js');
+const expectedPages = Math.ceil(expectedLive / PER_PAGE);
+const pageDirs = (() => { try { return readdirSync(join(OUT, 'page')).length; } catch { return 0; } })();
+const homeCardHrefs = [...homeHtml.matchAll(/class="card[^"]*"\s+href="([^"]+)"/g)].map((m) => m[1]);
+const newestTitle = movieDatabase.filter((m) => !DEAD_IDS.has(m.id) && !DUPLICATE_TO_CANONICAL[m.id]).at(-1);
+const newestSlug = newestTitle ? `/movie/${slugify(newestTitle.id, newestTitle.title)}/` : null;
+const pageTwo = readPage(join('page', '2', 'index.html'));
+
 const features = {
     // item #1 search: bundle contains the cross-script matcher and ?q= support
     searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
@@ -122,6 +131,13 @@ const features = {
     deadPageNoindex: /name="robots"[^>]*content="noindex/i.test(deadPage),
     livePageIndexable: !/name="robots"[^>]*content="noindex/i.test(livePage),
     robotsTxtSitemapSpacing: readPage('robots.txt').includes('Sitemap: http'),
+    // plan #4 item 2: newest-first catalog + real /page/N/ pages
+    newestFirstOnHome: !!newestSlug && homeCardHrefs[0] === newestSlug,
+    homepagePagerIsLinks: homeHtml.includes('href="/page/2/"'),
+    staticPageCount: pageDirs === Math.max(0, expectedPages - 1),
+    pageTwoHasCards: (pageTwo.match(/class="card/g) || []).length >= PER_PAGE,
+    pageTwoRelLinks: /rel="prev" href="\/"/.test(pageTwo) && /rel="next" href="\/page\/3\/"/.test(pageTwo),
+    sitemapHasPages: movieUrls.length === expectedLive && urls.filter((u) => u.includes('/page/')).length === Math.max(0, expectedPages - 1),
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));

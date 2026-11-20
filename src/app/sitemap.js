@@ -12,6 +12,7 @@ import { movieDatabase } from '../data/movies.js';
 import { DUPLICATE_TO_CANONICAL } from '../data/duplicates.js';
 import { DEAD_IDS } from '../data/dead-links.js';
 import { slugify } from '../lib/slug.js';
+import { totalPages } from '../lib/catalog.js';
 
 export const SITE = 'https://boengnang.vercel.app';
 
@@ -38,6 +39,13 @@ export default function sitemap() {
             changeFrequency: 'yearly',
             priority: 0.3,
         },
+        // Static catalog pages 2…N (page 1 is the homepage).
+        ...Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+            url: `${SITE}/page/${i + 2}/`,
+            lastModified: new Date(),
+            changeFrequency: 'daily',
+            priority: 0.4,
+        })),
         ...movieDatabase
             .filter((m) => !DUPLICATE_TO_CANONICAL[m.id] && !DEAD_IDS.has(m.id))
             .map((m) => ({

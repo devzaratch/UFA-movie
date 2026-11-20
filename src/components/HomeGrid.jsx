@@ -15,23 +15,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { CATEGORY_LABEL } from '../lib/categories.js';
 import { normalizeText, stripMarks } from '../lib/search.js';
+import { PER_PAGE, pageItems, pageHref } from '../lib/paging.js';
+import MovieCard from './MovieCard.jsx';
 
-const PER_PAGE = 24;
 const CATS = ['all', 'action', 'horror', 'anime', 'serie', 'drama'];
 const fmt = (n) => n.toLocaleString('en-US');
-
-function pageItems(cur, total) {
-    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-    const wanted = new Set([1, 2, cur - 1, cur, cur + 1, total - 1, total].filter((p) => p >= 1 && p <= total));
-    const out = [];
-    let prev = 0;
-    for (const p of [...wanted].sort((a, b) => a - b)) {
-        if (p - prev > 1) out.push('…');
-        out.push(p);
-        prev = p;
-    }
-    return out;
-}
 
 export default function HomeGrid({ entries }) {
     const [q, setQ] = useState('');
@@ -116,6 +104,9 @@ export default function HomeGrid({ entries }) {
     const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
     const cur = Math.min(page, totalPages);
     const visible = new Set(filtered.slice((cur - 1) * PER_PAGE, cur * PER_PAGE).map((m) => m.id));
+    // Pagination renders real links (crawlable, shareable, works without JS) for
+    // the unfiltered catalog; a filter/search can only page client-side.
+    const plain = !q.trim() && cat === 'all' && !year;
 
     const scrollToBar = () => {
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -210,19 +201,7 @@ export default function HomeGrid({ entries }) {
             ) : (
                 <div className="movie-grid" id="grid">
                     {entries.map((m) => (
-                        <a
-                            key={m.id}
-                            className={`card${visible.has(m.id) ? '' : ' card-hide'}`}
-                            href={`/movie/${m.slug}/`}
-                            data-cat={m.category}
-                        >
-                            <div className="ribbon">{m.quality || 'HD'}</div>
-                            <img src={m.poster} alt={`${m.title} ເບິ່ງໜັງອອນໄລນ໌ຟຣີ BOENGNANG`} width={252} height={378} loading="lazy" />
-                            <div className="rating-bar">
-                                {m.rating ? `ເບິ່ງໜັງອອນໄລນ໌ IMDb: ${m.rating}` : CATEGORY_LABEL[m.category] || ''}
-                            </div>
-                            <div className="card-title">{m.title}</div>
-                        </a>
+                        <MovieCard key={m.id} m={m} hidden={!visible.has(m.id)} />
                     ))}
                 </div>
             )}
@@ -230,29 +209,60 @@ export default function HomeGrid({ entries }) {
             <div id="pagination">
                 {totalPages > 1 && (
                     <>
-                        <button
-                            aria-label="ໜ້າກ່ອນ (หน้าก่อน)"
-                            disabled={cur === 1}
-                            onClick={() => cur > 1 && goPage(cur - 1)}
-                        >
-                            ‹
-                        </button>
+                        {plain ? (
+                            <a
+                                href={pageHref(cur - 1)}
+                                aria-label="ໜ້າກ່ອນ (หน้าก่อน)"
+                                className={cur === 1 ? 'off' : ''}
+                                aria-disabled={cur === 1 ? 'true' : undefined}
+                            >
+                                ‹
+                            </a>
+                        ) : (
+                            <button
+                                aria-label="ໜ້າກ່ອນ (หน้าก่อน)"
+                                disabled={cur === 1}
+                                onClick={() => cur > 1 && goPage(cur - 1)}
+                            >
+                                ‹
+                            </button>
+                        )}
                         {pageItems(cur, totalPages).map((it, i) =>
                             it === '…' ? (
                                 <span key={`d${i}`} className="dots">…</span>
+                            ) : plain ? (
+                                <a
+                                    key={it}
+                                    className={it === cur ? 'cur' : ''}
+                                    href={pageHref(it)}
+                                    aria-current={it === cur ? 'page' : undefined}
+                                >
+                                    {it}
+                                </a>
                             ) : (
                                 <button key={it} className={it === cur ? 'cur' : ''} onClick={() => goPage(it)}>
                                     {it}
                                 </button>
                             ),
                         )}
-                        <button
-                            aria-label="ໜ້າຕໍ່ໄປ (หน้าต่อไป)"
-                            disabled={cur === totalPages}
-                            onClick={() => cur < totalPages && goPage(cur + 1)}
-                        >
-                            ›
-                        </button>
+                        {plain ? (
+                            <a
+                                href={pageHref(cur + 1)}
+                                aria-label="ໜ້າຕໍ່ໄປ (หน้าต่อไป)"
+                                className={cur === totalPages ? 'off' : ''}
+                                aria-disabled={cur === totalPages ? 'true' : undefined}
+                            >
+                                ›
+                            </a>
+                        ) : (
+                            <button
+                                aria-label="ໜ້າຕໍ່ໄປ (หน้าต่อไป)"
+                                disabled={cur === totalPages}
+                                onClick={() => cur < totalPages && goPage(cur + 1)}
+                            >
+                                ›
+                            </button>
+                        )}
                         <span className="page-note">ໜ້າ {cur}/{totalPages}</span>
                     </>
                 )}

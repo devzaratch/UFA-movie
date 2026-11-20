@@ -1,0 +1,27 @@
+// Catalog card — plain markup (no hooks), shared by the client grid
+// (HomeGrid) and the static /page/N/ pages so the two can never drift apart.
+// Markup stays identical to the original card: verify-build counts .card-title.
+import { CATEGORY_LABEL } from '../lib/categories.js';
+
+export default function MovieCard({ m, hidden = false }) {
+    return (
+        <a
+            className={`card${hidden ? ' card-hide' : ''}`}
+            href={`/movie/${m.slug}/`}
+            data-cat={m.category}
+        >
+            <div className="ribbon">{m.quality || 'HD'}</div>
+            <img
+                src={m.poster}
+                alt={`${m.title} ເບິ່ງໜັງອອນໄລນ໌ຟຣີ BOENGNANG`}
+                width={252}
+                height={378}
+                loading="lazy"
+            />
+            <div className="rating-bar">
+                {m.rating ? `ເບິ່ງໜັງອອນໄລນ໌ IMDb: ${m.rating}` : CATEGORY_LABEL[m.category] || ''}
+            </div>
+            <div className="card-title">{m.title}</div>
+        </a>
+    );
+}

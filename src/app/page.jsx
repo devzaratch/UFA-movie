@@ -3,35 +3,16 @@ import Footer from '../components/Footer.jsx';
 import BottomNav from '../components/BottomNav.jsx';
 import HomeGrid from '../components/HomeGrid.jsx';
 import AdBanner from '../components/AdBanner.jsx';
-import { movieDatabase } from '../data/movies.js';
-import { DEAD_IDS } from '../data/dead-links.js';
-import { DUPLICATE_TO_CANONICAL } from '../data/duplicates.js';
-import { posterFor, microPosterFor } from '../lib/posters.js';
-import { categoryOf } from '../lib/category.js';
+import { catalogEntries } from '../lib/catalog.js';
 import { SITE } from './sitemap.js';
-import { slugify, yearOf } from '../lib/slug.js';
 
 export default function HomePage() {
     // All entries are rendered server-side (build time): slider, sidebar and every card.
     // HomeGrid is a client component that only toggles visibility for
     // search / category / year filtering + pagination.
-    // Titles whose stream links are all dead (see scripts/check-links.mjs)
-    // are left out of the catalog; their /movie/<slug>/ pages still exist.
-    const entries = movieDatabase
-        .filter((m) => !DEAD_IDS.has(m.id) && !DUPLICATE_TO_CANONICAL[m.id])
-        .map((m) => ({
-            ...m,
-            slug: slugify(m.id, m.title),
-            year: yearOf(m.title),
-            // corrected category (see scripts/rebalance-categories.mjs)
-            category: categoryOf(m),
-            // locally mirrored poster when available (posterFor falls back
-            // to the external url) — slider, sidebar and grid all use m.poster
-            poster: posterFor(m),
-            // 120px thumb for the sidebar list (36×54 on screen) — saves ~35KB
-            // per row on mobile; falls back to the full poster.
-            micro: microPosterFor(m),
-        }));
+    // Order + filtering live in lib/catalog.js: newest first, dead links and
+    // duplicate titles left out (their /movie/<slug>/ pages still exist).
+    const entries = catalogEntries;
 
     return (
         <>
