@@ -106,6 +106,23 @@ const newestTitle = movieDatabase.filter((m) => !DEAD_IDS.has(m.id) && !DUPLICAT
 const newestSlug = newestTitle ? `/movie/${slugify(newestTitle.id, newestTitle.title)}/` : null;
 const pageTwo = readPage(join('page', '2', 'index.html'));
 
+// ── Related variety (plan #4 item 4) ─────────────────────────────────────────
+const relHrefs = (html) => [...new Set([...html.matchAll(/class="rel-card"[^>]*href="([^"]+)"/g)].map((m) => m[1]))];
+const { categoryOf } = await import('../src/lib/category.js');
+const liveList = movieDatabase.filter((m) => !DEAD_IDS.has(m.id) && !DUPLICATE_TO_CANONICAL[m.id]);
+const oneCat = categoryOf(liveList.at(-1));
+const relSets = liveList
+    .filter((m) => categoryOf(m) === oneCat)
+    .slice(-3)
+    .map((m) => relHrefs(readPage(join('movie', slugify(m.id, m.title), 'index.html'))));
+// three pages of the same category must not show the same six films
+const relatedVariety = relSets.every((s) => s.length >= 6) && new Set(relSets.map((s) => s.slice(0, 6).join('|'))).size === relSets.length;
+// dead titles cannot play, but their page still suggests playable ones
+const deadPagesStillSuggest = movieDatabase
+    .filter((m) => DEAD_IDS.has(m.id))
+    .slice(0, 3)
+    .every((m) => relHrefs(readPage(join('movie', slugify(m.id, m.title), 'index.html'))).length >= 6);
+
 const features = {
     // item #1 search: bundle contains the cross-script matcher and ?q= support
     searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
@@ -138,6 +155,13 @@ const features = {
     pageTwoHasCards: (pageTwo.match(/class="card/g) || []).length >= PER_PAGE,
     pageTwoRelLinks: /rel="prev" href="\/"/.test(pageTwo) && /rel="next" href="\/page\/3\/"/.test(pageTwo),
     sitemapHasPages: movieUrls.length === expectedLive && urls.filter((u) => u.includes('/page/')).length === Math.max(0, expectedPages - 1),
+    // plan #4 item 4: related lists are scored, not the same six per category
+    relatedVariety,
+    deadPagesStillSuggest,
+    relatedHasNoDeadLinks: relSets.flat().every((href) => {
+        const mm = movieDatabase.find((x) => `/movie/${slugify(x.id, x.title)}/` === decodeURIComponent(href));
+        return !mm || !DEAD_IDS.has(mm.id);
+    }),
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));

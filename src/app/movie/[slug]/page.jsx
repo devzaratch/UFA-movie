@@ -9,6 +9,7 @@ import { slugify } from '../../../lib/slug.js';
 import { posterFor, microPosterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
 import { categoryOf } from '../../../lib/category.js';
+import { relatedFor } from '../../../lib/related.js';
 import { SITE } from '../../sitemap.js';
 import AdBanner from '../../../components/AdBanner.jsx';
 import ShareRow from '../../../components/ShareRow.jsx';
@@ -155,11 +156,10 @@ export default function MoviePage({ params }) {
         ],
     };
 
-    // "Related" is picked once at build time: same category, deterministic order
-    const related = movieDatabase
-        .filter((x) => categoryOf(x) === mcat && x.id !== m.id)
-        .slice(0, 6)
-        .map((x) => ({ ...x, slug: slugify(x.id, x.title) }));
+    // "Related" is scored at build time (lib/related.js): same category, shared
+    // title words (Thai ⇄ Lao), year proximity, type and rating — so two pages
+    // in the same category no longer show the same six films.
+    const related = relatedFor(m, 12);
 
     return (
         <>
