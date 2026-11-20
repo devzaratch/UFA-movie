@@ -21,10 +21,24 @@ const checkHome = {
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
 const movieUrls = urls.filter(u => u.includes('/movie/'));
 
-// pick: a movie (m1), a series (s1), and a random late entry (m144)
-const pick = [movieUrls.find(u => u.endsWith('-m1/')), movieUrls.find(u => u.endsWith('-s1/')), movieUrls.find(u => u.endsWith('-m144/'))];
+// Sample pages are picked from the data (not the sitemap): dead links are
+// deliberately absent from the sitemap but their pages still exist on disk.
+const SITE = 'https://boengnang.vercel.app';
+const { movieDatabase } = await import('../src/data/movies.js');
+const { slugify } = await import('../src/lib/slug.js');
+const { DUPLICATE_TO_CANONICAL } = await import('../src/data/duplicates.js');
+const { DEAD_IDS } = await import('../src/data/dead-links.js');
+const sampleOf = (pred) => {
+    const m = movieDatabase.find(pred);
+    return m ? `${SITE}/movie/${slugify(m.id, m.title)}/` : null;
+};
+const pick = [
+    sampleOf((m) => !DEAD_IDS.has(m.id)),                                  // a live movie
+    sampleOf((m) => m.type === 'series' && !DEAD_IDS.has(m.id)),           // a live series
+    sampleOf((m) => m.id === 'm144'),                                      // a late entry (may be dead)
+];
 
-const results = pick.map(u => {
+const results = pick.filter(Boolean).map(u => {
     // map URL -> disk path: decode the encodeURIComponent slugs, strip origin
     let path = u.replace(/^https?:\/\/[^/]+/, '');
     let decoded = decodeURIComponent(path);
@@ -71,6 +85,18 @@ for (const href of cardLinks) {
     }
 }
 
+// ── Dead-link hygiene (plan #4 item 1) ───────────────────────────────────────
+const idOfUrl = (u) => {
+    const m = decodeURIComponent(u).match(/-([ms]\d+)\/$/);
+    return m ? m[1] : null;
+};
+const sitemapDeadCount = movieUrls.filter((u) => DEAD_IDS.has(idOfUrl(u))).length;
+const expectedLive = movieDatabase.filter((m) => !DUPLICATE_TO_CANONICAL[m.id] && !DEAD_IDS.has(m.id)).length;
+const deadSample = movieDatabase.find((m) => DEAD_IDS.has(m.id));
+const deadPage = deadSample ? readPage(join('movie', slugify(deadSample.id, deadSample.title), 'index.html')) : '';
+const liveSample = movieDatabase.find((m) => !DEAD_IDS.has(m.id));
+const livePage = liveSample ? readPage(join('movie', slugify(liveSample.id, liveSample.title), 'index.html')) : '';
+
 const features = {
     // item #1 search: bundle contains the cross-script matcher and ?q= support
     searchQParam: homeHtml.includes('search_used') || homeHtml.includes('q='),
@@ -90,6 +116,12 @@ const features = {
     adsTxt: readPage('ads.txt').length > 0,
     // item #2 local posters
     localPostersOnHome: (homeHtml.match(/\/posters\//g) || []).length,
+    // plan #4 item 1: dead links out of the sitemap, pages noindexed, robots.txt valid
+    deadExcludedFromSitemap: sitemapDeadCount === 0,
+    sitemapMatchesLiveTitles: movieUrls.length === expectedLive,
+    deadPageNoindex: /name="robots"[^>]*content="noindex/i.test(deadPage),
+    livePageIndexable: !/name="robots"[^>]*content="noindex/i.test(livePage),
+    robotsTxtSitemapSpacing: readPage('robots.txt').includes('Sitemap: http'),
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));

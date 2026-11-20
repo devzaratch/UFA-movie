@@ -57,10 +57,14 @@ export async function generateMetadata({ params }) {
     const canonId = DUPLICATE_TO_CANONICAL[m.id];
     const canon = canonId ? movieDatabase.find((x) => x.id === canonId) : null;
     const canonicalUrl = canon ? `${SITE}/movie/${slugify(canon.id, canon.title)}/` : `${SITE}/movie/${slug}/`;
+    // Dead links stay online as a fallback landing page, but they carry no stream:
+    // keep them out of the index (they are also excluded from the sitemap) so the
+    // crawl budget goes to titles that actually play.
+    const dead = DEAD_IDS.has(m.id);
     return {
         title,
         description,
-        robots: { index: true },
+        robots: dead ? { index: false, follow: true } : { index: true },
         // canonical + per-title og:image (poster)
         alternates: { canonical: canonicalUrl },
         openGraph: {
