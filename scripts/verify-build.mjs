@@ -162,6 +162,10 @@ const features = {
         const mm = movieDatabase.find((x) => `/movie/${slugify(x.id, x.title)}/` === decodeURIComponent(href));
         return !mm || !DEAD_IDS.has(mm.id);
     }),
+    // plan #4 item 6: TMDB ratings are looked up through lib/rating.js
+    ratingFallbackWorks: (await import('../src/lib/rating.js')).ratingOf({ id: 'zzz', rating: 0 }) === 0,
+    ratingValueWorks: (await import('../src/lib/rating.js')).ratingOf({ id: 'zzz', rating: 7.9 }) === 7.9,
+    ratingsFilePresent: (await import('../src/data/ratings.js')).RATINGS !== undefined,
 };
 
 console.log(JSON.stringify({ checkHome, sitemapUrls: urls.length, movieUrls: movieUrls.length, samples: results, features }, null, 1));

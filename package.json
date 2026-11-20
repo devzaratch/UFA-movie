@@ -9,7 +9,8 @@
     "start": "next start",
     "check:links": "node scripts/check-links.mjs",
     "validate:data": "node scripts/validate-data.mjs",
-    "dedupe": "node scripts/dedupe-titles.mjs"
+    "dedupe": "node scripts/dedupe-titles.mjs",
+    "ratings": "node scripts/enrich-ratings.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

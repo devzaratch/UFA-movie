@@ -10,6 +10,7 @@ import { posterFor, microPosterFor } from '../../../lib/posters.js';
 import { CATEGORY_LABEL } from '../../../lib/categories.js';
 import { categoryOf } from '../../../lib/category.js';
 import { relatedFor } from '../../../lib/related.js';
+import { ratingOf } from '../../../lib/rating.js';
 import { SITE } from '../../sitemap.js';
 import AdBanner from '../../../components/AdBanner.jsx';
 import ShareRow from '../../../components/ShareRow.jsx';
@@ -137,11 +138,13 @@ export default function MoviePage({ params }) {
             ? { "duration": `PT${Math.max(1, (m.episodes || []).length)}H` }
             : {}),
     } : null;
-    // Only real IMDb-style ratings from the data get an aggregateRating.
-    if (m.rating) {
+    // Only real IMDb-style ratings (entry value or TMDB enrichment) get an
+    // aggregateRating — never invent one.
+    const rating = ratingOf(m);
+    if (rating) {
         schema.aggregateRating = {
             "@type": "AggregateRating",
-            "ratingValue": String(m.rating),
+            "ratingValue": rating.toFixed(1),
             "bestRating": "10",
             "worstRating": "1",
         };
